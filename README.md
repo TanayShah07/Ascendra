@@ -189,7 +189,7 @@ To build an intelligent placement readiness platform capable of understanding te
 
 # 👨‍💻 Team
 
-<div align="center">
+<div align="left">
 
 **Tanay Shah**
 
@@ -201,8 +201,6 @@ To build an intelligent placement readiness platform capable of understanding te
 
 <div align="center">
 
-### Prepare Smarter. Perform Better.
-
-Built with ❤️ using Artificial Intelligence, Deep Learning, Natural Language Processing, Computer Vision, and Modern Web Technologies.
+Built with using Artificial Intelligence, Deep Learning, Natural Language Processing, Computer Vision, and Modern Web Technologies.
 
 </div>
