@@ -1,0 +1,91 @@
+# ===========================
+# Node.js / React
+# ===========================
+node_modules/
+dist/
+build/
+.npm/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ===========================
+# Python
+# ===========================
+venv/
+.venv/
+env/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.coverage
+
+# ===========================
+# Environment Variables
+# ===========================
+.env
+.env.*
+!.env.example
+
+# ===========================
+# IDE / Editor
+# ===========================
+.vscode/settings.json
+.idea/
+*.code-workspace
+
+# ===========================
+# Operating System
+# ===========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===========================
+# Logs
+# ===========================
+logs/
+*.log
+
+# ===========================
+# Database
+# ===========================
+*.sqlite3
+*.db
+
+# ===========================
+# Temporary Files
+# ===========================
+tmp/
+temp/
+
+# ===========================
+# Build & Cache
+# ===========================
+.cache/
+coverage/
+.vite/
+
+# ===========================
+# AI Models
+# ===========================
+*.pt
+*.pth
+*.onnx
+*.h5
+*.ckpt
+
+# ===========================
+# Jupyter
+# ===========================
+.ipynb_checkpoints/
+
+# ===========================
+# Miscellaneous
+# ===========================
+*.bak
+*.swp
