@@ -1,0 +1,120 @@
+.floating-card{
+
+    position:absolute;
+
+    display:flex;
+
+    gap:8px;
+
+    align-items:center;
+
+    padding:12px 18px;
+
+    border-radius:999px;
+
+    background:white;
+
+    box-shadow:0 12px 30px rgba(15,23,42,.08);
+
+    animation:float 5s ease-in-out infinite;
+
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-10px);
+}
+
+100%{
+transform:translateY(0);
+}
+
+}
+.float{
+
+position:absolute;
+
+display:flex;
+
+align-items:center;
+
+gap:8px;
+
+padding:10px 18px;
+
+background:white;
+
+border-radius:999px;
+
+box-shadow:0 15px 35px rgba(15,23,42,.08);
+
+font-weight:700;
+
+animation:float 4s ease-in-out infinite;
+
+}
+
+.one{
+
+top:40px;
+
+left:-70px;
+
+}
+
+.two{
+
+top:170px;
+
+right:-70px;
+
+animation-delay:.5s;
+
+}
+
+.three{
+
+bottom:170px;
+
+left:-60px;
+
+animation-delay:1s;
+
+}
+
+.four{
+
+bottom:50px;
+
+right:-70px;
+
+animation-delay:1.5s;
+
+}
+
+@keyframes float{
+
+0%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-12px);
+
+}
+
+100%{
+
+transform:translateY(0);
+
+}
+
+}
