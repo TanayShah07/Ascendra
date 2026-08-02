@@ -1,0 +1,97 @@
+.interview-page{
+
+    min-height:100vh;
+
+    padding:60px 7%;
+
+    background:#f8fafc;
+
+}
+
+.interview-page h1{
+
+    font-size:3rem;
+
+    text-align:center;
+
+    margin-bottom:15px;
+
+}
+
+.interview-page p{
+
+    text-align:center;
+
+    color:#64748b;
+
+    margin-bottom:60px;
+
+}
+
+.mode-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:40px;
+
+}
+
+.mode-card{
+
+    background:white;
+
+    border-radius:24px;
+
+    padding:60px 40px;
+
+    cursor:pointer;
+
+    text-align:center;
+
+    transition:.35s;
+
+    box-shadow:0 15px 45px rgba(0,0,0,.08);
+
+}
+
+.mode-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 25px 60px rgba(37,99,235,.18);
+
+}
+
+.mode-card svg{
+
+    color:#2563eb;
+
+    margin-bottom:20px;
+
+}
+
+.mode-card h2{
+
+    margin-bottom:15px;
+
+}
+
+.mode-card p{
+
+    margin:0;
+
+    line-height:1.7;
+
+}
+
+@media(max-width:900px){
+
+    .mode-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}

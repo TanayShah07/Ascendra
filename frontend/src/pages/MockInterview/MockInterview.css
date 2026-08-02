@@ -1,0 +1,134 @@
+.setup-page{
+
+    min-height:100vh;
+
+    background:#f8fafc;
+
+    padding:50px 7%;
+
+}
+
+.setup-page h1{
+
+    text-align:center;
+
+    font-size:3rem;
+
+}
+
+.setup-page p{
+
+    text-align:center;
+
+    color:#64748b;
+
+    margin:15px 0 40px;
+
+}
+
+.setup-card{
+
+    max-width:700px;
+
+    margin:auto;
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:45px;
+
+    box-shadow:0 20px 60px rgba(0,0,0,.08);
+
+}
+
+.setup-card label{
+
+    display:block;
+
+    margin-top:22px;
+
+    margin-bottom:10px;
+
+    font-weight:700;
+
+}
+
+.setup-card select{
+
+    width:100%;
+
+    padding:16px;
+
+    border-radius:14px;
+
+    border:1px solid #dbe2ea;
+
+    font-size:1rem;
+
+}
+
+.setup-card button{
+
+    margin-top:35px;
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+
+    color:white;
+
+    font-size:1rem;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+}
+.back-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:30px;
+
+    padding:12px 20px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#2563eb;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.back-btn:hover{
+
+    transform:translateY(-2px);
+
+}
