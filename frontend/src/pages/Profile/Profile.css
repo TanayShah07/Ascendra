@@ -1,0 +1,412 @@
+.profile-page{
+
+    padding:40px;
+
+}
+
+.profile-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:24px;
+
+    margin-bottom:35px;
+
+}
+
+.profile-avatar{
+
+    width:90px;
+
+    height:90px;
+
+    border-radius:50%;
+
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+    );
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    flex-shrink:0;
+
+}
+
+.profile-heading h1{
+
+    font-size:2.2rem;
+
+    color:#0f172a;
+
+    margin-bottom:8px;
+
+}
+
+.profile-heading p{
+
+    color:#64748b;
+
+}
+
+.profile-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:25px;
+
+}
+
+.profile-card{
+
+    background:white;
+
+    border-radius:22px;
+
+    padding:28px;
+
+    box-shadow:0 10px 30px rgba(15,23,42,.08);
+
+    transition:.3s;
+
+}
+
+.profile-card:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.profile-card h2{
+
+    color:#0f172a;
+
+    margin-bottom:25px;
+
+}
+
+.full-width{
+
+    grid-column:1/-1;
+
+}
+
+/* ---------- Personal Information ---------- */
+
+.detail-item{
+
+    margin-bottom:22px;
+
+}
+
+.detail-item:last-child{
+
+    margin-bottom:0;
+
+}
+
+.detail-item label{
+
+    display:block;
+
+    color:#94a3b8;
+
+    font-size:14px;
+
+    margin-bottom:6px;
+
+}
+
+.detail-item span{
+
+    font-size:16px;
+
+    font-weight:600;
+
+    color:#0f172a;
+
+}
+
+/* ---------- Professional Profiles ---------- */
+
+.link-row{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:18px;
+
+    padding:20px 0;
+
+    border-bottom:1px solid #e2e8f0;
+
+}
+
+.link-row:last-child{
+
+    border-bottom:none;
+
+}
+
+
+.link-left{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:18px;
+
+    flex:1;
+
+    width:100%;
+
+}
+
+.link-left > div{
+
+    flex:1;
+
+    min-width:0;
+
+}
+
+
+.profile-icon{
+
+    font-size:24px;
+
+    color:#2563eb;
+
+    flex-shrink:0;
+
+    margin-top:3px;
+
+}
+
+.link-left h4{
+
+    color:#0f172a;
+
+    margin-bottom:6px;
+
+}
+
+.link-left p{
+
+    color:#64748b;
+
+    font-size:14px;
+
+    line-height:1.6;
+
+}
+
+.saved-link{
+
+    color:#2563eb !important;
+
+    font-weight:600;
+
+    word-break:break-word;
+
+}
+
+.profile-btn{
+
+    width:75px;
+
+    height:36px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#2563eb;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    transition:.25s;
+
+    margin-left:auto;
+
+    flex-shrink:0;
+
+}
+
+.profile-btn:hover{
+
+    background:#1d4ed8;
+
+}
+
+.link-row button:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 20px rgba(37,99,235,.25);
+
+}
+.saved-link{
+
+    color:#2563eb;
+
+    font-weight:600;
+
+}
+
+/* ---------- Statistics ---------- */
+
+.stats-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:16px;
+
+}
+
+.stats-grid div{
+
+    background:#f8fafc;
+
+    border:1px solid #e2e8f0;
+
+    border-radius:16px;
+
+    padding:22px;
+
+    text-align:center;
+
+    transition:.3s;
+
+}
+
+.stats-grid div:hover{
+
+    border-color:#2563eb;
+
+}
+
+.stats-grid h3{
+
+    color:#2563eb;
+
+    font-size:2rem;
+
+    margin-bottom:8px;
+
+}
+
+.stats-grid span{
+
+    color:#64748b;
+
+    font-size:14px;
+
+}
+
+/* ---------- Empty Cards ---------- */
+
+.empty-state{
+
+    background:#f8fafc;
+
+    border:2px dashed #dbe4f0;
+
+    border-radius:18px;
+
+    padding:40px;
+
+    text-align:center;
+
+    color:#94a3b8;
+
+    line-height:1.8;
+
+}
+
+/* ---------- Responsive ---------- */
+
+@media(max-width:1000px){
+
+.profile-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.full-width{
+
+grid-column:auto;
+
+}
+
+}
+
+@media(max-width:700px){
+
+.profile-page{
+
+padding:20px;
+
+}
+
+.profile-header{
+
+flex-direction:column;
+
+text-align:center;
+
+}
+
+.profile-card{
+
+padding:22px;
+
+}
+
+.stats-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.link-row{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+}
+
+.link-row button{
+
+width:100%;
+
+margin-top:10px;
+
+}
+
+}

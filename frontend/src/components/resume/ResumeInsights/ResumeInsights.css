@@ -1,0 +1,171 @@
+.resume-insights{
+
+    margin-bottom:35px;
+
+}
+
+.resume-insights h2{
+
+    margin-bottom:25px;
+
+    color:#0f172a;
+
+}
+
+.insight-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:24px;
+
+}
+
+.insight-card{
+
+    background:white;
+
+    border-radius:22px;
+
+    padding:28px;
+
+    box-shadow:0 10px 30px rgba(15,23,42,.08);
+
+}
+
+.insight-card svg{
+
+    color:#2563eb;
+
+    margin-bottom:16px;
+
+}
+
+.insight-card h3{
+
+    margin-bottom:18px;
+
+    color:#0f172a;
+
+}
+
+.keyword-list{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+}
+
+.keyword-list span{
+
+    padding:8px 14px;
+
+    background:#eff6ff;
+
+    color:#2563eb;
+
+    border-radius:999px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+.score-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:14px;
+
+}
+
+.score-row strong{
+
+    color:#2563eb;
+
+}
+
+.insight-card ul{
+
+    list-style:none;
+
+    padding:0;
+
+}
+
+.insight-card li{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:12px;
+
+}
+
+.insight-card li svg:first-child{
+
+    color:#22c55e;
+
+}
+
+.company-match{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:15px;
+
+}
+
+.company-match strong{
+
+    color:#2563eb;
+
+}
+
+.warning{
+
+    border-left:5px solid #f59e0b;
+
+}
+
+.warning p{
+
+    line-height:1.8;
+
+    color:#64748b;
+
+}
+
+.insight-card ol{
+
+    padding-left:20px;
+
+}
+
+.insight-card ol li{
+
+    margin-bottom:10px;
+
+}
+
+@media(max-width:900px){
+
+.insight-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
