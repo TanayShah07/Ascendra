@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-
 import Landing from "./pages/Landing/Landing";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
@@ -11,6 +10,10 @@ import CompanyInterview from "./pages/CompanyInterview/CompanyInterview";
 import GroupDiscussion from "./pages/GroupDiscussion/GroupDiscussion";
 import ResumeAnalysis from "./pages/ResumeAnalysis/ResumeAnalysis";
 import Profile from "./pages/Profile/Profile";
+import Coding from "./pages/Coding/Coding";
+import AICoding from "./pages/AICoding/AICoding";
+import Roadmap from "./pages/Roadmap/Roadmap";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 
 import ProtectedRoute from "./routes/ProtectedRoute";
 
@@ -34,6 +37,14 @@ function App() {
                 <Route
                     path="/login"
                     element={<Login />}
+                />
+
+                <Route
+
+                    path="/forgot-password"
+
+                    element={<ForgotPassword/>}
+
                 />
 
                 <Route
@@ -102,6 +113,33 @@ function App() {
                     element={
                         <ProtectedRoute>
                             <Profile />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/coding"
+                    element={
+                        <ProtectedRoute>
+                            <Coding />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/ai-coding"
+                    element={
+                        <ProtectedRoute>
+                            <AICoding />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/roadmap"
+                    element={
+                        <ProtectedRoute>
+                            <Roadmap />
                         </ProtectedRoute>
                     }
                 />

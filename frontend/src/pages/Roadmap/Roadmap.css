@@ -1,0 +1,205 @@
+.roadmap-page{
+
+    padding:40px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:30px;
+
+}
+
+.roadmap-card{
+
+    background:white;
+
+    border-radius:24px;
+
+    padding:45px;
+
+    text-align:center;
+
+    box-shadow:0 10px 30px rgba(15,23,42,.08);
+
+}
+
+.roadmap-icon{
+
+    width:90px;
+
+    height:90px;
+
+    border-radius:50%;
+
+    margin:auto;
+
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+    );
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    margin-bottom:22px;
+
+}
+
+.roadmap-card h1{
+
+    font-size:2.2rem;
+
+    color:#0f172a;
+
+}
+
+.roadmap-card p{
+
+    color:#64748b;
+
+    margin:15px auto 30px;
+
+    max-width:700px;
+
+    line-height:1.8;
+
+}
+
+.examples{
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+    margin-bottom:30px;
+
+}
+
+.examples span{
+
+    background:#eff6ff;
+
+    color:#2563eb;
+
+    padding:10px 16px;
+
+    border-radius:30px;
+
+    font-weight:600;
+
+}
+
+.roadmap-card label{
+
+    display:block;
+
+    text-align:left;
+
+    margin-bottom:12px;
+
+    font-weight:600;
+
+    color:#334155;
+
+}
+
+.roadmap-card textarea{
+
+    width:100%;
+
+    min-height:140px;
+
+    border:1px solid #e2e8f0;
+
+    border-radius:16px;
+
+    padding:18px;
+
+    resize:none;
+
+    outline:none;
+
+    font-size:15px;
+
+    margin-bottom:25px;
+
+}
+
+.roadmap-card button{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    margin:auto;
+
+    border:none;
+
+    border-radius:14px;
+
+    padding:15px 30px;
+
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+    );
+
+    color:white;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+}
+
+.future-card{
+
+    background:white;
+
+    border-radius:22px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:0 10px 30px rgba(15,23,42,.08);
+
+}
+
+.future-card svg{
+
+    color:#2563eb;
+
+    margin-bottom:15px;
+
+}
+
+.future-card h2{
+
+    margin-bottom:10px;
+
+}
+
+.future-card p{
+
+    color:#64748b;
+
+    line-height:1.8;
+
+}

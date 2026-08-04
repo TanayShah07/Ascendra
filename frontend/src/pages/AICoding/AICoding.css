@@ -1,0 +1,39 @@
+.ai-coding-page{
+
+    position:relative;
+
+    padding:35px;
+
+    min-height:100vh;
+
+}
+
+.ai-layout{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:25px;
+
+}
+
+.blurred{
+
+    filter:blur(12px);
+
+    pointer-events:none;
+
+    user-select:none;
+
+}
+
+.coding-main-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1.2fr;
+
+    gap:25px;
+
+}

@@ -118,6 +118,16 @@ onChange={handleChange}
 
 />
 
+<div className="forgot-password">
+
+    <span onClick={() => navigate("/forgot-password")}>
+
+        Forgot Password?
+
+    </span>
+
+</div>
+
 <button>
 
 Login

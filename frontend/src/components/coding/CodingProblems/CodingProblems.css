@@ -1,0 +1,19 @@
+.coding-problems{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+.problem-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}

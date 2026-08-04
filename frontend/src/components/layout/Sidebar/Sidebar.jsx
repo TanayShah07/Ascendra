@@ -91,6 +91,19 @@ const Sidebar = () => {
 
                 </NavLink>
 
+                <NavLink to="/ai-coding">
+
+                <Brain/>
+
+                {!collapsed && (
+                    <>
+                        <span>AI Coding</span>
+                        <span className="lock-badge">🔒</span>
+                    </>
+                )}
+
+            </NavLink>
+
                 <NavLink to="/resume">
 
                     <FileText/>

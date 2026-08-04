@@ -1,11 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { getProfile } from "../services/authService";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null);
+    const navigate = useNavigate();
 
     const [token, setToken] = useState(
         localStorage.getItem("token")
@@ -26,6 +28,8 @@ export const AuthProvider = ({ children }) => {
         setToken(null);
 
         setUser(null);
+
+        navigate("/login", { replace: true });
 
     };
 

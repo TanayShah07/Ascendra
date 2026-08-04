@@ -80,6 +80,51 @@ const Profile = () => {
 
                 </div>
 
+                <div className="profile-card readiness-card">
+
+                    <div>
+
+                        <h2>
+
+                            Placement Readiness
+
+                        </h2>
+
+                        <p>
+
+                            Complete more modules to improve your placement readiness.
+
+                        </p>
+
+                    </div>
+
+                    <div className="readiness-score">
+
+                        <h1>
+
+                            0%
+
+                        </h1>
+
+                        <span>
+
+                            Beginner
+
+                        </span>
+
+                    </div>
+
+                    <div className="progress-bar">
+
+                        <div
+                            className="progress-fill"
+                            style={{width:"0%"}}
+                        />
+
+                    </div>
+
+                </div>
+
                 <div className="profile-grid">
 
                     {/* ---------------- Personal Information ---------------- */}
@@ -450,6 +495,34 @@ const Profile = () => {
 
                     </div>
 
+                    <div className="profile-card">
+
+                    <h2>
+
+                    Skills
+
+                    </h2>
+
+                    <div className="skills-list">
+
+                    <span>Java</span>
+
+                    <span>React</span>
+
+                    <span>Python</span>
+
+                    <span>Node.js</span>
+
+                    <button>
+
+                    +
+
+                    </button>
+
+                    </div>
+
+                    </div>
+
                     {/* ---------------- Statistics ---------------- */}
 
                     <div className="profile-card">
@@ -464,71 +537,133 @@ const Profile = () => {
 
                             <div>
 
-                                <h3>
+                            <h3>
 
-                                    0
+                            0
 
-                                </h3>
+                            </h3>
 
-                                <span>
+                            <span>
 
-                                    Resume Uploads
+                            Resume Uploads
 
-                                </span>
+                            </span>
 
-                            </div>
+                            <small>
 
-                            <div>
+                            Last Upload : Never
 
-                                <h3>
-
-                                    0
-
-                                </h3>
-
-                                <span>
-
-                                    Interviews
-
-                                </span>
+                            </small>
 
                             </div>
 
                             <div>
 
-                                <h3>
+                            <h3>
 
-                                    0
+                            0
 
-                                </h3>
+                            </h3>
 
-                                <span>
+                            <span>
 
-                                    Coding Problems
+                            Interviews
 
-                                </span>
+                            </span>
+
+                            <small>
+
+                            Average : --
+
+                            </small>
 
                             </div>
 
                             <div>
 
-                                <h3>
+                            <h3>
 
-                                    0
+                            0
 
-                                </h3>
+                            </h3>
 
-                                <span>
+                            <span>
 
-                                    GD Sessions
+                            Coding
 
-                                </span>
+                            </span>
+
+                            <small>
+
+                            XP : 0
+
+                            </small>
 
                             </div>
+
+                            <div>
+
+                            <h3>
+
+                            0
+
+                            </h3>
+
+                            <span>
+
+                            GD Sessions
+
+                            </span>
+
+                            <small>
+
+                            Rating : --
+
+                            </small>
+
+                            </div>
+
+                         </div>
+
+                    </div>
+
+                    <div className="profile-card">
+
+                        <h2>
+
+                        Recent Activity
+
+                        </h2>
+
+                        <div className="activity">
+
+                        <p>
+
+                        🟢 Joined Ascendra
+
+                        </p>
+
+                        <p>
+
+                        📄 No resume uploaded
+
+                        </p>
+
+                        <p>
+
+                        💻 No coding problems solved
+
+                        </p>
+
+                        <p>
+
+                        🎤 No interviews completed
+
+                        </p>
 
                         </div>
 
-                    </div>
+                        </div>
 
                     {/* ---------------- Achievements ---------------- */}
 
@@ -540,15 +675,57 @@ const Profile = () => {
 
                         </h2>
 
-                        <div className="empty-state">
+                        <div className="achievement-grid">
 
-                            No achievements unlocked yet.
+                            <div>
 
-                            <br/>
+                            🔒
 
-                            Start using Ascendra to unlock badges and milestones.
+                            <h4>
 
-                        </div>
+                            First Resume Upload
+
+                            </h4>
+
+                            </div>
+
+                            <div>
+
+                            🔒
+
+                            <h4>
+
+                            First Interview
+
+                            </h4>
+
+                            </div>
+
+                            <div>
+
+                            🔒
+
+                            <h4>
+
+                            100 Coding Problems
+
+                            </h4>
+
+                            </div>
+
+                            <div>
+
+                            🔒
+
+                            <h4>
+
+                            30 Day Streak
+
+                            </h4>
+
+                            </div>
+
+                            </div>
 
                     </div>
 
@@ -562,9 +739,37 @@ const Profile = () => {
 
                         </h2>
 
-                        <div className="empty-state">
+                        <div className="insight-list">
 
-                            Complete interviews, coding practice, group discussions and resume analysis to unlock personalized AI insights.
+                        <p>
+
+                        ☐ Resume Analysis
+
+                        </p>
+
+                        <p>
+
+                        ☐ Coding Practice
+
+                        </p>
+
+                        <p>
+
+                        ☐ Mock Interview
+
+                        </p>
+
+                        <p>
+
+                        ☐ Group Discussion
+
+                        </p>
+
+                        <p>
+
+                        Generate your roadmap to unlock AI insights.
+
+                        </p>
 
                         </div>
 

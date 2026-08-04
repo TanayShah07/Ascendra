@@ -165,3 +165,12 @@
 .sidebar.collapsed .sidebar-top{
     justify-content:center;
 }
+.lock-badge{
+
+    margin-left:auto;
+
+    font-size:12px;
+
+    opacity:.9;
+
+}

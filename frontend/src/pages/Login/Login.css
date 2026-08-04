@@ -162,3 +162,39 @@ cursor:pointer;
         0 16px 35px rgba(37,99,235,.18);
 
 }
+
+.forgot-password{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    margin-top:-8px;
+
+    margin-bottom:18px;
+
+}
+
+.forgot-password span{
+
+    color:#2563eb;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.forgot-password span:hover{
+
+    color:#1d4ed8;
+
+    text-decoration:underline;
+
+}

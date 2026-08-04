@@ -1,12 +1,9 @@
 import "./Navbar.css";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Menu } from "lucide-react";
-import { useAuth } from "../../../context/AuthContext";
 import { useEffect, useState } from "react";
 
 const Navbar = () => {
-
-    const { token, logout } = useAuth();
 
     const [activeSection, setActiveSection] = useState("home");
 
@@ -23,6 +20,7 @@ const Navbar = () => {
 
             if (
                 home &&
+                features &&
                 scroll < features.offsetTop - 100
             ) {
 
@@ -32,6 +30,7 @@ const Navbar = () => {
 
             else if (
                 features &&
+                technology &&
                 scroll >= features.offsetTop - 100 &&
                 scroll < technology.offsetTop - 100
             ) {
@@ -42,6 +41,7 @@ const Navbar = () => {
 
             else if (
                 technology &&
+                about &&
                 scroll >= technology.offsetTop - 100 &&
                 scroll < about.offsetTop - 100
             ) {
@@ -88,92 +88,55 @@ const Navbar = () => {
 
             </div>
 
-            {!token ? (
+            <div className="navbar-links">
 
-                <>
+                <a
+                    href="#home"
+                    className={activeSection === "home" ? "active" : ""}
+                >
+                    Home
+                </a>
 
-                    <div className="navbar-links">
+                <a
+                    href="#features"
+                    className={activeSection === "features" ? "active" : ""}
+                >
+                    Features
+                </a>
 
-                        <a
-                            href="#home"
-                            className={activeSection === "home" ? "active" : ""}
-                        >
-                            Home
-                        </a>
+                <a
+                    href="#technology"
+                    className={activeSection === "technology" ? "active" : ""}
+                >
+                    Technology
+                </a>
 
-                        <a
-                            href="#features"
-                            className={activeSection === "features" ? "active" : ""}
-                        >
-                            Features
-                        </a>
+                <a
+                    href="#about"
+                    className={activeSection === "about" ? "active" : ""}
+                >
+                    About
+                </a>
 
-                        <a
-                            href="#technology"
-                            className={activeSection === "technology" ? "active" : ""}
-                        >
-                            Technology
-                        </a>
+            </div>
 
-                        <a
-                            href="#about"
-                            className={activeSection === "about" ? "active" : ""}
-                        >
-                            About
-                        </a>
+            <div className="navbar-buttons">
 
-                    </div>
+                <Link
+                    to="/login"
+                    className="login-btn"
+                >
+                    Login
+                </Link>
 
-                    <div className="navbar-buttons">
+                <Link
+                    to="/register"
+                    className="get-started-btn"
+                >
+                    Get Started
+                </Link>
 
-                        <Link
-                            to="/login"
-                            className="login-btn"
-                        >
-                            Login
-                        </Link>
-
-                        <Link
-                            to="/register"
-                            className="get-started-btn"
-                        >
-                            Get Started
-                        </Link>
-
-                    </div>
-
-                </>
-
-            ) : (
-
-                <>
-
-                    <div className="navbar-links">
-
-                        <NavLink to="/dashboard">Dashboard</NavLink>
-
-                        <NavLink to="/interview">Interview</NavLink>
-
-                        <NavLink to="/roadmap">Roadmap</NavLink>
-
-                        <NavLink to="/profile">Profile</NavLink>
-
-                    </div>
-
-                    <div className="navbar-buttons">
-
-                        <button
-                            className="logout-btn"
-                            onClick={logout}
-                        >
-                            Logout
-                        </button>
-
-                    </div>
-
-                </>
-
-            )}
+            </div>
 
             <button className="mobile-menu">
 
