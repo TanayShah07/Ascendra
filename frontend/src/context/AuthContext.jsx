@@ -6,8 +6,11 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
 
-    const [user, setUser] = useState(null);
     const navigate = useNavigate();
+
+    const [user, setUser] = useState(null);
+
+    const [loading, setLoading] = useState(true);
 
     const [token, setToken] = useState(
         localStorage.getItem("token")
@@ -35,9 +38,15 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
 
-        if (!token) return;
-
         const fetchProfile = async () => {
+
+            if (!token) {
+
+                setLoading(false);
+
+                return;
+
+            }
 
             try {
 
@@ -47,9 +56,17 @@ export const AuthProvider = ({ children }) => {
 
             }
 
-            catch {
+            catch (error) {
+
+                console.error(error);
 
                 logout();
+
+            }
+
+            finally {
+
+                setLoading(false);
 
             }
 
@@ -65,8 +82,10 @@ export const AuthProvider = ({ children }) => {
             value={{
                 user,
                 token,
+                loading,
                 login,
-                logout
+                logout,
+                setUser
             }}
         >
 

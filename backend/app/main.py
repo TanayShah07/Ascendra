@@ -4,6 +4,14 @@ from fastapi.middleware.cors import CORSMiddleware
 import app.models
 from app.routes import auth_router
 from app.database.session import engine, Base
+from app.routes import (
+    auth_router,
+    profile_router,
+    dashboard_router,
+    resume_router,
+    coding_router,
+    roadmap_router,
+)
 
 Base.metadata.create_all(bind=engine)
 
@@ -13,6 +21,11 @@ app = FastAPI(
     description="Backend API for Ascendra"
 )
 app.include_router(auth_router)
+app.include_router(profile_router)
+app.include_router(dashboard_router)
+app.include_router(resume_router)
+app.include_router(coding_router)
+app.include_router(roadmap_router)
 
 app.add_middleware(
     CORSMiddleware,

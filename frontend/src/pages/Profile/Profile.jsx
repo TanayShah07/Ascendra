@@ -1,8 +1,14 @@
 import "./Profile.css";
 import DashboardLayout from "../../components/layout/DashboardLayout/DashboardLayout";
 import { useAuth } from "../../context/AuthContext";
+import EditProfileModal from "../../components/profile/EditProfileModal/EditProfileModal";
 import { useState } from "react";
-
+import EditGoalsModal from "../../components/profile/EditGoalsModal/EditGoalsModal";
+import {
+    updateProfile,
+    updateSocialLinks,
+    updatePlacementGoals
+} from "../../services/authService";
 import {
     User
 } from "lucide-react";
@@ -16,35 +22,111 @@ import {
 
 const Profile = () => {
 
-    const { user } = useAuth();
+    const {
 
-    const [links, setLinks] = useState({
+    user,
 
-        linkedin: "",
+    token,
 
-        github: "",
+    setUser
 
-        portfolio: "",
+} = useAuth();
 
-        leetcode: ""
+    const [showProfileModal, setShowProfileModal] = useState(false);
+    const [showGoalModal, setShowGoalModal] = useState(false);
 
-    });
+    const handleAddLink = async (platform) => {
 
-    const handleAddLink = (platform) => {
+    const url = prompt(
+        `Enter your ${platform} profile URL`
+    );
 
-        const url = prompt(`Enter your ${platform} profile URL`);
+    if (!url) return;
 
-        if (!url) return;
+    try {
 
-        setLinks({
+        const updated = {
 
-            ...links,
+            linkedin: user.linkedin,
 
-            [platform.toLowerCase()]: url
+            github: user.github,
 
-        });
+            portfolio: user.portfolio,
 
-    };
+            leetcode: user.leetcode,
+
+            [platform]: url
+
+        };
+
+        const res = await updateSocialLinks(
+            token,
+            updated
+        );
+
+        setUser(res.data);
+
+    }
+
+    catch (err) {
+
+        console.error(err);
+
+        alert("Unable to update profile.");
+
+    }
+
+};
+
+const handleProfileUpdate = async (data) => {
+
+    try {
+
+        const res = await updateProfile(
+            token,
+            data
+        );
+
+        setUser(res.data);
+
+        setShowProfileModal(false);
+
+    }
+
+    catch (err) {
+
+        console.error(err);
+
+        alert("Unable to update profile.");
+
+    }
+
+};
+
+const handleGoalUpdate = async (data) => {
+
+    try{
+
+        const res = await updatePlacementGoals(
+            token,
+            data
+        );
+
+        setUser(res.data);
+
+        setShowGoalModal(false);
+
+    }
+
+    catch(err){
+
+        console.error(err);
+
+        alert("Unable to update goals.");
+
+    }
+
+};
 
     return (
 
@@ -131,11 +213,28 @@ const Profile = () => {
 
                     <div className="profile-card">
 
-                        <h2>
+                        <div className="profile-card-header">
 
-                            Personal Information
+                            <h2
+                                style={{
+                                    marginBottom: 0
+                                }}
+                            >
 
-                        </h2>
+                                Personal Information
+
+                            </h2>
+
+                            <button
+                                className="profile-btn"
+                                onClick={() => setShowProfileModal(true)}
+                            >
+
+                                Edit
+
+                            </button>
+
+                        </div>
 
                         <div className="detail-item">
 
@@ -247,11 +346,11 @@ const Profile = () => {
 
                                     {
 
-                                        links.linkedin ?
+                                        user?.linkedin ?
 
                                         <p className="saved-link">
 
-                                            {links.linkedin}
+                                            {user.linkedin}
 
                                         </p>
 
@@ -274,7 +373,7 @@ const Profile = () => {
                                 onClick={() => handleAddLink("linkedin")}
                             >
 
-                                {links.linkedin ? "Edit" : "Add"}
+                                {user?.linkedin ? "Edit" : "Add"}
 
                             </button>
 
@@ -298,11 +397,11 @@ const Profile = () => {
 
                                     {
 
-                                        links.github ?
+                                        user?.github ?
 
                                         <p className="saved-link">
 
-                                            {links.github}
+                                            {user.github}
 
                                         </p>
 
@@ -325,7 +424,7 @@ const Profile = () => {
                                 onClick={() => handleAddLink("github")}
                             >
 
-                                {links.github ? "Edit" : "Add"}
+                                {user?.github ? "Edit" : "Add"}
 
                             </button>
 
@@ -349,11 +448,11 @@ const Profile = () => {
 
                                     {
 
-                                        links.portfolio ?
+                                        user?.portfolio ?
 
                                         <p className="saved-link">
 
-                                            {links.portfolio}
+                                            {user.portfolio}
 
                                         </p>
 
@@ -376,7 +475,7 @@ const Profile = () => {
                                 onClick={() => handleAddLink("portfolio")}
                             >
 
-                                {links.portfolio ? "Edit" : "Add"}
+                                {user?.portfolio ? "Edit" : "Add"}
 
                             </button>
 
@@ -400,11 +499,11 @@ const Profile = () => {
 
                                     {
 
-                                        links.leetcode ?
+                                        user?.leetcode ?
 
                                         <p className="saved-link">
 
-                                            {links.leetcode}
+                                            {user.leetcode}
 
                                         </p>
 
@@ -427,7 +526,7 @@ const Profile = () => {
                                 onClick={() => handleAddLink("leetcode")}
                             >
 
-                                {links.leetcode ? "Edit" : "Add"}
+                                {user?.leetcode ? "Edit" : "Add"}
 
                             </button>
 
@@ -437,13 +536,28 @@ const Profile = () => {
 
                                         {/* ---------------- Placement Goals ---------------- */}
 
+                    {/* ---------------- Placement Goals ---------------- */}
+
                     <div className="profile-card">
 
-                        <h2>
+                        <div className="profile-card-header">
 
-                            Placement Goals
+                            <h2>
 
-                        </h2>
+                                Placement Goals
+
+                            </h2>
+
+                            <button
+                                className="profile-btn"
+                                onClick={() => setShowGoalModal(true)}
+                            >
+
+                                Edit
+
+                            </button>
+
+                        </div>
 
                         <div className="detail-item">
 
@@ -455,7 +569,7 @@ const Profile = () => {
 
                             <span>
 
-                                Not Selected
+                                {user?.dream_company || "Not Selected"}
 
                             </span>
 
@@ -471,7 +585,7 @@ const Profile = () => {
 
                             <span>
 
-                                Not Selected
+                                {user?.target_role || "Not Selected"}
 
                             </span>
 
@@ -487,39 +601,11 @@ const Profile = () => {
 
                             <span>
 
-                                Not Selected
+                                {user?.preferred_domain || "Not Selected"}
 
                             </span>
 
                         </div>
-
-                    </div>
-
-                    <div className="profile-card">
-
-                    <h2>
-
-                    Skills
-
-                    </h2>
-
-                    <div className="skills-list">
-
-                    <span>Java</span>
-
-                    <span>React</span>
-
-                    <span>Python</span>
-
-                    <span>Node.js</span>
-
-                    <button>
-
-                    +
-
-                    </button>
-
-                    </div>
 
                     </div>
 
@@ -778,6 +864,41 @@ const Profile = () => {
                 </div>
 
             </div>
+            {
+
+                showProfileModal && (
+
+                <EditProfileModal
+
+                user={user}
+
+                onClose={() => setShowProfileModal(false)}
+
+                onSave={handleProfileUpdate}
+
+                />
+
+                )
+
+                }
+
+                {
+
+                    showGoalModal && (
+
+                    <EditGoalsModal
+
+                    user={user}
+
+                    onClose={() => setShowGoalModal(false)}
+
+                    onSave={handleGoalUpdate}
+
+                    />
+
+                    )
+
+                    }
 
         </DashboardLayout>
 
