@@ -657,3 +657,99 @@ color:#475569;
     flex-shrink:0;
 
 }
+
+.readiness-breakdown {
+
+    grid-column: 1 / -1;
+
+}
+
+
+.readiness-breakdown > div:first-child p {
+
+    color: #64748b;
+
+    margin-top: 6px;
+
+}
+
+
+.breakdown-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 22px;
+
+}
+
+
+.breakdown-item {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+
+}
+
+
+.breakdown-info {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+.breakdown-info span {
+
+    color: #475569;
+
+    font-weight: 600;
+
+}
+
+
+.breakdown-info strong {
+
+    color: #2563eb;
+
+}
+
+
+.breakdown-bar {
+
+    width: 100%;
+
+    height: 9px;
+
+    background: #e5e7eb;
+
+    border-radius: 50px;
+
+    overflow: hidden;
+
+}
+
+
+.breakdown-bar div {
+
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        #2563eb,
+        #7c3aed
+    );
+
+    border-radius: 50px;
+
+    transition: width .6s ease;
+
+}

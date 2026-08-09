@@ -14,7 +14,8 @@ import Coding from "./pages/Coding/Coding";
 import AICoding from "./pages/AICoding/AICoding";
 import Roadmap from "./pages/Roadmap/Roadmap";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
-
+import PreparationHub from "./pages/PreparationHub/PreparationHub";
+import Aptitude from "./pages/Aptitude/Aptitude";
 import ProtectedRoute from "./routes/ProtectedRoute";
 
 function App() {
@@ -118,10 +119,28 @@ function App() {
                 />
 
                 <Route
+                    path="/preparation"
+                    element={
+                        <ProtectedRoute>
+                            <PreparationHub />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
                     path="/coding"
                     element={
                         <ProtectedRoute>
                             <Coding />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/aptitude"
+                    element={
+                        <ProtectedRoute>
+                            <Aptitude />
                         </ProtectedRoute>
                     }
                 />

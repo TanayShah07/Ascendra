@@ -18,6 +18,36 @@ export const loginUser = (data) =>
 
     API.post("/auth/login", data);
 
+export const forgotPassword = (email) =>
+    API.post("/auth/forgot-password", null, {
+        params: {
+            email
+        }
+    });
+
+
+export const verifyOtp = (email, otp) =>
+    API.post("/auth/verify-otp", null, {
+        params: {
+            email,
+            otp
+        }
+    });
+
+
+export const resetPassword = (
+    email,
+    resetToken,
+    newPassword
+) =>
+    API.post("/auth/reset-password", null, {
+        params: {
+            email,
+            reset_token: resetToken,
+            new_password: newPassword
+        }
+    });
+
 
 // ---------------- Profile ----------------
 
@@ -88,6 +118,14 @@ export const updatePlacementGoals = (
 
         }
 
+    });
+
+
+export const getReadiness = (token) =>
+    API.get("/profile/readiness", {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
     });
 
 

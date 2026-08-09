@@ -1,14 +1,22 @@
 import "./Profile.css";
+
 import DashboardLayout from "../../components/layout/DashboardLayout/DashboardLayout";
+
 import { useAuth } from "../../context/AuthContext";
+
 import EditProfileModal from "../../components/profile/EditProfileModal/EditProfileModal";
-import { useState } from "react";
+
 import EditGoalsModal from "../../components/profile/EditGoalsModal/EditGoalsModal";
+
+import { useEffect, useState } from "react";
+
 import {
     updateProfile,
     updateSocialLinks,
-    updatePlacementGoals
+    updatePlacementGoals,
+    getReadiness
 } from "../../services/authService";
+
 import {
     User
 } from "lucide-react";
@@ -20,113 +28,273 @@ import {
     FaLaptopCode
 } from "react-icons/fa";
 
+
 const Profile = () => {
 
     const {
+        user,
+        token,
+        setUser
+    } = useAuth();
 
-    user,
 
-    token,
+    // =====================================================
+    // STATE
+    // =====================================================
 
-    setUser
+    const [showProfileModal, setShowProfileModal] =
+        useState(false);
 
-} = useAuth();
+    const [showGoalModal, setShowGoalModal] =
+        useState(false);
 
-    const [showProfileModal, setShowProfileModal] = useState(false);
-    const [showGoalModal, setShowGoalModal] = useState(false);
+    const [readiness, setReadiness] =
+        useState(null);
 
-    const handleAddLink = async (platform) => {
 
-    const url = prompt(
-        `Enter your ${platform} profile URL`
-    );
+    // =====================================================
+    // READINESS SCORE
+    // =====================================================
 
-    if (!url) return;
+    const readinessScore =
+        user?.placement_readiness || 0;
 
-    try {
 
-        const updated = {
+    const readinessLevel =
+        readinessScore >= 80
+            ? "Placement Ready"
+            : readinessScore >= 60
+            ? "Advanced"
+            : readinessScore >= 40
+            ? "Intermediate"
+            : readinessScore >= 20
+            ? "Developing"
+            : "Beginner";
 
-            linkedin: user.linkedin,
 
-            github: user.github,
+    // =====================================================
+    // FETCH READINESS BREAKDOWN
+    // =====================================================
 
-            portfolio: user.portfolio,
+    useEffect(() => {
 
-            leetcode: user.leetcode,
+        if (!token) return;
 
-            [platform]: url
+
+        const fetchReadiness = async () => {
+
+            try {
+
+                const res =
+                    await getReadiness(token);
+
+                setReadiness(res.data);
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Failed to fetch readiness:",
+                    error
+                );
+
+            }
 
         };
 
-        const res = await updateSocialLinks(
-            token,
-            updated
+
+        fetchReadiness();
+
+    }, [token, user]);
+
+
+    // =====================================================
+    // ADD / EDIT SOCIAL LINK
+    // =====================================================
+
+    const handleAddLink = async (platform) => {
+
+        const url = prompt(
+            `Enter your ${platform} profile URL`
         );
 
-        setUser(res.data);
 
-    }
+        if (!url) return;
 
-    catch (err) {
 
-        console.error(err);
+        try {
 
-        alert("Unable to update profile.");
+            const updated = {
 
-    }
+                linkedin: user.linkedin,
 
-};
+                github: user.github,
 
-const handleProfileUpdate = async (data) => {
+                portfolio: user.portfolio,
 
-    try {
+                leetcode: user.leetcode,
 
-        const res = await updateProfile(
-            token,
-            data
-        );
+                [platform]: url
 
-        setUser(res.data);
+            };
 
-        setShowProfileModal(false);
 
-    }
+            const res =
+                await updateSocialLinks(
+                    token,
+                    updated
+                );
 
-    catch (err) {
 
-        console.error(err);
+            setUser(res.data);
 
-        alert("Unable to update profile.");
 
-    }
+        }
 
-};
+        catch (err) {
 
-const handleGoalUpdate = async (data) => {
+            console.error(err);
 
-    try{
+            alert(
+                "Unable to update profile."
+            );
 
-        const res = await updatePlacementGoals(
-            token,
-            data
-        );
+        }
 
-        setUser(res.data);
+    };
 
-        setShowGoalModal(false);
 
-    }
+    // =====================================================
+    // UPDATE PERSONAL PROFILE
+    // =====================================================
 
-    catch(err){
+    const handleProfileUpdate = async (data) => {
 
-        console.error(err);
+        try {
 
-        alert("Unable to update goals.");
+            const res =
+                await updateProfile(
+                    token,
+                    data
+                );
 
-    }
 
-};
+            setUser(res.data);
+
+            setShowProfileModal(false);
+
+        }
+
+        catch (err) {
+
+            console.error(err);
+
+            alert(
+                "Unable to update profile."
+            );
+
+        }
+
+    };
+
+
+    // =====================================================
+    // UPDATE PLACEMENT GOALS
+    // =====================================================
+
+    const handleGoalUpdate = async (data) => {
+
+        try {
+
+            const res =
+                await updatePlacementGoals(
+                    token,
+                    data
+                );
+
+
+            setUser(res.data);
+
+            setShowGoalModal(false);
+
+        }
+
+        catch (err) {
+
+            console.error(err);
+
+            alert(
+                "Unable to update goals."
+            );
+
+        }
+
+    };
+
+
+    // =====================================================
+    // READINESS BREAKDOWN DATA
+    // =====================================================
+
+    const breakdownItems = readiness
+        ? [
+
+            {
+                label: "Profile",
+                score: readiness.breakdown.profile.score,
+                max: readiness.breakdown.profile.max
+            },
+
+            {
+                label: "Professional Profiles",
+                score: readiness.breakdown.professional.score,
+                max: readiness.breakdown.professional.max
+            },
+
+            {
+                label: "Placement Goals",
+                score: readiness.breakdown.placement_goals.score,
+                max: readiness.breakdown.placement_goals.max
+            },
+
+            {
+                label: "Resume",
+                score: readiness.breakdown.resume.score,
+                max: readiness.breakdown.resume.max
+            },
+
+            {
+                label: "Coding",
+                score: readiness.breakdown.coding.score,
+                max: readiness.breakdown.coding.max
+            },
+
+            {
+                label: "Interview",
+                score: readiness.breakdown.interview.score,
+                max: readiness.breakdown.interview.max
+            },
+
+            {
+                label: "Group Discussion",
+                score: readiness.breakdown.group_discussion.score,
+                max: readiness.breakdown.group_discussion.max
+            },
+
+            {
+                label: "Roadmap",
+                score: readiness.breakdown.roadmap.score,
+                max: readiness.breakdown.roadmap.max
+            }
+
+        ]
+        : [];
+
+
+    // =====================================================
+    // RENDER
+    // =====================================================
 
     return (
 
@@ -134,15 +302,19 @@ const handleGoalUpdate = async (data) => {
 
             <div className="profile-page">
 
-                {/* ---------------- Header ---------------- */}
+
+                {/* =================================================
+                    PROFILE HEADER
+                ================================================= */}
 
                 <div className="profile-header">
 
                     <div className="profile-avatar">
 
-                        <User size={48}/>
+                        <User size={48} />
 
                     </div>
+
 
                     <div className="profile-heading">
 
@@ -152,64 +324,190 @@ const handleGoalUpdate = async (data) => {
 
                         </h1>
 
+
                         <p>
 
-                            Complete your profile to improve your placement readiness.
+                            Complete your profile to improve
+                            your placement readiness.
 
                         </p>
 
                     </div>
 
                 </div>
+
+
+                {/* =================================================
+                    PLACEMENT READINESS
+                ================================================= */}
 
                 <div className="profile-card readiness-card">
 
                     <div>
 
                         <h2>
-
                             Placement Readiness
-
                         </h2>
+
 
                         <p>
 
-                            Complete more modules to improve your placement readiness.
+                            Your readiness score is calculated
+                            from your profile, resume, coding,
+                            interview, GD and placement preparation.
 
                         </p>
 
                     </div>
 
+
                     <div className="readiness-score">
 
                         <h1>
 
-                            0%
+                            {readinessScore}%
 
                         </h1>
 
+
                         <span>
 
-                            Beginner
+                            {readinessLevel}
 
                         </span>
 
                     </div>
 
+
                     <div className="progress-bar">
 
                         <div
                             className="progress-fill"
-                            style={{width:"0%"}}
+                            style={{
+                                width: `${readinessScore}%`
+                            }}
                         />
 
                     </div>
 
                 </div>
 
+
+                {/* =================================================
+                    PROFILE GRID
+                ================================================= */}
+
                 <div className="profile-grid">
 
-                    {/* ---------------- Personal Information ---------------- */}
+
+                    {/* =================================================
+                        READINESS BREAKDOWN
+                    ================================================= */}
+
+                    <div className="profile-card readiness-breakdown full-width">
+
+                        <div className="profile-card-header">
+
+                            <div>
+
+                                <h2>
+                                    Readiness Breakdown
+                                </h2>
+
+
+                                <p>
+
+                                    See what's contributing to
+                                    your placement readiness.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        {readiness && (
+
+                            <div className="breakdown-list">
+
+                                {breakdownItems.map(
+                                    (item) => {
+
+                                        const percentage =
+                                            item.max > 0
+                                                ? (
+                                                    item.score /
+                                                    item.max
+                                                ) * 100
+                                                : 0;
+
+
+                                        return (
+
+                                            <div
+                                                className="breakdown-item"
+                                                key={item.label}
+                                            >
+
+                                                <div className="breakdown-info">
+
+                                                    <span>
+
+                                                        {item.label}
+
+                                                    </span>
+
+
+                                                    <strong>
+
+                                                        {item.score}
+                                                        /
+                                                        {item.max}
+
+                                                    </strong>
+
+                                                </div>
+
+
+                                                <div className="breakdown-bar">
+
+                                                    <div
+                                                        style={{
+                                                            width: `${percentage}%`
+                                                        }}
+                                                    />
+
+                                                </div>
+
+                                            </div>
+
+                                        );
+
+                                    }
+                                )}
+
+                            </div>
+
+                        )}
+
+
+                        {!readiness && (
+
+                            <p className="breakdown-loading">
+
+                                Loading readiness breakdown...
+
+                            </p>
+
+                        )}
+
+                    </div>
+
+
+                    {/* =================================================
+                        PERSONAL INFORMATION
+                    ================================================= */}
 
                     <div className="profile-card">
 
@@ -225,9 +523,12 @@ const handleGoalUpdate = async (data) => {
 
                             </h2>
 
+
                             <button
                                 className="profile-btn"
-                                onClick={() => setShowProfileModal(true)}
+                                onClick={() =>
+                                    setShowProfileModal(true)
+                                }
                             >
 
                                 Edit
@@ -236,97 +537,84 @@ const handleGoalUpdate = async (data) => {
 
                         </div>
 
+
                         <div className="detail-item">
 
                             <label>
-
                                 Full Name
-
                             </label>
 
                             <span>
-
                                 {user?.full_name}
-
                             </span>
 
                         </div>
 
+
                         <div className="detail-item">
 
                             <label>
-
                                 Email
-
                             </label>
 
                             <span>
-
                                 {user?.email}
-
                             </span>
 
                         </div>
 
+
                         <div className="detail-item">
 
                             <label>
-
                                 College
-
                             </label>
 
                             <span>
-
                                 {user?.college}
-
                             </span>
 
                         </div>
 
+
                         <div className="detail-item">
 
                             <label>
-
                                 Branch
-
                             </label>
 
                             <span>
-
                                 {user?.branch}
-
                             </span>
 
                         </div>
 
+
                         <div className="detail-item">
 
                             <label>
-
                                 Graduation Year
-
                             </label>
 
                             <span>
-
                                 {user?.graduation_year}
-
                             </span>
 
                         </div>
 
                     </div>
 
-                    {/* ---------------- Professional Profiles ---------------- */}
+
+                    {/* =================================================
+                        PROFESSIONAL PROFILES
+                    ================================================= */}
 
                     <div className="profile-card">
 
                         <h2>
-
                             Professional Profiles
-
                         </h2>
+
 
                         {/* LinkedIn */}
 
@@ -334,19 +622,19 @@ const handleGoalUpdate = async (data) => {
 
                             <div className="link-left">
 
-                                <FaLinkedin className="profile-icon"/>
+                                <FaLinkedin
+                                    className="profile-icon"
+                                />
+
 
                                 <div>
 
                                     <h4>
-
                                         LinkedIn
-
                                     </h4>
 
-                                    {
 
-                                        user?.linkedin ?
+                                    {user?.linkedin ? (
 
                                         <p className="saved-link">
 
@@ -354,30 +642,39 @@ const handleGoalUpdate = async (data) => {
 
                                         </p>
 
-                                        :
+                                    ) : (
 
                                         <p>
 
-                                            Add your LinkedIn profile to showcase your professional presence.
+                                            Add your LinkedIn profile
+                                            to showcase your professional
+                                            presence.
 
                                         </p>
 
-                                    }
+                                    )}
 
                                 </div>
 
                             </div>
 
+
                             <button
                                 className="profile-btn"
-                                onClick={() => handleAddLink("linkedin")}
+                                onClick={() =>
+                                    handleAddLink("linkedin")
+                                }
                             >
 
-                                {user?.linkedin ? "Edit" : "Add"}
+                                {user?.linkedin
+                                    ? "Edit"
+                                    : "Add"
+                                }
 
                             </button>
 
                         </div>
+
 
                         {/* GitHub */}
 
@@ -385,19 +682,19 @@ const handleGoalUpdate = async (data) => {
 
                             <div className="link-left">
 
-                                <FaGithub className="profile-icon"/>
+                                <FaGithub
+                                    className="profile-icon"
+                                />
+
 
                                 <div>
 
                                     <h4>
-
                                         GitHub
-
                                     </h4>
 
-                                    {
 
-                                        user?.github ?
+                                    {user?.github ? (
 
                                         <p className="saved-link">
 
@@ -405,30 +702,39 @@ const handleGoalUpdate = async (data) => {
 
                                         </p>
 
-                                        :
+                                    ) : (
 
                                         <p>
 
-                                            Connect your GitHub profile to showcase your repositories and projects.
+                                            Connect your GitHub profile
+                                            to showcase your repositories
+                                            and projects.
 
                                         </p>
 
-                                    }
+                                    )}
 
                                 </div>
 
                             </div>
 
+
                             <button
                                 className="profile-btn"
-                                onClick={() => handleAddLink("github")}
+                                onClick={() =>
+                                    handleAddLink("github")
+                                }
                             >
 
-                                {user?.github ? "Edit" : "Add"}
+                                {user?.github
+                                    ? "Edit"
+                                    : "Add"
+                                }
 
                             </button>
 
                         </div>
+
 
                         {/* Portfolio */}
 
@@ -436,19 +742,19 @@ const handleGoalUpdate = async (data) => {
 
                             <div className="link-left">
 
-                                <FaGlobe className="profile-icon"/>
+                                <FaGlobe
+                                    className="profile-icon"
+                                />
+
 
                                 <div>
 
                                     <h4>
-
                                         Portfolio
-
                                     </h4>
 
-                                    {
 
-                                        user?.portfolio ?
+                                    {user?.portfolio ? (
 
                                         <p className="saved-link">
 
@@ -456,30 +762,38 @@ const handleGoalUpdate = async (data) => {
 
                                         </p>
 
-                                        :
+                                    ) : (
 
                                         <p>
 
-                                            Add your personal portfolio website to impress recruiters.
+                                            Add your personal portfolio
+                                            website to impress recruiters.
 
                                         </p>
 
-                                    }
+                                    )}
 
                                 </div>
 
                             </div>
 
+
                             <button
                                 className="profile-btn"
-                                onClick={() => handleAddLink("portfolio")}
+                                onClick={() =>
+                                    handleAddLink("portfolio")
+                                }
                             >
 
-                                {user?.portfolio ? "Edit" : "Add"}
+                                {user?.portfolio
+                                    ? "Edit"
+                                    : "Add"
+                                }
 
                             </button>
 
                         </div>
+
 
                         {/* LeetCode */}
 
@@ -487,19 +801,19 @@ const handleGoalUpdate = async (data) => {
 
                             <div className="link-left">
 
-                                <FaLaptopCode className="profile-icon"/>
+                                <FaLaptopCode
+                                    className="profile-icon"
+                                />
+
 
                                 <div>
 
                                     <h4>
-
                                         LeetCode
-
                                     </h4>
 
-                                    {
 
-                                        user?.leetcode ?
+                                    {user?.leetcode ? (
 
                                         <p className="saved-link">
 
@@ -507,26 +821,33 @@ const handleGoalUpdate = async (data) => {
 
                                         </p>
 
-                                        :
+                                    ) : (
 
                                         <p>
 
-                                            Showcase your coding journey through your LeetCode profile.
+                                            Showcase your coding journey
+                                            through your LeetCode profile.
 
                                         </p>
 
-                                    }
+                                    )}
 
                                 </div>
 
                             </div>
 
+
                             <button
                                 className="profile-btn"
-                                onClick={() => handleAddLink("leetcode")}
+                                onClick={() =>
+                                    handleAddLink("leetcode")
+                                }
                             >
 
-                                {user?.leetcode ? "Edit" : "Add"}
+                                {user?.leetcode
+                                    ? "Edit"
+                                    : "Add"
+                                }
 
                             </button>
 
@@ -534,23 +855,25 @@ const handleGoalUpdate = async (data) => {
 
                     </div>
 
-                                        {/* ---------------- Placement Goals ---------------- */}
 
-                    {/* ---------------- Placement Goals ---------------- */}
+                    {/* =================================================
+                        PLACEMENT GOALS
+                    ================================================= */}
 
                     <div className="profile-card">
 
                         <div className="profile-card-header">
 
                             <h2>
-
                                 Placement Goals
-
                             </h2>
+
 
                             <button
                                 className="profile-btn"
-                                onClick={() => setShowGoalModal(true)}
+                                onClick={() =>
+                                    setShowGoalModal(true)
+                                }
                             >
 
                                 Edit
@@ -559,49 +882,49 @@ const handleGoalUpdate = async (data) => {
 
                         </div>
 
+
                         <div className="detail-item">
 
                             <label>
-
                                 Dream Company
-
                             </label>
 
                             <span>
 
-                                {user?.dream_company || "Not Selected"}
+                                {user?.dream_company ||
+                                    "Not Selected"}
 
                             </span>
 
                         </div>
 
+
                         <div className="detail-item">
 
                             <label>
-
                                 Target Role
-
                             </label>
 
                             <span>
 
-                                {user?.target_role || "Not Selected"}
+                                {user?.target_role ||
+                                    "Not Selected"}
 
                             </span>
 
                         </div>
 
+
                         <div className="detail-item">
 
                             <label>
-
                                 Preferred Domain
-
                             </label>
 
                             <span>
 
-                                {user?.preferred_domain || "Not Selected"}
+                                {user?.preferred_domain ||
+                                    "Not Selected"}
 
                             </span>
 
@@ -609,253 +932,220 @@ const handleGoalUpdate = async (data) => {
 
                     </div>
 
-                    {/* ---------------- Statistics ---------------- */}
+
+                    {/* =================================================
+                        STATISTICS
+                    ================================================= */}
 
                     <div className="profile-card">
 
                         <h2>
-
                             Statistics
-
                         </h2>
+
 
                         <div className="stats-grid">
 
                             <div>
 
-                            <h3>
+                                <h3>
+                                    0
+                                </h3>
 
-                            0
+                                <span>
+                                    Resume Uploads
+                                </span>
 
-                            </h3>
-
-                            <span>
-
-                            Resume Uploads
-
-                            </span>
-
-                            <small>
-
-                            Last Upload : Never
-
-                            </small>
+                                <small>
+                                    Last Upload : Never
+                                </small>
 
                             </div>
+
 
                             <div>
 
-                            <h3>
+                                <h3>
+                                    0
+                                </h3>
 
-                            0
+                                <span>
+                                    Interviews
+                                </span>
 
-                            </h3>
-
-                            <span>
-
-                            Interviews
-
-                            </span>
-
-                            <small>
-
-                            Average : --
-
-                            </small>
+                                <small>
+                                    Average : --
+                                </small>
 
                             </div>
+
 
                             <div>
 
-                            <h3>
+                                <h3>
+                                    0
+                                </h3>
 
-                            0
+                                <span>
+                                    Coding
+                                </span>
 
-                            </h3>
-
-                            <span>
-
-                            Coding
-
-                            </span>
-
-                            <small>
-
-                            XP : 0
-
-                            </small>
+                                <small>
+                                    XP : 0
+                                </small>
 
                             </div>
+
 
                             <div>
 
-                            <h3>
+                                <h3>
+                                    0
+                                </h3>
 
-                            0
+                                <span>
+                                    GD Sessions
+                                </span>
 
-                            </h3>
-
-                            <span>
-
-                            GD Sessions
-
-                            </span>
-
-                            <small>
-
-                            Rating : --
-
-                            </small>
+                                <small>
+                                    Rating : --
+                                </small>
 
                             </div>
 
-                         </div>
+                        </div>
 
                     </div>
+
+
+                    {/* =================================================
+                        RECENT ACTIVITY
+                    ================================================= */}
 
                     <div className="profile-card">
 
                         <h2>
-
-                        Recent Activity
-
+                            Recent Activity
                         </h2>
+
 
                         <div className="activity">
 
-                        <p>
+                            <p>
+                                🟢 Joined Ascendra
+                            </p>
 
-                        🟢 Joined Ascendra
+                            <p>
+                                📄 No resume uploaded
+                            </p>
 
-                        </p>
+                            <p>
+                                💻 No coding problems solved
+                            </p>
 
-                        <p>
-
-                        📄 No resume uploaded
-
-                        </p>
-
-                        <p>
-
-                        💻 No coding problems solved
-
-                        </p>
-
-                        <p>
-
-                        🎤 No interviews completed
-
-                        </p>
+                            <p>
+                                🎤 No interviews completed
+                            </p>
 
                         </div>
 
-                        </div>
+                    </div>
 
-                    {/* ---------------- Achievements ---------------- */}
+
+                    {/* =================================================
+                        ACHIEVEMENTS
+                    ================================================= */}
 
                     <div className="profile-card full-width">
 
                         <h2>
-
                             Achievements
-
                         </h2>
+
 
                         <div className="achievement-grid">
 
                             <div>
 
-                            🔒
+                                🔒
 
-                            <h4>
-
-                            First Resume Upload
-
-                            </h4>
+                                <h4>
+                                    First Resume Upload
+                                </h4>
 
                             </div>
+
 
                             <div>
 
-                            🔒
+                                🔒
 
-                            <h4>
-
-                            First Interview
-
-                            </h4>
+                                <h4>
+                                    First Interview
+                                </h4>
 
                             </div>
+
 
                             <div>
 
-                            🔒
+                                🔒
 
-                            <h4>
-
-                            100 Coding Problems
-
-                            </h4>
+                                <h4>
+                                    100 Coding Problems
+                                </h4>
 
                             </div>
+
 
                             <div>
 
-                            🔒
+                                🔒
 
-                            <h4>
-
-                            30 Day Streak
-
-                            </h4>
+                                <h4>
+                                    30 Day Streak
+                                </h4>
 
                             </div>
 
-                            </div>
+                        </div>
 
                     </div>
 
-                    {/* ---------------- AI Insights ---------------- */}
+
+                    {/* =================================================
+                        AI INSIGHTS
+                    ================================================= */}
 
                     <div className="profile-card full-width">
 
                         <h2>
-
                             AI Insights
-
                         </h2>
+
 
                         <div className="insight-list">
 
-                        <p>
+                            <p>
+                                ☐ Resume Analysis
+                            </p>
 
-                        ☐ Resume Analysis
+                            <p>
+                                ☐ Coding Practice
+                            </p>
 
-                        </p>
+                            <p>
+                                ☐ Mock Interview
+                            </p>
 
-                        <p>
+                            <p>
+                                ☐ Group Discussion
+                            </p>
 
-                        ☐ Coding Practice
-
-                        </p>
-
-                        <p>
-
-                        ☐ Mock Interview
-
-                        </p>
-
-                        <p>
-
-                        ☐ Group Discussion
-
-                        </p>
-
-                        <p>
-
-                        Generate your roadmap to unlock AI insights.
-
-                        </p>
+                            <p>
+                                Generate your roadmap to unlock
+                                AI insights.
+                            </p>
 
                         </div>
 
@@ -864,46 +1154,54 @@ const handleGoalUpdate = async (data) => {
                 </div>
 
             </div>
-            {
 
-                showProfileModal && (
+
+            {/* =================================================
+                EDIT PROFILE MODAL
+            ================================================= */}
+
+            {showProfileModal && (
 
                 <EditProfileModal
 
-                user={user}
+                    user={user}
 
-                onClose={() => setShowProfileModal(false)}
+                    onClose={() =>
+                        setShowProfileModal(false)
+                    }
 
-                onSave={handleProfileUpdate}
+                    onSave={handleProfileUpdate}
 
                 />
 
-                )
+            )}
 
-                }
 
-                {
+            {/* =================================================
+                EDIT GOALS MODAL
+            ================================================= */}
 
-                    showGoalModal && (
+            {showGoalModal && (
 
-                    <EditGoalsModal
+                <EditGoalsModal
 
                     user={user}
 
-                    onClose={() => setShowGoalModal(false)}
+                    onClose={() =>
+                        setShowGoalModal(false)
+                    }
 
                     onSave={handleGoalUpdate}
 
-                    />
+                />
 
-                    )
-
-                    }
+            )}
 
         </DashboardLayout>
 
     );
 
 };
+
 
 export default Profile;

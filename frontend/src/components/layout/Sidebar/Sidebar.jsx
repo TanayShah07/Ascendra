@@ -3,10 +3,10 @@ import {
     LayoutDashboard,
     Brain,
     Users,
-    Code2,
     FileText,
     Route,
     User,
+    BookOpen,
     ChevronLeft,
     ChevronRight,
     LogOut
@@ -83,26 +83,17 @@ const Sidebar = () => {
 
                 </NavLink>
 
-                <NavLink to="/coding">
+                <NavLink to="/preparation">
 
-                    <Code2/>
+                    <BookOpen />
 
-                    {!collapsed && <span>Coding Practice</span>}
+                    {!collapsed && (
+                        <span>
+                            Preparation Hub
+                        </span>
+                    )}
 
                 </NavLink>
-
-                <NavLink to="/ai-coding">
-
-                <Brain/>
-
-                {!collapsed && (
-                    <>
-                        <span>AI Coding</span>
-                        <span className="lock-badge">🔒</span>
-                    </>
-                )}
-
-            </NavLink>
 
                 <NavLink to="/resume">
 

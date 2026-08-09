@@ -19,6 +19,14 @@ from app.services.profile_service import (
     update_placement_goals,
 )
 
+from app.services.profile_service import (
+    get_profile,
+    update_profile,
+    update_social_links,
+    update_placement_goals,
+    calculate_readiness_breakdown,
+)
+
 router = APIRouter(
     prefix="/profile",
     tags=["Profile"]
@@ -77,3 +85,22 @@ def edit_placement_goals(
         current_user,
         data
     )
+
+@router.get("/readiness")
+def get_readiness(
+    current_user: User = Depends(get_current_user),
+):
+
+    breakdown = calculate_readiness_breakdown(
+        current_user
+    )
+
+    total = sum(
+        item["score"]
+        for item in breakdown.values()
+    )
+
+    return {
+        "score": min(total, 100),
+        "breakdown": breakdown
+    }
