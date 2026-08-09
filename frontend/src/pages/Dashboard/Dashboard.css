@@ -1,273 +1,219 @@
-.dashboard-page{
-
-padding:50px 7%;
-
-min-height:100vh;
-
-background:#f5f8ff;
-
+.dashboard-page {
+    padding: 50px 7%;
+    min-height: 100vh;
+    background: var(--bg-primary);
 }
 
-.dashboard-top{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-margin-bottom:40px;
-
+.dashboard-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
 }
 
-.dashboard-top h1{
-
-font-size:2.5rem;
-
-font-weight:800;
-
-color:#111827;
-
+.dashboard-top h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
 }
 
-.dashboard-top h1 span{
-
-color:#2563eb;
-
+.dashboard-top h1 span {
+    color: #2563eb;
 }
 
-.dashboard-top p{
-
-margin-top:10px;
-
-color:#6b7280;
-
+.dashboard-top p {
+    margin-top: 10px;
+    color: var(--text-secondary);
 }
 
-.readiness-card{
-
-padding:25px 35px;
-
-border-radius:22px;
-
-background:linear-gradient(135deg,#2563eb,#7c3aed);
-
-color:white;
-
-box-shadow:0 25px 60px rgba(37,99,235,.25);
-
+.readiness-card {
+    padding: 25px 35px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    color: white;
+    box-shadow: 0 25px 60px rgba(37, 99, 235, 0.25);
 }
 
-.readiness-card span{
-
-display:block;
-
-opacity:.8;
-
-margin-bottom:8px;
-
+.readiness-card span {
+    display: block;
+    opacity: 0.8;
+    margin-bottom: 8px;
 }
 
-.readiness-card h2{
-
-font-size:2.5rem;
-
+.readiness-card h2 {
+    font-size: 2.5rem;
 }
 
-.dashboard-grid{
-
-display:grid;
-
-grid-template-columns:repeat(12,1fr);
-
-gap:25px;
-
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 25px;
 }
 
-.card{
-
-background:white;
-
-border-radius:24px;
-
-padding:25px;
-
-box-shadow:0 15px 35px rgba(15,23,42,.08);
-
-transition:.3s;
-
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 25px;
+    box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08);
+    transition: 0.3s;
 }
 
-.card:hover{
-
-transform:translateY(-6px);
-
+.card:hover {
+    transform: translateY(-6px);
 }
 
-.profile-card{
-
-grid-column:span 4;
-
-display:flex;
-
-flex-direction:column;
-
-gap:10px;
-
-align-items:flex-start;
-
+.profile-card {
+    grid-column: span 4;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
 }
 
-.profile-card svg{
-
-width:70px;
-
-height:70px;
-
-padding:18px;
-
-border-radius:50%;
-
-background:linear-gradient(135deg,#2563eb,#7c3aed);
-
-color:white;
-
+.profile-card svg {
+    width: 70px;
+    height: 70px;
+    padding: 18px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    color: white;
 }
 
-.progress-card{
-
-grid-column:span 8;
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
+.progress-card {
+    grid-column: span 8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.progress-circle{
+.progress-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-width:150px;
+    background: conic-gradient(
+        #2563eb 82%,
+        var(--border-color) 0
+    );
 
-height:150px;
-
-border-radius:50%;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-background:conic-gradient(#2563eb 82%,#e5e7eb 0);
-
-font-size:2rem;
-
-font-weight:800;
-
-color:#111827;
-
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-primary);
 }
 
-.metric{
-
-grid-column:span 2;
-
-text-align:center;
-
+.metric {
+    grid-column: span 2;
+    text-align: center;
 }
 
-.metric svg{
-
-margin-bottom:15px;
-
-color:#2563eb;
-
+.metric svg {
+    margin-bottom: 15px;
+    color: #2563eb;
 }
 
-.metric span{
-
-display:block;
-
-color:#6b7280;
-
-margin-bottom:10px;
-
+.metric span {
+    display: block;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
 }
 
-.metric h3{
-
-font-size:1.8rem;
-
+.metric h3 {
+    font-size: 1.8rem;
+    color: var(--text-primary);
 }
 
-.roadmap{
-
-grid-column:span 6;
-
+.roadmap {
+    grid-column: span 6;
 }
 
-.activity{
-
-grid-column:span 3;
-
+.activity {
+    grid-column: span 3;
 }
 
-.suggestions{
-
-grid-column:span 3;
-
+.suggestions {
+    grid-column: span 3;
 }
 
-.card-title{
-
-display:flex;
-
-align-items:center;
-
-gap:10px;
-
-font-weight:700;
-
-margin-bottom:20px;
-
+.card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--text-primary);
 }
 
-.roadmap ul{
-
-padding-left:18px;
-
-display:flex;
-
-flex-direction:column;
-
-gap:12px;
-
+.roadmap ul {
+    padding-left: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
-.tip{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-padding:15px 0;
-
-border-bottom:1px solid #eef2ff;
-
-cursor:pointer;
-
-transition:.3s;
-
+.roadmap li {
+    color: var(--text-secondary);
 }
 
-.tip:hover{
+.tip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: 0.3s;
+    color: var(--text-secondary);
+}
 
-color:#2563eb;
+.tip:hover {
+    color: #2563eb;
+    padding-left: 10px;
+}
 
-padding-left:10px;
+@media (max-width: 1000px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
+    .profile-card,
+    .progress-card,
+    .metric,
+    .roadmap,
+    .activity,
+    .suggestions {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 700px) {
+    .dashboard-page {
+        padding: 30px 20px;
+    }
+
+    .dashboard-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .dashboard-top h1 {
+        font-size: 2rem;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-card,
+    .progress-card,
+    .metric,
+    .roadmap,
+    .activity,
+    .suggestions {
+        grid-column: span 1;
+    }
 }

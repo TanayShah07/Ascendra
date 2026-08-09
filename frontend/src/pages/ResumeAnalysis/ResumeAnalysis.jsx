@@ -8,11 +8,12 @@ import ATSScore from "../../components/resume/ATSScore/ATSScore";
 import ResumeInsights from "../../components/resume/ResumeInsights/ResumeInsights";
 import ResumeSuggestions from "../../components/resume/ResumeSuggestions/ResumeSuggestions";
 import ResumeInterview from "../../components/resume/ResumeInterview/ResumeInterview";
+import { useLanguage } from "../../context/LanguageContext";
 
 const ResumeAnalysis = () => {
 
     const [analyzed, setAnalyzed] = useState(false);
-
+    const { t } = useLanguage();
     return (
 
         <DashboardLayout>
@@ -23,14 +24,13 @@ const ResumeAnalysis = () => {
 
                     <h1>
 
-                        Resume Intelligence
+                        {t("resume.title")}
 
                     </h1>
 
                     <p>
 
-                        Upload your resume and receive AI-powered ATS scoring,
-                        recruiter insights and interview preparation.
+                        {t("resume.description")}
 
                     </p>
 
@@ -48,29 +48,27 @@ const ResumeAnalysis = () => {
 
                         <h2>
 
-                            Ready for AI Analysis
+                            {t("resume.readyForAnalysis")}
 
                         </h2>
 
                         <p>
 
-                            Upload your resume and click
-                            <strong> Analyze Resume </strong>
-                            to generate:
+                            {t("resume.analysisDescription")}
 
                         </p>
 
                         <ul>
 
-                            <li>✅ ATS Score</li>
+                            <li>✅ {t("resume.atsScore")}</li>
 
-                            <li>✅ Missing Keywords</li>
+                            <li>✅ {t("resume.missingKeywords")}</li>
 
-                            <li>✅ Company Match</li>
+                            <li>✅ {t("resume.companyMatch")}</li>
 
-                            <li>✅ AI Suggestions</li>
+                            <li>✅ {t("resume.aiSuggestions")}</li>
 
-                            <li>✅ Resume Interview</li>
+                            <li>✅ {t("resume.resumeInterview")}</li>
 
                         </ul>
 

@@ -5,7 +5,6 @@ import DashboardLayout from "../../components/layout/DashboardLayout/DashboardLa
 import { useAuth } from "../../context/AuthContext";
 
 import EditProfileModal from "../../components/profile/EditProfileModal/EditProfileModal";
-
 import EditGoalsModal from "../../components/profile/EditGoalsModal/EditGoalsModal";
 
 import { useEffect, useState } from "react";
@@ -28,6 +27,8 @@ import {
     FaLaptopCode
 } from "react-icons/fa";
 
+import { useLanguage } from "../../context/LanguageContext";
+
 
 const Profile = () => {
 
@@ -37,10 +38,8 @@ const Profile = () => {
         setUser
     } = useAuth();
 
+    const { t } = useLanguage();
 
-    // =====================================================
-    // STATE
-    // =====================================================
 
     const [showProfileModal, setShowProfileModal] =
         useState(false);
@@ -52,34 +51,25 @@ const Profile = () => {
         useState(null);
 
 
-    // =====================================================
-    // READINESS SCORE
-    // =====================================================
-
     const readinessScore =
         user?.placement_readiness || 0;
 
 
     const readinessLevel =
         readinessScore >= 80
-            ? "Placement Ready"
+            ? t("profile.placementReady")
             : readinessScore >= 60
-            ? "Advanced"
+            ? t("profile.advanced")
             : readinessScore >= 40
-            ? "Intermediate"
+            ? t("profile.intermediate")
             : readinessScore >= 20
-            ? "Developing"
-            : "Beginner";
+            ? t("profile.developing")
+            : t("profile.beginner");
 
-
-    // =====================================================
-    // FETCH READINESS BREAKDOWN
-    // =====================================================
 
     useEffect(() => {
 
         if (!token) return;
-
 
         const fetchReadiness = async () => {
 
@@ -90,9 +80,7 @@ const Profile = () => {
 
                 setReadiness(res.data);
 
-            }
-
-            catch (error) {
+            } catch (error) {
 
                 console.error(
                     "Failed to fetch readiness:",
@@ -103,42 +91,31 @@ const Profile = () => {
 
         };
 
-
         fetchReadiness();
 
     }, [token, user]);
 
 
-    // =====================================================
-    // ADD / EDIT SOCIAL LINK
-    // =====================================================
-
     const handleAddLink = async (platform) => {
 
         const url = prompt(
-            `Enter your ${platform} profile URL`
+            `${t("profile.enterProfileUrl")} ${platform}`
         );
 
-
         if (!url) return;
-
 
         try {
 
             const updated = {
 
                 linkedin: user.linkedin,
-
                 github: user.github,
-
                 portfolio: user.portfolio,
-
                 leetcode: user.leetcode,
 
                 [platform]: url
 
             };
-
 
             const res =
                 await updateSocialLinks(
@@ -146,28 +123,20 @@ const Profile = () => {
                     updated
                 );
 
-
             setUser(res.data);
 
-
-        }
-
-        catch (err) {
+        } catch (err) {
 
             console.error(err);
 
             alert(
-                "Unable to update profile."
+                t("profile.updateProfileError")
             );
 
         }
 
     };
 
-
-    // =====================================================
-    // UPDATE PERSONAL PROFILE
-    // =====================================================
 
     const handleProfileUpdate = async (data) => {
 
@@ -179,29 +148,22 @@ const Profile = () => {
                     data
                 );
 
-
             setUser(res.data);
 
             setShowProfileModal(false);
 
-        }
-
-        catch (err) {
+        } catch (err) {
 
             console.error(err);
 
             alert(
-                "Unable to update profile."
+                t("profile.updateProfileError")
             );
 
         }
 
     };
 
-
-    // =====================================================
-    // UPDATE PLACEMENT GOALS
-    // =====================================================
 
     const handleGoalUpdate = async (data) => {
 
@@ -213,19 +175,16 @@ const Profile = () => {
                     data
                 );
 
-
             setUser(res.data);
 
             setShowGoalModal(false);
 
-        }
-
-        catch (err) {
+        } catch (err) {
 
             console.error(err);
 
             alert(
-                "Unable to update goals."
+                t("profile.updateGoalsError")
             );
 
         }
@@ -233,57 +192,53 @@ const Profile = () => {
     };
 
 
-    // =====================================================
-    // READINESS BREAKDOWN DATA
-    // =====================================================
-
     const breakdownItems = readiness
         ? [
 
             {
-                label: "Profile",
+                label: t("profile.profile"),
                 score: readiness.breakdown.profile.score,
                 max: readiness.breakdown.profile.max
             },
 
             {
-                label: "Professional Profiles",
+                label: t("profile.professionalProfiles"),
                 score: readiness.breakdown.professional.score,
                 max: readiness.breakdown.professional.max
             },
 
             {
-                label: "Placement Goals",
+                label: t("profile.placementGoals"),
                 score: readiness.breakdown.placement_goals.score,
                 max: readiness.breakdown.placement_goals.max
             },
 
             {
-                label: "Resume",
+                label: t("profile.resume"),
                 score: readiness.breakdown.resume.score,
                 max: readiness.breakdown.resume.max
             },
 
             {
-                label: "Coding",
+                label: t("profile.coding"),
                 score: readiness.breakdown.coding.score,
                 max: readiness.breakdown.coding.max
             },
 
             {
-                label: "Interview",
+                label: t("profile.interview"),
                 score: readiness.breakdown.interview.score,
                 max: readiness.breakdown.interview.max
             },
 
             {
-                label: "Group Discussion",
+                label: t("profile.groupDiscussion"),
                 score: readiness.breakdown.group_discussion.score,
                 max: readiness.breakdown.group_discussion.max
             },
 
             {
-                label: "Roadmap",
+                label: t("profile.roadmap"),
                 score: readiness.breakdown.roadmap.score,
                 max: readiness.breakdown.roadmap.max
             }
@@ -292,20 +247,12 @@ const Profile = () => {
         : [];
 
 
-    // =====================================================
-    // RENDER
-    // =====================================================
-
     return (
 
         <DashboardLayout>
 
             <div className="profile-page">
 
-
-                {/* =================================================
-                    PROFILE HEADER
-                ================================================= */}
 
                 <div className="profile-header">
 
@@ -315,21 +262,14 @@ const Profile = () => {
 
                     </div>
 
-
                     <div className="profile-heading">
 
                         <h1>
-
                             {user?.full_name}
-
                         </h1>
 
-
                         <p>
-
-                            Complete your profile to improve
-                            your placement readiness.
-
+                            {t("profile.completeProfile")}
                         </p>
 
                     </div>
@@ -337,47 +277,31 @@ const Profile = () => {
                 </div>
 
 
-                {/* =================================================
-                    PLACEMENT READINESS
-                ================================================= */}
-
                 <div className="profile-card readiness-card">
 
                     <div>
 
                         <h2>
-                            Placement Readiness
+                            {t("profile.placementReadiness")}
                         </h2>
 
-
                         <p>
-
-                            Your readiness score is calculated
-                            from your profile, resume, coding,
-                            interview, GD and placement preparation.
-
+                            {t("profile.readinessDescription")}
                         </p>
 
                     </div>
 
-
                     <div className="readiness-score">
 
                         <h1>
-
                             {readinessScore}%
-
                         </h1>
 
-
                         <span>
-
                             {readinessLevel}
-
                         </span>
 
                     </div>
-
 
                     <div className="progress-bar">
 
@@ -393,16 +317,8 @@ const Profile = () => {
                 </div>
 
 
-                {/* =================================================
-                    PROFILE GRID
-                ================================================= */}
-
                 <div className="profile-grid">
 
-
-                    {/* =================================================
-                        READINESS BREAKDOWN
-                    ================================================= */}
 
                     <div className="profile-card readiness-breakdown full-width">
 
@@ -411,15 +327,11 @@ const Profile = () => {
                             <div>
 
                                 <h2>
-                                    Readiness Breakdown
+                                    {t("profile.readinessBreakdown")}
                                 </h2>
 
-
                                 <p>
-
-                                    See what's contributing to
-                                    your placement readiness.
-
+                                    {t("profile.breakdownDescription")}
                                 </p>
 
                             </div>
@@ -442,7 +354,6 @@ const Profile = () => {
                                                 ) * 100
                                                 : 0;
 
-
                                         return (
 
                                             <div
@@ -453,28 +364,21 @@ const Profile = () => {
                                                 <div className="breakdown-info">
 
                                                     <span>
-
                                                         {item.label}
-
                                                     </span>
 
-
                                                     <strong>
-
-                                                        {item.score}
-                                                        /
-                                                        {item.max}
-
+                                                        {item.score}/{item.max}
                                                     </strong>
 
                                                 </div>
-
 
                                                 <div className="breakdown-bar">
 
                                                     <div
                                                         style={{
-                                                            width: `${percentage}%`
+                                                            width:
+                                                                `${percentage}%`
                                                         }}
                                                     />
 
@@ -496,7 +400,7 @@ const Profile = () => {
 
                             <p className="breakdown-loading">
 
-                                Loading readiness breakdown...
+                                {t("profile.loadingBreakdown")}
 
                             </p>
 
@@ -505,24 +409,15 @@ const Profile = () => {
                     </div>
 
 
-                    {/* =================================================
-                        PERSONAL INFORMATION
-                    ================================================= */}
-
                     <div className="profile-card">
 
                         <div className="profile-card-header">
 
-                            <h2
-                                style={{
-                                    marginBottom: 0
-                                }}
-                            >
+                            <h2 style={{ marginBottom: 0 }}>
 
-                                Personal Information
+                                {t("profile.personalInformation")}
 
                             </h2>
-
 
                             <button
                                 className="profile-btn"
@@ -531,7 +426,7 @@ const Profile = () => {
                                 }
                             >
 
-                                Edit
+                                {t("profile.edit")}
 
                             </button>
 
@@ -541,7 +436,7 @@ const Profile = () => {
                         <div className="detail-item">
 
                             <label>
-                                Full Name
+                                {t("profile.fullName")}
                             </label>
 
                             <span>
@@ -554,7 +449,7 @@ const Profile = () => {
                         <div className="detail-item">
 
                             <label>
-                                Email
+                                {t("profile.email")}
                             </label>
 
                             <span>
@@ -567,7 +462,7 @@ const Profile = () => {
                         <div className="detail-item">
 
                             <label>
-                                College
+                                {t("profile.college")}
                             </label>
 
                             <span>
@@ -580,7 +475,7 @@ const Profile = () => {
                         <div className="detail-item">
 
                             <label>
-                                Branch
+                                {t("profile.branch")}
                             </label>
 
                             <span>
@@ -593,7 +488,7 @@ const Profile = () => {
                         <div className="detail-item">
 
                             <label>
-                                Graduation Year
+                                {t("profile.graduationYear")}
                             </label>
 
                             <span>
@@ -605,27 +500,18 @@ const Profile = () => {
                     </div>
 
 
-                    {/* =================================================
-                        PROFESSIONAL PROFILES
-                    ================================================= */}
-
                     <div className="profile-card">
 
                         <h2>
-                            Professional Profiles
+                            {t("profile.professionalProfiles")}
                         </h2>
 
-
-                        {/* LinkedIn */}
 
                         <div className="link-row">
 
                             <div className="link-left">
 
-                                <FaLinkedin
-                                    className="profile-icon"
-                                />
-
+                                <FaLinkedin className="profile-icon" />
 
                                 <div>
 
@@ -633,23 +519,16 @@ const Profile = () => {
                                         LinkedIn
                                     </h4>
 
-
                                     {user?.linkedin ? (
 
                                         <p className="saved-link">
-
                                             {user.linkedin}
-
                                         </p>
 
                                     ) : (
 
                                         <p>
-
-                                            Add your LinkedIn profile
-                                            to showcase your professional
-                                            presence.
-
+                                            {t("profile.linkedinDescription")}
                                         </p>
 
                                     )}
@@ -657,7 +536,6 @@ const Profile = () => {
                                 </div>
 
                             </div>
-
 
                             <button
                                 className="profile-btn"
@@ -667,8 +545,8 @@ const Profile = () => {
                             >
 
                                 {user?.linkedin
-                                    ? "Edit"
-                                    : "Add"
+                                    ? t("profile.edit")
+                                    : t("profile.add")
                                 }
 
                             </button>
@@ -676,16 +554,11 @@ const Profile = () => {
                         </div>
 
 
-                        {/* GitHub */}
-
                         <div className="link-row">
 
                             <div className="link-left">
 
-                                <FaGithub
-                                    className="profile-icon"
-                                />
-
+                                <FaGithub className="profile-icon" />
 
                                 <div>
 
@@ -693,23 +566,16 @@ const Profile = () => {
                                         GitHub
                                     </h4>
 
-
                                     {user?.github ? (
 
                                         <p className="saved-link">
-
                                             {user.github}
-
                                         </p>
 
                                     ) : (
 
                                         <p>
-
-                                            Connect your GitHub profile
-                                            to showcase your repositories
-                                            and projects.
-
+                                            {t("profile.githubDescription")}
                                         </p>
 
                                     )}
@@ -717,7 +583,6 @@ const Profile = () => {
                                 </div>
 
                             </div>
-
 
                             <button
                                 className="profile-btn"
@@ -727,8 +592,8 @@ const Profile = () => {
                             >
 
                                 {user?.github
-                                    ? "Edit"
-                                    : "Add"
+                                    ? t("profile.edit")
+                                    : t("profile.add")
                                 }
 
                             </button>
@@ -736,16 +601,11 @@ const Profile = () => {
                         </div>
 
 
-                        {/* Portfolio */}
-
                         <div className="link-row">
 
                             <div className="link-left">
 
-                                <FaGlobe
-                                    className="profile-icon"
-                                />
-
+                                <FaGlobe className="profile-icon" />
 
                                 <div>
 
@@ -753,22 +613,16 @@ const Profile = () => {
                                         Portfolio
                                     </h4>
 
-
                                     {user?.portfolio ? (
 
                                         <p className="saved-link">
-
                                             {user.portfolio}
-
                                         </p>
 
                                     ) : (
 
                                         <p>
-
-                                            Add your personal portfolio
-                                            website to impress recruiters.
-
+                                            {t("profile.portfolioDescription")}
                                         </p>
 
                                     )}
@@ -776,7 +630,6 @@ const Profile = () => {
                                 </div>
 
                             </div>
-
 
                             <button
                                 className="profile-btn"
@@ -786,8 +639,8 @@ const Profile = () => {
                             >
 
                                 {user?.portfolio
-                                    ? "Edit"
-                                    : "Add"
+                                    ? t("profile.edit")
+                                    : t("profile.add")
                                 }
 
                             </button>
@@ -795,16 +648,11 @@ const Profile = () => {
                         </div>
 
 
-                        {/* LeetCode */}
-
                         <div className="link-row">
 
                             <div className="link-left">
 
-                                <FaLaptopCode
-                                    className="profile-icon"
-                                />
-
+                                <FaLaptopCode className="profile-icon" />
 
                                 <div>
 
@@ -812,22 +660,16 @@ const Profile = () => {
                                         LeetCode
                                     </h4>
 
-
                                     {user?.leetcode ? (
 
                                         <p className="saved-link">
-
                                             {user.leetcode}
-
                                         </p>
 
                                     ) : (
 
                                         <p>
-
-                                            Showcase your coding journey
-                                            through your LeetCode profile.
-
+                                            {t("profile.leetcodeDescription")}
                                         </p>
 
                                     )}
@@ -835,7 +677,6 @@ const Profile = () => {
                                 </div>
 
                             </div>
-
 
                             <button
                                 className="profile-btn"
@@ -845,8 +686,8 @@ const Profile = () => {
                             >
 
                                 {user?.leetcode
-                                    ? "Edit"
-                                    : "Add"
+                                    ? t("profile.edit")
+                                    : t("profile.add")
                                 }
 
                             </button>
@@ -856,18 +697,13 @@ const Profile = () => {
                     </div>
 
 
-                    {/* =================================================
-                        PLACEMENT GOALS
-                    ================================================= */}
-
                     <div className="profile-card">
 
                         <div className="profile-card-header">
 
                             <h2>
-                                Placement Goals
+                                {t("profile.placementGoals")}
                             </h2>
-
 
                             <button
                                 className="profile-btn"
@@ -876,7 +712,7 @@ const Profile = () => {
                                 }
                             >
 
-                                Edit
+                                {t("profile.edit")}
 
                             </button>
 
@@ -886,14 +722,12 @@ const Profile = () => {
                         <div className="detail-item">
 
                             <label>
-                                Dream Company
+                                {t("profile.dreamCompany")}
                             </label>
 
                             <span>
-
                                 {user?.dream_company ||
-                                    "Not Selected"}
-
+                                    t("profile.notSelected")}
                             </span>
 
                         </div>
@@ -902,14 +736,12 @@ const Profile = () => {
                         <div className="detail-item">
 
                             <label>
-                                Target Role
+                                {t("profile.targetRole")}
                             </label>
 
                             <span>
-
                                 {user?.target_role ||
-                                    "Not Selected"}
-
+                                    t("profile.notSelected")}
                             </span>
 
                         </div>
@@ -918,14 +750,12 @@ const Profile = () => {
                         <div className="detail-item">
 
                             <label>
-                                Preferred Domain
+                                {t("profile.preferredDomain")}
                             </label>
 
                             <span>
-
                                 {user?.preferred_domain ||
-                                    "Not Selected"}
-
+                                    t("profile.notSelected")}
                             </span>
 
                         </div>
@@ -933,31 +763,24 @@ const Profile = () => {
                     </div>
 
 
-                    {/* =================================================
-                        STATISTICS
-                    ================================================= */}
-
                     <div className="profile-card">
 
                         <h2>
-                            Statistics
+                            {t("profile.statistics")}
                         </h2>
-
 
                         <div className="stats-grid">
 
                             <div>
 
-                                <h3>
-                                    0
-                                </h3>
+                                <h3>0</h3>
 
                                 <span>
-                                    Resume Uploads
+                                    {t("profile.resumeUploads")}
                                 </span>
 
                                 <small>
-                                    Last Upload : Never
+                                    {t("profile.lastUpload")}
                                 </small>
 
                             </div>
@@ -965,16 +788,14 @@ const Profile = () => {
 
                             <div>
 
-                                <h3>
-                                    0
-                                </h3>
+                                <h3>0</h3>
 
                                 <span>
-                                    Interviews
+                                    {t("profile.interviews")}
                                 </span>
 
                                 <small>
-                                    Average : --
+                                    {t("profile.average")}
                                 </small>
 
                             </div>
@@ -982,16 +803,14 @@ const Profile = () => {
 
                             <div>
 
-                                <h3>
-                                    0
-                                </h3>
+                                <h3>0</h3>
 
                                 <span>
-                                    Coding
+                                    {t("profile.coding")}
                                 </span>
 
                                 <small>
-                                    XP : 0
+                                    {t("profile.xp")}
                                 </small>
 
                             </div>
@@ -999,16 +818,14 @@ const Profile = () => {
 
                             <div>
 
-                                <h3>
-                                    0
-                                </h3>
+                                <h3>0</h3>
 
                                 <span>
-                                    GD Sessions
+                                    {t("profile.gdSessions")}
                                 </span>
 
                                 <small>
-                                    Rating : --
+                                    {t("profile.rating")}
                                 </small>
 
                             </div>
@@ -1017,34 +834,29 @@ const Profile = () => {
 
                     </div>
 
-
-                    {/* =================================================
-                        RECENT ACTIVITY
-                    ================================================= */}
 
                     <div className="profile-card">
 
                         <h2>
-                            Recent Activity
+                            {t("profile.recentActivity")}
                         </h2>
-
 
                         <div className="activity">
 
                             <p>
-                                🟢 Joined Ascendra
+                                🟢 {t("profile.joinedAscendra")}
                             </p>
 
                             <p>
-                                📄 No resume uploaded
+                                📄 {t("profile.noResume")}
                             </p>
 
                             <p>
-                                💻 No coding problems solved
+                                💻 {t("profile.noCoding")}
                             </p>
 
                             <p>
-                                🎤 No interviews completed
+                                🎤 {t("profile.noInterviews")}
                             </p>
 
                         </div>
@@ -1052,60 +864,40 @@ const Profile = () => {
                     </div>
 
 
-                    {/* =================================================
-                        ACHIEVEMENTS
-                    ================================================= */}
-
                     <div className="profile-card full-width">
 
                         <h2>
-                            Achievements
+                            {t("profile.achievements")}
                         </h2>
-
 
                         <div className="achievement-grid">
 
                             <div>
-
                                 🔒
-
                                 <h4>
-                                    First Resume Upload
+                                    {t("profile.firstResume")}
                                 </h4>
-
                             </div>
 
-
                             <div>
-
                                 🔒
-
                                 <h4>
-                                    First Interview
+                                    {t("profile.firstInterview")}
                                 </h4>
-
                             </div>
 
-
                             <div>
-
                                 🔒
-
                                 <h4>
-                                    100 Coding Problems
+                                    {t("profile.hundredCoding")}
                                 </h4>
-
                             </div>
 
-
                             <div>
-
                                 🔒
-
                                 <h4>
-                                    30 Day Streak
+                                    {t("profile.thirtyDayStreak")}
                                 </h4>
-
                             </div>
 
                         </div>
@@ -1113,38 +905,32 @@ const Profile = () => {
                     </div>
 
 
-                    {/* =================================================
-                        AI INSIGHTS
-                    ================================================= */}
-
                     <div className="profile-card full-width">
 
                         <h2>
-                            AI Insights
+                            {t("profile.aiInsights")}
                         </h2>
-
 
                         <div className="insight-list">
 
                             <p>
-                                ☐ Resume Analysis
+                                ☐ {t("profile.resumeAnalysis")}
                             </p>
 
                             <p>
-                                ☐ Coding Practice
+                                ☐ {t("profile.codingPractice")}
                             </p>
 
                             <p>
-                                ☐ Mock Interview
+                                ☐ {t("profile.mockInterview")}
                             </p>
 
                             <p>
-                                ☐ Group Discussion
+                                ☐ {t("profile.groupDiscussion")}
                             </p>
 
                             <p>
-                                Generate your roadmap to unlock
-                                AI insights.
+                                {t("profile.generateRoadmap")}
                             </p>
 
                         </div>
@@ -1156,43 +942,27 @@ const Profile = () => {
             </div>
 
 
-            {/* =================================================
-                EDIT PROFILE MODAL
-            ================================================= */}
-
             {showProfileModal && (
 
                 <EditProfileModal
-
                     user={user}
-
                     onClose={() =>
                         setShowProfileModal(false)
                     }
-
                     onSave={handleProfileUpdate}
-
                 />
 
             )}
 
 
-            {/* =================================================
-                EDIT GOALS MODAL
-            ================================================= */}
-
             {showGoalModal && (
 
                 <EditGoalsModal
-
                     user={user}
-
                     onClose={() =>
                         setShowGoalModal(false)
                     }
-
                     onSave={handleGoalUpdate}
-
                 />
 
             )}

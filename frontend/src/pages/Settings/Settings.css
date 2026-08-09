@@ -1,0 +1,801 @@
+.settings-page {
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.settings-header {
+
+    margin-bottom: 35px;
+
+}
+
+.settings-header h1 {
+
+    font-size: 2.4rem;
+
+    color: #0f172a;
+
+    margin-bottom: 8px;
+
+}
+
+.settings-header p {
+
+    color: #64748b;
+
+    line-height: 1.6;
+
+}
+
+
+/* =========================================================
+   SETTINGS CARD
+========================================================= */
+
+.settings-card {
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 28px;
+
+    margin-bottom: 22px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(15, 23, 42, .07);
+
+}
+
+
+.settings-card-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.settings-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 14px;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+}
+
+
+.settings-card-header h2 {
+
+    color: #0f172a;
+
+    font-size: 1.2rem;
+
+    margin-bottom: 5px;
+
+}
+
+
+.settings-card-header p {
+
+    color: #64748b;
+
+    font-size: 14px;
+
+}
+
+
+/* =========================================================
+   APPEARANCE
+========================================================= */
+
+.settings-options {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+
+}
+
+
+.setting-option {
+
+    padding: 14px;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 12px;
+
+    background: #f8fafc;
+
+    cursor: pointer;
+
+    color: #475569;
+
+    font-weight: 600;
+
+    transition: .25s;
+
+}
+
+
+.setting-option:hover {
+
+    border-color: #2563eb;
+
+}
+
+
+.setting-option.active {
+
+    border-color: #2563eb;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+}
+
+
+/* =========================================================
+   SELECT
+========================================================= */
+
+.settings-select {
+
+    width: 100%;
+
+    max-width: 350px;
+
+    padding: 13px 15px;
+
+    border: 1px solid #dbe4f0;
+
+    border-radius: 12px;
+
+    outline: none;
+
+    color: #0f172a;
+
+    background: white;
+
+    font-size: 14px;
+
+}
+
+
+.settings-select:focus {
+
+    border-color: #2563eb;
+
+}
+
+
+/* =========================================================
+   ACTION BUTTON
+========================================================= */
+
+.settings-action-btn {
+
+    padding: 12px 20px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .25s;
+
+}
+
+
+.settings-action-btn:hover {
+
+    background: #1d4ed8;
+
+}
+
+
+/* =========================================================
+   NOTIFICATIONS
+========================================================= */
+
+.notification-row,
+.privacy-row {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 18px 0;
+
+    border-bottom: 1px solid #e2e8f0;
+
+}
+
+
+.notification-row:last-child,
+.privacy-row:last-child {
+
+    border-bottom: none;
+
+}
+
+
+.notification-row div,
+.privacy-row div {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+}
+
+
+.notification-row strong,
+.privacy-row strong {
+
+    color: #0f172a;
+
+    font-size: 14px;
+
+}
+
+
+.notification-row span,
+.privacy-row span {
+
+    color: #64748b;
+
+    font-size: 13px;
+
+}
+
+
+/* =========================================================
+   TOGGLE
+========================================================= */
+
+.switch {
+
+    position: relative;
+
+    width: 48px;
+
+    height: 26px;
+
+    flex-shrink: 0;
+
+}
+
+
+.switch input {
+
+    opacity: 0;
+
+    width: 0;
+
+    height: 0;
+
+}
+
+
+.slider {
+
+    position: absolute;
+
+    inset: 0;
+
+    background: #cbd5e1;
+
+    border-radius: 50px;
+
+    cursor: pointer;
+
+    transition: .25s;
+
+}
+
+
+.slider::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 20px;
+
+    height: 20px;
+
+    left: 3px;
+
+    top: 3px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    transition: .25s;
+
+}
+
+
+.switch input:checked + .slider {
+
+    background: #2563eb;
+
+}
+
+
+.switch input:checked + .slider::before {
+
+    transform: translateX(22px);
+
+}
+
+
+/* =========================================================
+   PREPARATION PREFERENCES
+========================================================= */
+
+.preference-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+
+}
+
+
+.preference-item {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+}
+
+
+.preference-item label {
+
+    color: #475569;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+
+.preference-item select {
+
+    padding: 12px;
+
+    border: 1px solid #dbe4f0;
+
+    border-radius: 10px;
+
+    background: white;
+
+    color: #0f172a;
+
+    outline: none;
+
+}
+
+
+/* =========================================================
+   PRIVACY
+========================================================= */
+
+.secondary-settings-btn {
+
+    margin-top: 20px;
+
+    padding: 11px 18px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 10px;
+
+    background: white;
+
+    color: #475569;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+
+.secondary-settings-btn:hover {
+
+    border-color: #2563eb;
+
+    color: #2563eb;
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.logout-icon {
+
+    background: #fef2f2;
+
+    color: #ef4444;
+
+}
+
+
+.logout-settings-btn {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 12px 22px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #ef4444;
+
+    color: white;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .25s;
+
+}
+
+
+.logout-settings-btn:hover {
+
+    background: #dc2626;
+
+    transform: translateY(-1px);
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .settings-page {
+
+        padding: 20px;
+
+    }
+
+
+    .settings-options {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .preference-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .notification-row,
+    .privacy-row {
+
+        align-items: flex-start;
+
+    }
+
+}
+
+.dark-theme .settings-page {
+
+    color: var(--text-primary);
+
+}
+
+
+.dark-theme .settings-header h1 {
+
+    color: var(--text-primary);
+
+}
+
+
+.dark-theme .settings-header p {
+
+    color: var(--text-secondary);
+
+}
+
+
+.dark-theme .settings-card {
+
+    background: var(--bg-card);
+
+    box-shadow:
+        0 8px 25px
+        rgba(0, 0, 0, .25);
+
+}
+
+
+.dark-theme .settings-card-header h2 {
+
+    color: var(--text-primary);
+
+}
+
+
+.dark-theme .settings-card-header p {
+
+    color: var(--text-secondary);
+
+}
+
+
+.dark-theme .settings-icon {
+
+    background: #172554;
+
+    color: #60a5fa;
+
+}
+
+
+.dark-theme .setting-option {
+
+    background: #1e293b;
+
+    border-color: #334155;
+
+    color: #cbd5e1;
+
+}
+
+
+.dark-theme .setting-option.active {
+
+    background: #172554;
+
+    border-color: #3b82f6;
+
+    color: #60a5fa;
+
+}
+
+
+.dark-theme .settings-select,
+.dark-theme .preference-item select {
+
+    background: #1e293b;
+
+    color: #f8fafc;
+
+    border-color: #334155;
+
+}
+
+
+.dark-theme .notification-row,
+.dark-theme .privacy-row {
+
+    border-color: #334155;
+
+}
+
+
+.dark-theme .notification-row strong,
+.dark-theme .privacy-row strong {
+
+    color: #f8fafc;
+
+}
+
+
+.dark-theme .notification-row span,
+.dark-theme .privacy-row span {
+
+    color: #94a3b8;
+
+}
+
+
+.dark-theme .secondary-settings-btn {
+
+    background: #1e293b;
+
+    color: #cbd5e1;
+
+    border-color: #334155;
+
+}
+
+/* =========================================================
+   SETTINGS THEME
+========================================================= */
+
+.settings-page {
+
+    background: var(--bg-primary);
+
+    color: var(--text-primary);
+
+    transition:
+        background-color .25s ease,
+        color .25s ease;
+
+}
+
+
+/* ---------- Dark Mode ---------- */
+
+html.dark-theme .settings-page {
+
+    background: var(--bg-primary);
+
+    color: var(--text-primary);
+
+}
+
+
+html.dark-theme .settings-page h1,
+html.dark-theme .settings-page h2,
+html.dark-theme .settings-page h3,
+html.dark-theme .settings-page h4 {
+
+    color: var(--text-primary);
+
+}
+
+
+html.dark-theme .settings-page p {
+
+    color: var(--text-secondary);
+
+}
+
+
+/* ---------- Cards ---------- */
+
+html.dark-theme .settings-card {
+
+    background: var(--bg-card);
+
+    border-color: var(--border-color);
+
+    box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, .25);
+
+}
+
+
+/* ---------- Icons ---------- */
+
+html.dark-theme .settings-icon {
+
+    background: #172554;
+
+    color: #60a5fa;
+
+}
+
+
+/* ---------- Appearance buttons ---------- */
+
+html.dark-theme .setting-option {
+
+    background: #1e293b;
+
+    border-color: #334155;
+
+    color: #cbd5e1;
+
+}
+
+
+html.dark-theme .setting-option:hover {
+
+    background: #263449;
+
+}
+
+
+html.dark-theme .setting-option.active {
+
+    background: #172554;
+
+    border-color: #3b82f6;
+
+    color: #60a5fa;
+
+}
+
+
+/* ---------- Select ---------- */
+
+html.dark-theme select {
+
+    background: #1e293b;
+
+    color: #f8fafc;
+
+    border-color: #334155;
+
+}
+
+
+html.dark-theme select option {
+
+    background: #1e293b;
+
+    color: #f8fafc;
+
+}

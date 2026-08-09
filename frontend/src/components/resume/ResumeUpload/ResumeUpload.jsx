@@ -9,9 +9,12 @@ import {
     Sparkles
 } from "lucide-react";
 
+import { useLanguage } from "../../../context/LanguageContext";
+
 const ResumeUpload = ({ onAnalyze }) => {
 
     const [fileName, setFileName] = useState("");
+    const { t } = useLanguage();
 
     const handleFile = (e) => {
 
@@ -35,14 +38,13 @@ const ResumeUpload = ({ onAnalyze }) => {
 
                     <h2>
 
-                        AI Resume Analysis
+                        {t("resume.title")}
 
                     </h2>
 
                     <p>
 
-                        Upload your latest resume and customize the analysis
-                        according to your dream company and role.
+                        {t("resume.description")}
 
                     </p>
 
@@ -56,19 +58,19 @@ const ResumeUpload = ({ onAnalyze }) => {
 
                 <h3>
 
-                    Drag & Drop Resume
+                    {t("resume.dragAndDrop")}
 
                 </h3>
 
                 <p>
 
-                    PDF or DOCX • Maximum 5 MB
+                    {t("resume.fileTypes")} • {t("resume.maxSize")}
 
                 </p>
 
                 <label className="upload-btn">
 
-                    Choose Resume
+                    {t("resume.chooseResume")}
 
                     <input
                         type="file"
@@ -105,7 +107,7 @@ const ResumeUpload = ({ onAnalyze }) => {
 
                         <Building2 size={18} />
 
-                        Target Company
+                        {t("resume.targetCompany")}
 
                     </label>
 
@@ -113,21 +115,21 @@ const ResumeUpload = ({ onAnalyze }) => {
 
                         <option value="" disabled>
 
-                            Select Target Company
+                            {t("resume.selectTargetCompany")}
 
                         </option>
 
-                        <option>Google</option>
-                        <option>Microsoft</option>
-                        <option>Amazon</option>
-                        <option>Adobe</option>
-                        <option>NVIDIA</option>
-                        <option>Oracle</option>
-                        <option>JP Morgan</option>
-                        <option>Goldman Sachs</option>
-                        <option>Infosys</option>
-                        <option>TCS</option>
-                        <option>Accenture</option>
+                        <option>{t("resume.targetCompany.google")}</option>
+                        <option>{t("resume.targetCompany.microsoft")}</option>
+                        <option>{t("resume.targetCompany.amazon")}</option>
+                        <option>{t("resume.targetCompany.adobe")}</option>
+                        <option>{t("resume.targetCompany.nvidia")}</option>
+                        <option>{t("resume.targetCompany.oracle")}</option>
+                        <option>{t("resume.targetCompany.jpMorgan")}</option>
+                        <option>{t("resume.targetCompany.goldmanSachs")}</option>
+                        <option>{t("resume.targetCompany.infosys")}</option>
+                        <option>{t("resume.targetCompany.tcs")}</option>
+                        <option>{t("resume.targetCompany.accenture")}</option>
 
                     </select>
 
@@ -139,7 +141,7 @@ const ResumeUpload = ({ onAnalyze }) => {
 
                         <Briefcase size={18} />
 
-                        Target Role
+                        {t("resume.targetRole")}
 
                     </label>
 
@@ -147,17 +149,17 @@ const ResumeUpload = ({ onAnalyze }) => {
 
                         <option value="" disabled>
 
-                            Select Target Role
+                            {t("resume.selectTargetRole")}
 
                         </option>
 
-                        <option>Software Engineer</option>
-                        <option>Frontend Developer</option>
-                        <option>Backend Developer</option>
-                        <option>Full Stack Developer</option>
-                        <option>AI Engineer</option>
-                        <option>Machine Learning Engineer</option>
-                        <option>Data Scientist</option>
+                        <option>{t("resume.role.softwareEngineer")}</option>
+                        <option>{t("resume.role.frontendDeveloper")}</option>
+                        <option>{t("resume.role.backendDeveloper")}</option>
+                        <option>{t("resume.role.fullStackDeveloper")}</option>
+                        <option>{t("resume.role.aiEngineer")}</option>
+                        <option>{t("resume.role.machineLearningEngineer")}</option>
+                        <option>{t("resume.role.dataScientist")}</option>
 
                     </select>
 
@@ -169,16 +171,16 @@ const ResumeUpload = ({ onAnalyze }) => {
 
                         <GraduationCap size={18} />
 
-                        Experience Level
+                        {t("resume.experienceLevel")}
 
                     </label>
 
                     <select>
 
-                        <option>Fresher</option>
-                        <option>Intern</option>
-                        <option>0-2 Years</option>
-                        <option>2-5 Years</option>
+                        <option>{t("resume.experience.fresher")}</option>
+                        <option>{t("resume.experience.intern")}</option>
+                        <option>{t("resume.experience.0-2-years")}</option>
+                        <option>{t("resume.experience.2-5-years")}</option>
 
                     </select>
 
@@ -188,15 +190,15 @@ const ResumeUpload = ({ onAnalyze }) => {
 
                     <label>
 
-                        Resume Version
+                        {t("resume.resumeVersion")}
 
                     </label>
 
                     <select>
 
-                        <option>Latest Resume</option>
-                        <option>Version 2</option>
-                        <option>Version 1</option>
+                        <option>{t("resume.version.latest")}</option>
+                        <option>{t("resume.version.2")}</option>
+                        <option>{t("resume.version.1")}</option>
 
                     </select>
 
@@ -209,7 +211,7 @@ const ResumeUpload = ({ onAnalyze }) => {
                 onClick={onAnalyze}
             >
 
-                Analyze Resume
+                {t("resume.analyzeButton")}
 
             </button>
 

@@ -6,32 +6,34 @@ import {
     ShieldCheck,
     Sparkles
 } from "lucide-react";
+import { useLanguage } from "../../context/LanguageContext";
 
-const stats = [
+const About = () => {
+    const { t } = useLanguage();
+
+    const stats = [
 
     {
         number: "10+",
-        title: "AI Modules"
+        title: t("landing.about.aiModules")
     },
 
     {
         number: "7",
-        title: "Assessment Types"
+        title: t("landing.about.assessmentTypes")
     },
 
     {
         number: "100%",
-        title: "Personalized Feedback"
+        title: t("landing.about.personalizedFeedback")
     },
 
     {
         number: "95%",
-        title: "Prediction Accuracy"
+        title: t("landing.about.predictionAccuracy")
     }
 
 ];
-
-const About = () => {
 
     return (
 
@@ -57,23 +59,19 @@ const About = () => {
 
                 <span>
 
-                    ABOUT ASCENDRA
+                    {t("landing.about.label")}
 
                 </span>
 
                 <h2>
 
-                    Built For The Next Generation Of Placements
+                    {t("landing.about.title")}
 
                 </h2>
 
                 <p>
 
-                    Ascendra combines Artificial Intelligence,
-                    Deep Learning, Computer Vision,
-                    Natural Language Processing and Speech
-                    Intelligence to prepare students for
-                    real-world technical interviews.
+                    {t("landing.about.description")}
 
                 </p>
 
@@ -102,16 +100,13 @@ const About = () => {
 
                         <h3>
 
-                            AI Driven Evaluation
+                            {t("landing.about.aiDrivenEvaluation")}
 
                         </h3>
 
                         <p>
 
-                            Analyze speech, eye contact,
-                            facial expressions,
-                            coding ability and resume
-                            using intelligent AI models.
+                            {t("landing.about.aiDrivenEvaluationDescription")}
 
                         </p>
 
@@ -123,15 +118,13 @@ const About = () => {
 
                         <h3>
 
-                            Personalized Roadmaps
+                            {t("landing.about.personalizedRoadmaps")}
 
                         </h3>
 
                         <p>
 
-                            Every student receives a custom
-                            roadmap based on strengths,
-                            weaknesses and interview history.
+                            {t("landing.about.personalizedRoadmapsDescription")}
 
                         </p>
 
@@ -143,16 +136,13 @@ const About = () => {
 
                         <h3>
 
-                            Secure Platform
+                            {t("landing.about.securePlatform")}
 
                         </h3>
 
                         <p>
 
-                            JWT Authentication,
-                            PostgreSQL,
-                            encrypted passwords and
-                            secure APIs.
+                            {t("landing.about.securePlatformDescription")}
 
                         </p>
 
@@ -182,17 +172,13 @@ const About = () => {
 
                     <h2>
 
-                        Why Recruiters Love Ascendra
+                        {t("landing.about.whyRecruitersLove")}
 
                     </h2>
 
                     <p>
 
-                        Instead of generic interview practice,
-                        Ascendra creates a complete AI-powered
-                        placement readiness ecosystem combining
-                        resume optimization, coding interviews,
-                        speech intelligence and adaptive learning.
+                        {t("landing.about.whyRecruitersLoveDescription")}
 
                     </p>
 

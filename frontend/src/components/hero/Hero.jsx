@@ -2,10 +2,12 @@ import "./Hero.css";
 import DashboardPreview from "../dashboard/DashboardPreview/DashboardPreview";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 
 const Hero = () => {
 
     const navigate = useNavigate();
+    const { t } = useLanguage();
 
     return (
         <section
@@ -23,20 +25,17 @@ const Hero = () => {
             >
 
                 <span className="hero-badge">
-                    Multimodal AI Interview Intelligence Platform
+                    {t("landing.hero.badge")}
                 </span>
 
                 <h1>
-                    Prepare Smarter.
+                    {t("landing.hero.titleLine1")}
                     <br />
-                    Perform Better.
+                    {t("landing.hero.titleLine2")}
                 </h1>
 
                 <p>
-                    Ascendra is an AI-powered placement readiness platform that combines
-                    NLP, Deep Learning, Computer Vision, and Speech Intelligence to
-                    simulate real interviews, assess technical and communication skills,
-                    and generate personalized feedback with adaptive learning roadmaps.
+                    {t("landing.hero.description")}
                 </p>
 
                 <div className="hero-buttons">
@@ -45,14 +44,14 @@ const Hero = () => {
                         className="primary-btn"
                         onClick={() => navigate("/register")}
                     >
-                        Get Started
+                        {t("landing.hero.getStarted")}
                     </button>
 
                     <button
                         className="secondary-btn"
                         onClick={() => navigate("/register")}
                     >
-                        Watch Demo
+                        {t("landing.hero.watchDemo")}
                     </button>
 
                 </div>
@@ -61,17 +60,17 @@ const Hero = () => {
 
                     <div>
                         <h2>10+</h2>
-                        <span>AI Modules</span>
+                        <span>{t("landing.hero.aiModules")}</span>
                     </div>
 
                     <div>
                         <h2>7</h2>
-                        <span>Assessment Types</span>
+                        <span>{t("landing.hero.assessmentTypes")}</span>
                     </div>
 
                     <div>
                         <h2>100%</h2>
-                        <span>Personalized Feedback</span>
+                        <span>{t("landing.hero.personalizedFeedback")}</span>
                     </div>
 
                 </div>

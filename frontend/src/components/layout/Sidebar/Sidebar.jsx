@@ -7,6 +7,7 @@ import {
     Route,
     User,
     BookOpen,
+    Settings as SettingsIcon,
     ChevronLeft,
     ChevronRight,
     LogOut
@@ -15,12 +16,15 @@ import {
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
+import { useLanguage } from "../../../context/LanguageContext";
 
 const Sidebar = () => {
 
     const [collapsed, setCollapsed] = useState(false);
 
     const { logout } = useAuth();
+
+    const { t } = useLanguage();
 
     return (
 
@@ -63,7 +67,7 @@ const Sidebar = () => {
 
                     <LayoutDashboard/>
 
-                    {!collapsed && <span>Dashboard</span>}
+                    {!collapsed && <span>{t("sidebar.dashboard")}</span>}
 
                 </NavLink>
 
@@ -71,7 +75,7 @@ const Sidebar = () => {
 
                     <Brain/>
 
-                    {!collapsed && <span>Interview</span>}
+                    {!collapsed && <span>{t("sidebar.interview")}</span>}
 
                 </NavLink>
 
@@ -79,7 +83,7 @@ const Sidebar = () => {
 
                     <Users/>
 
-                    {!collapsed && <span>Group Discussion</span>}
+                    {!collapsed && <span>{t("sidebar.groupDiscussion")}</span>}
 
                 </NavLink>
 
@@ -89,7 +93,7 @@ const Sidebar = () => {
 
                     {!collapsed && (
                         <span>
-                            Preparation Hub
+                            {t("sidebar.preparation")}
                         </span>
                     )}
 
@@ -99,7 +103,7 @@ const Sidebar = () => {
 
                     <FileText/>
 
-                    {!collapsed && <span>Resume Analysis</span>}
+                    {!collapsed && <span>{t("sidebar.resume")}</span>}
 
                 </NavLink>
 
@@ -107,7 +111,7 @@ const Sidebar = () => {
 
                     <Route/>
 
-                    {!collapsed && <span>Roadmap</span>}
+                    {!collapsed && <span>{t("sidebar.roadmap")}</span>}
 
                 </NavLink>
 
@@ -115,7 +119,19 @@ const Sidebar = () => {
 
                     <User/>
 
-                    {!collapsed && <span>Profile</span>}
+                    {!collapsed && <span>{t("sidebar.profile")}</span>}
+
+                </NavLink>
+
+                <NavLink to="/settings">
+
+                    <SettingsIcon />
+
+                    {!collapsed && (
+                        <span>
+                            {t("sidebar.settings")}
+                        </span>
+                    )}
 
                 </NavLink>
 
@@ -144,7 +160,7 @@ const Sidebar = () => {
 
                     <LogOut/>
 
-                    {!collapsed && <span>Logout</span>}
+                    {!collapsed && <span>{t("sidebar.logout")}</span>}
 
                 </button>
 

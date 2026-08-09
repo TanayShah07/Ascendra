@@ -1,5 +1,7 @@
 import "./GroupDiscussion.css";
+
 import DashboardLayout from "../../components/layout/DashboardLayout/DashboardLayout";
+
 import {
     Users,
     Bot,
@@ -17,6 +19,8 @@ import {
 
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useLanguage } from "../../context/LanguageContext";
+
 
 const GroupDiscussion = () => {
 
@@ -24,221 +28,382 @@ const GroupDiscussion = () => {
 
     const [mode, setMode] = useState("create");
 
+    const { t } = useLanguage();
+
+
     return (
 
         <DashboardLayout>
 
             <div className="gd-page">
 
+                {/* ================= BACK BUTTON ================= */}
+
                 <button
                     className="back-btn"
                     onClick={() => navigate("/dashboard")}
                 >
-                    <ArrowLeft size={18}/>
-                    Back to Dashboard
+
+                    <ArrowLeft size={18} />
+
+                    {t("groupDiscussion.backToInterview")}
+
                 </button>
+
+
+                {/* ================= HEADER ================= */}
 
                 <div className="gd-header">
 
                     <h1>
 
-                        <Users/>
+                        <Users />
 
-                        Group Discussion Arena
+                        {t("groupDiscussion.title")}
 
                     </h1>
 
                     <p>
 
-                        Practice real-world group discussions with friends,
-                        AI participants or company-specific GD simulations.
+                        {t("groupDiscussion.description")}
 
                     </p>
 
                 </div>
 
+
+                {/* ================= MODE SELECTION ================= */}
+
                 <div className="gd-mode-grid">
 
+
+                    {/* CREATE */}
+
                     <div
-                        className={`gd-mode-card ${mode==="create"?"active":""}`}
-                        onClick={()=>setMode("create")}
+                        className={`gd-mode-card ${
+                            mode === "create" ? "active" : ""
+                        }`}
+                        onClick={() => setMode("create")}
                     >
 
-                        <PlusCircle size={42}/>
+                        <PlusCircle size={42} />
 
-                        <h2>Create Discussion</h2>
+                        <h2>
+                            {t("groupDiscussion.title")}
+                        </h2>
 
-                        <p>Create a room and invite participants.</p>
+                        <p>
+                            {t("groupDiscussion.description")}
+                        </p>
 
                     </div>
 
+
+                    {/* JOIN */}
+
                     <div
-                        className={`gd-mode-card ${mode==="join"?"active":""}`}
-                        onClick={()=>setMode("join")}
+                        className={`gd-mode-card ${
+                            mode === "join" ? "active" : ""
+                        }`}
+                        onClick={() => setMode("join")}
                     >
 
-                        <Link2 size={42}/>
+                        <Link2 size={42} />
 
-                        <h2>Join Discussion</h2>
+                        <h2>
+                            {t("groupDiscussion.peerDiscussion")}
+                        </h2>
 
-                        <p>Enter invite code or room link.</p>
+                        <p>
+                            {t("groupDiscussion.peerDiscussionDescription")}
+                        </p>
 
                     </div>
 
+
+                    {/* AI */}
+
                     <div
-                        className={`gd-mode-card ${mode==="ai"?"active":""}`}
-                        onClick={()=>setMode("ai")}
+                        className={`gd-mode-card ${
+                            mode === "ai" ? "active" : ""
+                        }`}
+                        onClick={() => setMode("ai")}
                     >
 
-                        <Bot size={42}/>
+                        <Bot size={42} />
 
-                        <h2>Join AI Discussion</h2>
+                        <h2>
+                            {t("groupDiscussion.aiDiscussion")}
+                        </h2>
 
-                        <p>Practice anytime with intelligent AI participants.</p>
+                        <p>
+                            {t("groupDiscussion.aiDiscussionDescription")}
+                        </p>
 
                     </div>
 
                 </div>
 
+
+                {/* ================= CONFIGURATION ================= */}
+
                 <div className="gd-config-card">
 
-                    <h2>Discussion Configuration</h2>
+                    <h2>
+                        {t("groupDiscussion.selectMode")}
+                    </h2>
+
 
                     <div className="gd-form">
+
+
+                        {/* TOPIC */}
 
                         <div>
 
                             <label>
 
-                                <Brain size={18}/>
+                                <Brain size={18} />
 
-                                Topic
+                                {t("groupDiscussion.topic")}
 
                             </label>
 
                             <input
-                                placeholder="Eg. Is AI replacing Software Engineers?"
+                                type="text"
+                                placeholder={
+                                    t(
+                                        "groupDiscussion.enterTopic"
+                                    )
+                                }
                             />
 
                         </div>
 
+
+                        {/* COMPANY */}
+
                         <div>
 
                             <label>
 
-                                <Building2 size={18}/>
+                                <Building2 size={18} />
 
-                                Company Mode
+                                {t("groupDiscussion.company")}
 
                             </label>
 
                             <select>
 
-                                <option>General Discussion</option>
+                                <option value="">
 
-                                <option>Deloitte</option>
+                                    {t(
+                                        "groupDiscussion.selectCompany"
+                                    )}
 
-                                <option>Accenture</option>
+                                </option>
 
-                                <option>EY</option>
+                                <option>
+                                    Deloitte
+                                </option>
 
-                                <option>PwC</option>
+                                <option>
+                                    Accenture
+                                </option>
 
-                                <option>Infosys</option>
+                                <option>
+                                    EY
+                                </option>
 
-                                <option>TCS</option>
+                                <option>
+                                    PwC
+                                </option>
+
+                                <option>
+                                    Infosys
+                                </option>
+
+                                <option>
+                                    TCS
+                                </option>
 
                             </select>
 
                         </div>
 
+
+                        {/* PARTICIPANTS */}
+
                         <div>
 
                             <label>
 
-                                <Users size={18}/>
+                                <Users size={18} />
 
-                                Participants
+                                {t(
+                                    "groupDiscussion.participants"
+                                )}
 
                             </label>
 
                             <select>
 
-                                <option>4</option>
+                                <option value="">
 
-                                <option>6</option>
+                                    {t(
+                                        "groupDiscussion.participants"
+                                    )}
 
-                                <option>8</option>
+                                </option>
 
-                                <option>10</option>
+                                <option>
+                                    4
+                                </option>
+
+                                <option>
+                                    6
+                                </option>
+
+                                <option>
+                                    8
+                                </option>
+
+                                <option>
+                                    10
+                                </option>
 
                             </select>
 
                         </div>
 
+
+                        {/* DURATION */}
+
                         <div>
 
                             <label>
 
-                                <Clock size={18}/>
+                                <Clock size={18} />
 
-                                Duration
+                                {t(
+                                    "groupDiscussion.duration"
+                                )}
 
                             </label>
 
                             <select>
 
-                                <option>10 Minutes</option>
+                                <option value="">
 
-                                <option>15 Minutes</option>
+                                    {t(
+                                        "groupDiscussion.duration"
+                                    )}
 
-                                <option>20 Minutes</option>
+                                </option>
 
-                                <option>30 Minutes</option>
+                                <option>
+                                    10 minutes
+                                </option>
+
+                                <option>
+                                    15 minutes
+                                </option>
+
+                                <option>
+                                    20 minutes
+                                </option>
+
+                                <option>
+                                    30 minutes
+                                </option>
 
                             </select>
 
                         </div>
 
+
+                        {/* DIFFICULTY */}
+
                         <div>
 
                             <label>
 
-                                <Globe size={18}/>
+                                <Globe size={18} />
 
-                                Difficulty
+                                {t(
+                                    "groupDiscussion.difficulty"
+                                )}
 
                             </label>
 
                             <select>
 
-                                <option>Easy</option>
+                                <option value="">
 
-                                <option>Medium</option>
+                                    {t(
+                                        "groupDiscussion.difficulty"
+                                    )}
 
-                                <option>Hard</option>
+                                </option>
+
+                                <option>
+                                    {t(
+                                        "groupDiscussion.easy"
+                                    )}
+                                </option>
+
+                                <option>
+                                    {t(
+                                        "groupDiscussion.medium"
+                                    )}
+                                </option>
+
+                                <option>
+                                    {t(
+                                        "groupDiscussion.hard"
+                                    )}
+                                </option>
 
                             </select>
 
                         </div>
 
+
+                        {/* LANGUAGE */}
+
                         <div>
 
                             <label>
 
-                                <Languages size={18}/>
+                                <Languages size={18} />
 
-                                Language
+                                {t(
+                                    "groupDiscussion.language"
+                                )}
 
                             </label>
 
                             <select>
 
-                                <option>English</option>
+                                <option value="">
 
-                                <option>Hindi</option>
+                                    {t(
+                                        "groupDiscussion.language"
+                                    )}
 
-                                <option>Hinglish</option>
+                                </option>
+
+                                <option>
+                                    English
+                                </option>
+
+                                <option>
+                                    Hindi
+                                </option>
+
+                                <option>
+                                    Hinglish
+                                </option>
 
                             </select>
 
@@ -246,19 +411,29 @@ const GroupDiscussion = () => {
 
                     </div>
 
-                    {mode==="join" && (
+
+                    {/* ================= JOIN ROOM ================= */}
+
+                    {mode === "join" && (
 
                         <div className="join-room">
 
                             <input
-                                placeholder="Paste Invite Link or Room Code"
+                                type="text"
+                                placeholder={
+                                    t(
+                                        "groupDiscussion.enterRoomCode"
+                                    )
+                                }
                             />
 
                             <button>
 
-                                <Link2 size={18}/>
+                                <Link2 size={18} />
 
-                                Join Room
+                                {t(
+                                    "groupDiscussion.joinRoom"
+                                )}
 
                             </button>
 
@@ -266,13 +441,18 @@ const GroupDiscussion = () => {
 
                     )}
 
-                    {mode==="create" && (
+
+                    {/* ================= CREATE INVITE ================= */}
+
+                    {mode === "create" && (
 
                         <div className="invite-box">
 
                             <span>
 
-                                Invite Link
+                                {t(
+                                    "groupDiscussion.copyInvite"
+                                )}
 
                             </span>
 
@@ -283,9 +463,16 @@ const GroupDiscussion = () => {
                                     readOnly
                                 />
 
-                                <button>
+                                <button
+                                    type="button"
+                                    title={
+                                        t(
+                                            "groupDiscussion.copyInvite"
+                                        )
+                                    }
+                                >
 
-                                    <Copy size={18}/>
+                                    <Copy size={18} />
 
                                 </button>
 
@@ -295,25 +482,54 @@ const GroupDiscussion = () => {
 
                     )}
 
-                    {mode==="ai" && (
+
+                    {/* ================= AI PREVIEW ================= */}
+
+                    {mode === "ai" && (
 
                         <div className="ai-preview">
 
                             <h3>
 
-                                AI Participants
+                                {t(
+                                    "groupDiscussion.aiParticipants"
+                                )}
 
                             </h3>
 
                             <div className="ai-grid">
 
-                                <div>Aggressive Speaker</div>
+                                <div>
 
-                                <div>Analytical Thinker</div>
+                                    {t(
+                                        "groupDiscussion.communication"
+                                    )}
 
-                                <div>Confident Speaker</div>
+                                </div>
 
-                                <div>Quiet Observer</div>
+                                <div>
+
+                                    {t(
+                                        "groupDiscussion.confidence"
+                                    )}
+
+                                </div>
+
+                                <div>
+
+                                    {t(
+                                        "groupDiscussion.teamwork"
+                                    )}
+
+                                </div>
+
+                                <div>
+
+                                    {t(
+                                        "groupDiscussion.relevance"
+                                    )}
+
+                                </div>
 
                             </div>
 
@@ -321,11 +537,16 @@ const GroupDiscussion = () => {
 
                     )}
 
+
+                    {/* ================= START ================= */}
+
                     <button className="start-gd">
 
-                        <Play size={20}/>
+                        <Play size={20} />
 
-                        Start Discussion
+                        {t(
+                            "groupDiscussion.startDiscussion"
+                        )}
 
                     </button>
 
@@ -338,5 +559,6 @@ const GroupDiscussion = () => {
     );
 
 };
+
 
 export default GroupDiscussion;

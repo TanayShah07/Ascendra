@@ -4,8 +4,8 @@
 
     background:linear-gradient(
         180deg,
-        #f8fafc,
-        #eef5ff
+        var(--bg-secondary),
+        var(--bg-primary)
     );
 
 }
@@ -22,7 +22,7 @@
 
 .tech-card{
 
-    background:white;
+    background: var(--bg-primary);
 
     border-radius:28px;
 
@@ -80,7 +80,7 @@
 
     margin-bottom:18px;
 
-    color:#0f172a;
+    color: var(--text-primary);
 
 }
 
@@ -94,7 +94,7 @@
 
 .tech-card li{
 
-    color:#64748b;
+    color: var(--text-secondary);
 
     margin-bottom:12px;
 

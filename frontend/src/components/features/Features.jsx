@@ -10,41 +10,43 @@ import {
     ChevronRight
 } from "lucide-react";
 
-const features = [
+import { useLanguage } from "../../context/LanguageContext";
+
+const Features = () => {
+    const { t } = useLanguage();
+
+    const features = [
     {
         icon: <Brain size={30} />,
-        title: "AI Mock Interviews",
-        desc: "Practice realistic interviews powered by AI."
+        title: t("landing.features.aiMockInterviews"),
+        desc: t("landing.features.aiMockInterviewsDesc")
     },
     {
         icon: <FileText size={30} />,
-        title: "ATS Resume Scanner",
-        desc: "Optimize your resume for recruiters."
+        title: t("landing.features.atsResumeScanner"),
+        desc: t("landing.features.atsResumeScannerDesc")
     },
     {
         icon: <Code2 size={30} />,
-        title: "Coding Assessment",
-        desc: "Solve DSA and coding interview questions."
+        title: t("landing.features.codingAssessment"),
+        desc: t("landing.features.codingAssessmentDesc")
     },
     {
         icon: <Mic size={30} />,
-        title: "Speech Intelligence",
-        desc: "Analyze confidence, pace and clarity."
+        title: t("landing.features.speechIntelligence"),
+        desc: t("landing.features.speechIntelligenceDesc")
     },
     {
         icon: <Eye size={30} />,
-        title: "Computer Vision",
-        desc: "Eye contact and posture analysis."
+        title: t("landing.features.computerVision"),
+        desc: t("landing.features.computerVisionDesc")
     },
     {
         icon: <Route size={30} />,
-        title: "Learning Roadmaps",
-        desc: "Personalized preparation plans."
+        title: t("landing.features.learningRoadmaps"),
+        desc: t("landing.features.learningRoadmapsDesc")
     }
 ];
-
-const Features = () => {
-
     return (
 
         <section
@@ -60,17 +62,15 @@ const Features = () => {
             >
 
                 <span>
-                    FEATURES
+                    {t("landing.features.label")}
                 </span>
 
                 <h2>
-                    Everything You Need To Crack Placements
+                    {t("landing.features.title")}
                 </h2>
 
                 <p>
-                    Ascendra combines Artificial Intelligence, NLP,
-                    Deep Learning and Computer Vision into one
-                    intelligent interview preparation platform.
+                    {t("landing.features.description")}
                 </p>
 
             </motion.div>
@@ -118,7 +118,7 @@ const Features = () => {
 
                         <button>
 
-                            Learn More
+                            {t("landing.features.learnMore")}
 
                             <ChevronRight size={18}/>
 

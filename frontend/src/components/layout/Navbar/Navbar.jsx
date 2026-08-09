@@ -2,10 +2,12 @@ import "./Navbar.css";
 import { Link } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useLanguage } from "../../../context/LanguageContext";
 
 const Navbar = () => {
 
     const [activeSection, setActiveSection] = useState("home");
+    const { t } = useLanguage();
 
     useEffect(() => {
 
@@ -94,28 +96,28 @@ const Navbar = () => {
                     href="#home"
                     className={activeSection === "home" ? "active" : ""}
                 >
-                    Home
+                    {t("landing.nav.home")}
                 </a>
 
                 <a
                     href="#features"
                     className={activeSection === "features" ? "active" : ""}
                 >
-                    Features
+                    {t("landing.nav.features")}
                 </a>
 
                 <a
                     href="#technology"
                     className={activeSection === "technology" ? "active" : ""}
                 >
-                    Technology
+                    {t("landing.nav.technology")}
                 </a>
 
                 <a
                     href="#about"
                     className={activeSection === "about" ? "active" : ""}
                 >
-                    About
+                    {t("landing.nav.about")}
                 </a>
 
             </div>
@@ -126,14 +128,14 @@ const Navbar = () => {
                     to="/login"
                     className="login-btn"
                 >
-                    Login
+                    {t("landing.nav.login")}
                 </Link>
 
                 <Link
                     to="/register"
                     className="get-started-btn"
                 >
-                    Get Started
+                    {t("landing.nav.getStarted")}
                 </Link>
 
             </div>

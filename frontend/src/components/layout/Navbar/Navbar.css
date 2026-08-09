@@ -10,11 +10,15 @@
 
     padding:14px 7%;
 
-    background:rgba(255,255,255,.96);
+    background: color-mix(
+    in srgb,
+    var(--bg-card) 96%,
+    transparent
+);
 
     backdrop-filter:blur(18px);
 
-    border-bottom:1px solid rgba(0,0,0,.06);
+    border-bottom:1px solid var(--border-color);
 
 }
 
@@ -46,7 +50,7 @@
 
     text-decoration:none;
 
-    color:#1e293b;
+    color: var(--text-primary);
 
     font-weight:600;
 
@@ -94,7 +98,7 @@
 
 .login-btn{
 
-    color:#2563eb;
+    color: var(--primary);
 
     text-decoration:none;
 
@@ -165,6 +169,8 @@
     background:none;
 
     cursor:pointer;
+
+    color: var(--text-primary);
 
 }
 

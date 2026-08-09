@@ -1,97 +1,65 @@
-.interview-page{
-
-    min-height:100vh;
-
-    padding:60px 7%;
-
-    background:#f8fafc;
-
+.interview-page {
+    min-height: 100vh;
+    padding: 60px 7%;
+    background: var(--bg-primary);
 }
 
-.interview-page h1{
-
-    font-size:3rem;
-
-    text-align:center;
-
-    margin-bottom:15px;
-
+.interview-page h1 {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 15px;
+    color: var(--text-primary);
 }
 
-.interview-page p{
-
-    text-align:center;
-
-    color:#64748b;
-
-    margin-bottom:60px;
-
+.interview-page > p {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-bottom: 60px;
 }
 
-.mode-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(2,1fr);
-
-    gap:40px;
-
+.mode-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
 }
 
-.mode-card{
-
-    background:white;
-
-    border-radius:24px;
-
-    padding:60px 40px;
-
-    cursor:pointer;
-
-    text-align:center;
-
-    transition:.35s;
-
-    box-shadow:0 15px 45px rgba(0,0,0,.08);
-
+.mode-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    border-radius: 24px;
+    padding: 60px 40px;
+    cursor: pointer;
+    text-align: center;
+    transition: 0.35s;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.08);
 }
 
-.mode-card:hover{
-
-    transform:translateY(-10px);
-
-    box-shadow:0 25px 60px rgba(37,99,235,.18);
-
+.mode-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 60px rgba(37, 99, 235, 0.18);
 }
 
-.mode-card svg{
-
-    color:#2563eb;
-
-    margin-bottom:20px;
-
+.mode-card svg {
+    color: #2563eb;
+    margin-bottom: 20px;
 }
 
-.mode-card h2{
-
-    margin-bottom:15px;
-
+.mode-card h2 {
+    margin-bottom: 15px;
+    color: var(--text-primary);
 }
 
-.mode-card p{
-
-    margin:0;
-
-    line-height:1.7;
-
+.mode-card p {
+    margin: 0;
+    line-height: 1.7;
+    color: var(--text-secondary);
 }
 
-@media(max-width:900px){
+@media (max-width: 900px) {
 
-    .mode-grid{
-
-        grid-template-columns:1fr;
-
+    .mode-grid {
+        grid-template-columns: 1fr;
     }
 
 }

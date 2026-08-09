@@ -1,23 +1,30 @@
-.hero{
+.hero {
+    position: relative;
+    overflow: hidden;
 
-    position:relative;
-    overflow:hidden;
+    min-height: calc(100vh - 84px);
 
-    min-height:calc(100vh - 84px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 
-    display:grid;
-    grid-template-columns:1fr 1fr;
+    align-items: center;
 
-    align-items:center;
+    gap: 5rem;
 
-    gap:5rem;
-
-    padding:0 6rem;
+    padding: 0 6rem;
 
     background:
-    radial-gradient(circle at top left,#eef4ff 0%,#ffffff 45%),
-    linear-gradient(180deg,#ffffff,#f8fafc);
+        radial-gradient(
+            circle at top left,
+            var(--bg-secondary),
+            var(--bg-primary) 55%
+        );
 
+    color: var(--text-primary);
+
+    transition:
+        background .25s ease,
+        color .25s ease;
 }
 .hero::before{
 
@@ -155,19 +162,22 @@
     cursor:pointer;
 }
 
-.secondary-btn{
+.secondary-btn {
+    padding: 16px 34px;
 
-    padding:16px 34px;
+    border-radius: 16px;
 
-    border-radius:16px;
+    border: 2px solid var(--border);
 
-    border:2px solid var(--border);
+    background: var(--bg-card);
 
-    background:white;
+    color: var(--text-primary);
 
-    cursor:pointer;
+    cursor: pointer;
 
-    font-weight:700;
+    font-weight: 700;
+
+    transition: .3s;
 }
 
 .hero-stats{

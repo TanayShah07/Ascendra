@@ -1,10 +1,12 @@
 import "./DashboardHeader.css";
 import { Sparkles } from "lucide-react";
 import { useAuth } from "../../../context/AuthContext";
+import { useLanguage } from "../../../context/LanguageContext";
 
 const DashboardHeader = () => {
 
     const { user } = useAuth();
+    const { t } = useLanguage();
 
     return (
 
@@ -14,13 +16,13 @@ const DashboardHeader = () => {
 
                 <span className="welcome-tag">
 
-                    Welcome Back
+                    {t("dashboard.welcome")}
 
                 </span>
 
                 <h1>
 
-                    Hi,
+                    {t("dashboard.hi")},
 
                     <span>
 
@@ -34,7 +36,7 @@ const DashboardHeader = () => {
 
                 <p>
 
-                    Ready to ace your next interview?
+                    {t("dashboard.greeting")}
 
                 </p>
 
@@ -48,13 +50,13 @@ const DashboardHeader = () => {
 
                     <span>
 
-                        Level
+                        {t("level")}
 
                     </span>
 
                     <h2>
 
-                        1
+                        {t("level_number")}
 
                     </h2>
 

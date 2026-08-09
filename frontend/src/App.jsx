@@ -16,6 +16,8 @@ import Roadmap from "./pages/Roadmap/Roadmap";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import PreparationHub from "./pages/PreparationHub/PreparationHub";
 import Aptitude from "./pages/Aptitude/Aptitude";
+import Settings from "./pages/Settings/Settings";
+
 import ProtectedRoute from "./routes/ProtectedRoute";
 
 function App() {
@@ -114,6 +116,15 @@ function App() {
                     element={
                         <ProtectedRoute>
                             <Profile />
+                        </ProtectedRoute>
+                    }
+                />
+                
+                <Route
+                    path="/settings"
+                    element={
+                        <ProtectedRoute>
+                            <Settings />
                         </ProtectedRoute>
                     }
                 />

@@ -5,36 +5,38 @@ import {
     Brain,
     TrendingUp
 } from "lucide-react";
-
-const stats = [
-
-    {
-        icon: <Flame size={28} />,
-        title: "Current Streak",
-        value: "0 Days"
-    },
-
-    {
-        icon: <Trophy size={28} />,
-        title: "XP",
-        value: "0"
-    },
-
-    {
-        icon: <Brain size={28} />,
-        title: "Interviews",
-        value: "0"
-    },
-
-    {
-        icon: <TrendingUp size={28} />,
-        title: "Readiness",
-        value: "0%"
-    }
-
-];
+import { useLanguage } from "../../../context/LanguageContext";
 
 const DashboardStats=()=>{
+    const { t } = useLanguage();
+
+    const stats = [
+    
+    {
+        icon: <Flame size={28} />,
+        title: t("dashboard.currentStreak"),
+        value: "0 Days"
+    },
+    
+    {
+        icon: <Trophy size={28} />,
+        title: t("dashboard.xp"),
+        value: "0"
+    },
+    
+    {
+        icon: <Brain size={28} />,
+        title: t("dashboard.interviews"),
+        value: "0"
+    },
+    
+    {
+        icon: <TrendingUp size={28} />,
+        title: t("dashboard.readiness"),
+        value: "0%"
+    }
+    
+];
 
     return(
 

@@ -1,11 +1,24 @@
 import "./Interview.css";
-import DashboardLayout from "../../components/layout/DashboardLayout/DashboardLayout";
-import { Brain, Building2 } from "lucide-react";
+
+import DashboardLayout
+    from "../../components/layout/DashboardLayout/DashboardLayout";
+
+import {
+    Brain,
+    Building2
+} from "lucide-react";
+
 import { useNavigate } from "react-router-dom";
+
+import { useLanguage } from "../../context/LanguageContext";
+
 
 const Interview = () => {
 
     const navigate = useNavigate();
+
+    const { t } = useLanguage();
+
 
     return (
 
@@ -14,48 +27,64 @@ const Interview = () => {
             <div className="interview-page">
 
                 <h1>
-                    Choose Interview Mode
+                    {t("interview.chooseMode")}
                 </h1>
 
                 <p>
-                    Select how you'd like to practice today.
+                    {t("interview.selectPracticeMode")}
                 </p>
+
 
                 <div className="mode-grid">
 
+
+                    {/* AI MOCK INTERVIEW */}
+
                     <div
                         className="mode-card"
-                        onClick={() => navigate("/interview/mock")}
+                        onClick={() =>
+                            navigate("/interview/mock")
+                        }
                     >
 
                         <Brain size={50} />
 
                         <h2>
-                            AI Mock Interview
+                            {t("interview.aiMockInterview")}
                         </h2>
 
                         <p>
-                            Practice subject-wise technical and HR interviews with AI.
+                            {t(
+                                "interview.aiMockInterviewDescription"
+                            )}
                         </p>
 
                     </div>
 
+
+                    {/* COMPANY INTERVIEW */}
+
                     <div
                         className="mode-card"
-                        onClick={() => navigate("/interview/company")}
+                        onClick={() =>
+                            navigate("/interview/company")
+                        }
                     >
 
                         <Building2 size={50} />
 
                         <h2>
-                            Company Specific Interview
+                            {t("interview.companyInterview")}
                         </h2>
 
                         <p>
-                            Experience interviews based on real company patterns.
+                            {t(
+                                "interview.companyInterviewDescription"
+                            )}
                         </p>
 
                     </div>
+
 
                 </div>
 
@@ -66,5 +95,6 @@ const Interview = () => {
     );
 
 };
+
 
 export default Interview;

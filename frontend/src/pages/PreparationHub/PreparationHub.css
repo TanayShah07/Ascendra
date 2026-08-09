@@ -1,188 +1,116 @@
 .preparation-page {
-
     padding: 40px;
-
+    min-height: 100vh;
+    background: var(--bg-primary);
+    color: var(--text-primary);
 }
-
 
 .preparation-header {
-
     margin-bottom: 40px;
-
 }
-
 
 .preparation-header h1 {
-
     font-size: 2.4rem;
-
-    color: #0f172a;
-
+    color: var(--text-primary);
     margin-bottom: 10px;
-
 }
-
 
 .preparation-header p {
-
-    color: #64748b;
-
+    color: var(--text-secondary);
     font-size: 1rem;
-
 }
-
 
 .preparation-grid {
-
     display: grid;
-
-    grid-template-columns: repeat(
-        3,
-        1fr
-    );
-
+    grid-template-columns: repeat(3, 1fr);
     gap: 28px;
-
 }
-
 
 .preparation-card {
+    background: var(--bg-card);
+    color: var(--text-primary);
 
-    background: white;
-
+    border: 1px solid var(--border-color);
     border-radius: 22px;
-
     padding: 32px;
 
-    box-shadow:
-        0 10px 30px
-        rgba(15, 23, 42, .08);
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
 
     cursor: pointer;
-
-    transition: .3s ease;
+    transition: 0.3s ease;
 
     display: flex;
-
     flex-direction: column;
-
     min-height: 300px;
-
 }
-
 
 .preparation-card:hover {
-
     transform: translateY(-7px);
-
-    box-shadow:
-        0 18px 40px
-        rgba(15, 23, 42, .12);
-
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
 }
 
-
 .preparation-icon {
-
     width: 70px;
-
     height: 70px;
 
     border-radius: 18px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
-    background:
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #7c3aed
-        );
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+    );
 
     color: white;
-
     margin-bottom: 24px;
-
 }
-
 
 .preparation-card h2 {
-
-    color: #0f172a;
-
+    color: var(--text-primary);
     margin-bottom: 12px;
-
     font-size: 1.45rem;
-
 }
-
 
 .preparation-card p {
-
-    color: #64748b;
-
+    color: var(--text-secondary);
     line-height: 1.7;
-
     flex: 1;
-
 }
 
-
 .preparation-card button {
-
     margin-top: 24px;
-
     padding: 13px 20px;
 
     border: none;
-
     border-radius: 12px;
 
     background: #2563eb;
-
     color: white;
 
     font-size: 14px;
-
     font-weight: 600;
 
     cursor: pointer;
-
-    transition: .25s;
-
+    transition: 0.25s;
 }
-
 
 .preparation-card button:hover {
-
     background: #1d4ed8;
-
     transform: translateY(-2px);
-
 }
-
 
 @media (max-width: 1000px) {
-
     .preparation-grid {
-
         grid-template-columns: 1fr;
-
     }
-
 }
 
-
 @media (max-width: 700px) {
-
     .preparation-page {
-
         padding: 20px;
-
     }
-
 }

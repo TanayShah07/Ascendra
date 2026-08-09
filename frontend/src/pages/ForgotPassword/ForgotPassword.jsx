@@ -17,11 +17,12 @@ import {
     verifyOtp,
     resetPassword
 } from "../../services/authService";
-
+import { useLanguage } from "../../context/LanguageContext";
 
 const ForgotPassword = () => {
 
     const navigate = useNavigate();
+    const { t } = useLanguage();
 
     const [step, setStep] = useState(1);
 
@@ -91,7 +92,7 @@ const ForgotPassword = () => {
         if (!email.trim()) {
 
             toast.error(
-                "Please enter your email address."
+                t("forgotPassword.enterEmail")
             );
 
             return;
@@ -105,7 +106,7 @@ const ForgotPassword = () => {
             await forgotPassword(email);
 
             toast.success(
-                "If the email is registered, an OTP has been sent."
+                t("forgotPassword.otpSent")
             );
 
             setOtp("");
@@ -152,7 +153,7 @@ const ForgotPassword = () => {
             await forgotPassword(email);
 
             toast.success(
-                "A new OTP has been sent to your email."
+                t("forgotPassword.otpResent")
             );
 
             // Clear old OTP
@@ -167,7 +168,7 @@ const ForgotPassword = () => {
 
             toast.error(
                 error.response?.data?.detail ||
-                "Unable to resend OTP."
+                t("forgotPassword.unableToResendOtp")
             );
 
         }
@@ -192,7 +193,7 @@ const ForgotPassword = () => {
         if (otp.length !== 6) {
 
             toast.error(
-                "Enter the 6-digit OTP."
+                t("forgotPassword.enterValidOtp")
             );
 
             return;
@@ -213,7 +214,7 @@ const ForgotPassword = () => {
             );
 
             toast.success(
-                "OTP verified successfully."
+                t("forgotPassword.otpVerified")
             );
 
             setStep(3);
@@ -224,7 +225,7 @@ const ForgotPassword = () => {
 
             toast.error(
                 error.response?.data?.detail ||
-                "Invalid or expired OTP."
+                t("forgotPassword.invalidOtp")
             );
 
         }
@@ -249,7 +250,7 @@ const ForgotPassword = () => {
         if (newPassword.length < 8) {
 
             toast.error(
-                "Password must be at least 8 characters."
+                t("forgotPassword.passwordLength")
             );
 
             return;
@@ -259,7 +260,7 @@ const ForgotPassword = () => {
         if (newPassword !== confirmPassword) {
 
             toast.error(
-                "Passwords do not match."
+                t("forgotPassword.passwordMismatch")
             );
 
             return;
@@ -277,7 +278,7 @@ const ForgotPassword = () => {
             );
 
             toast.success(
-                "Password reset successfully!"
+                t("forgotPassword.passwordReset")
             );
 
             navigate("/login");
@@ -288,7 +289,7 @@ const ForgotPassword = () => {
 
             toast.error(
                 error.response?.data?.detail ||
-                "Unable to reset password."
+                t("forgotPassword.unableToResetPassword")
             );
 
         }
@@ -335,7 +336,7 @@ const ForgotPassword = () => {
 
                 <ArrowLeft size={18} />
 
-                Back to Login
+                {t("forgotPassword.backToLogin")}
 
             </button>
 
@@ -362,16 +363,14 @@ const ForgotPassword = () => {
 
                         <h1>
 
-                            Forgot Password?
+                            {t("forgotPassword.forgotTitle")}
 
                         </h1>
 
 
                         <p>
 
-                            Enter your registered email
-                            address. We'll send you a
-                            6-digit OTP to reset your password.
+                            {t("forgotPassword.forgotDescription")}
 
                         </p>
 
@@ -382,7 +381,7 @@ const ForgotPassword = () => {
 
                             <input
                                 type="email"
-                                placeholder="Enter your email"
+                                placeholder={t("forgotPassword.emailPlaceholder")}
                                 value={email}
                                 onChange={(e) =>
                                     setEmail(e.target.value)
@@ -400,8 +399,8 @@ const ForgotPassword = () => {
                         >
 
                             {loading
-                                ? "Sending..."
-                                : "Send OTP"
+                                ? t("forgotPassword.sending")
+                                : t("forgotPassword.sendOtp")
                             }
 
                         </button>
@@ -430,14 +429,14 @@ const ForgotPassword = () => {
 
                         <h1>
 
-                            Verify OTP
+                            {t("forgotPassword.verifyOtp")}
 
                         </h1>
 
 
                         <p>
 
-                            We've sent a 6-digit OTP to:
+                            {t("forgotPassword.otpSent")}
 
                             <br />
 
@@ -458,7 +457,7 @@ const ForgotPassword = () => {
                                 type="text"
                                 inputMode="numeric"
                                 maxLength={6}
-                                placeholder="Enter 6-digit OTP"
+                                placeholder={t("forgotPassword.otpPlaceholder")}
                                 value={otp}
                                 onChange={(e) =>
                                     setOtp(
@@ -483,8 +482,8 @@ const ForgotPassword = () => {
                         >
 
                             {loading
-                                ? "Verifying..."
-                                : "Verify OTP"
+                                ? t("forgotPassword.verifying")
+                                : t("forgotPassword.verifyOtp")
                             }
 
                         </button>
@@ -508,7 +507,7 @@ const ForgotPassword = () => {
 
                             {resendTimer > 0
                                 ? `Resend OTP in ${formatTimer()}`
-                                : "Resend OTP"
+                                : t("forgotPassword.resendOtp")
                             }
 
                         </button>
@@ -522,7 +521,7 @@ const ForgotPassword = () => {
                             onClick={handleChangeEmail}
                         >
 
-                            Change Email
+                            {t("forgotPassword.changeEmail")}
 
                         </button>
 
@@ -550,15 +549,15 @@ const ForgotPassword = () => {
 
                         <h1>
 
-                            Create New Password
+                            {t("forgotPassword.createPassword")}
 
                         </h1>
 
 
                         <p>
 
-                            Your OTP has been verified.
-                            Create a new password for your account.
+                            {t("forgotPassword.otpVerified")}
+                            {t("forgotPassword.createNewPassword")}
 
                         </p>
 
@@ -571,7 +570,7 @@ const ForgotPassword = () => {
 
                             <input
                                 type="password"
-                                placeholder="New password"
+                                placeholder={t("forgotPassword.newPassword")}
                                 value={newPassword}
                                 onChange={(e) =>
                                     setNewPassword(
@@ -592,7 +591,7 @@ const ForgotPassword = () => {
 
                             <input
                                 type="password"
-                                placeholder="Confirm new password"
+                                placeholder={t("forgotPassword.confirmPassword")}
                                 value={confirmPassword}
                                 onChange={(e) =>
                                     setConfirmPassword(
@@ -614,8 +613,8 @@ const ForgotPassword = () => {
                         >
 
                             {loading
-                                ? "Resetting..."
-                                : "Reset Password"
+                                ? t("forgotPassword.resetting")
+                                : t("forgotPassword.resetPassword")
                             }
 
                         </button>

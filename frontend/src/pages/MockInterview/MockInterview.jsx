@@ -1,19 +1,41 @@
 import "./MockInterview.css";
-import DashboardLayout from "../../components/layout/DashboardLayout/DashboardLayout";
+
+import DashboardLayout
+    from "../../components/layout/DashboardLayout/DashboardLayout";
+
 import { useState } from "react";
-import { Play, ArrowLeft } from "lucide-react";
+
+import {
+    Play,
+    ArrowLeft
+} from "lucide-react";
+
 import { useNavigate } from "react-router-dom";
+
+import { useLanguage } from "../../context/LanguageContext";
+
 
 const MockInterview = () => {
 
     const navigate = useNavigate();
 
+    const { t } = useLanguage();
+
+
     const [subject, setSubject] = useState("");
-    const [difficulty, setDifficulty] = useState("Easy");
-    const [duration, setDuration] = useState("30");
-    const [language, setLanguage] = useState("English");
+
+    const [difficulty, setDifficulty] =
+        useState("Easy");
+
+    const [duration, setDuration] =
+        useState("30");
+
+    const [language, setLanguage] =
+        useState("English");
+
 
     const subjects = [
+
         "Data Structures",
         "OOP",
         "DBMS",
@@ -26,7 +48,9 @@ const MockInterview = () => {
         "HR",
         "Aptitude",
         "Mixed"
+
     ];
+
 
     return (
 
@@ -34,86 +58,168 @@ const MockInterview = () => {
 
             <div className="setup-page">
 
+
+                {/* BACK */}
+
                 <button
-                    className="back-btn"
-                    onClick={() => navigate("/interview")}
+                    className="mock-interview-back-btn"
+                    onClick={() =>
+                        navigate("/interview")
+                    }
                 >
+
                     <ArrowLeft size={18} />
-                    Back to Interview
+
+                    {t("interview.backToInterview")}
+
                 </button>
 
+
                 <h1>
-                    AI Mock Interview
+                    {t("interview.aiMockInterview")}
                 </h1>
 
+
                 <p>
-                    Configure your interview before starting.
+                    {t("interview.configureInterview")}
                 </p>
+
 
                 <div className="setup-card">
 
-                    <label>Subject</label>
+
+                    {/* SUBJECT */}
+
+                    <label>
+                        {t("interview.subject")}
+                    </label>
 
                     <select
                         value={subject}
-                        onChange={(e) => setSubject(e.target.value)}
+                        onChange={(e) =>
+                            setSubject(e.target.value)
+                        }
                     >
-                        <option value="">Select Subject</option>
 
-                        {subjects.map((item, index) => (
+                        <option value="">
+                            {t("interview.selectSubject")}
+                        </option>
 
-                            <option
-                                key={index}
-                                value={item}
-                            >
-                                {item}
-                            </option>
 
-                        ))}
+                        {subjects.map(
+                            (item, index) => (
+
+                                <option
+                                    key={index}
+                                    value={item}
+                                >
+                                    {item}
+                                </option>
+
+                            )
+                        )}
 
                     </select>
 
-                    <label>Difficulty</label>
+
+                    {/* DIFFICULTY */}
+
+                    <label>
+                        {t("interview.difficulty")}
+                    </label>
 
                     <select
                         value={difficulty}
-                        onChange={(e) => setDifficulty(e.target.value)}
+                        onChange={(e) =>
+                            setDifficulty(e.target.value)
+                        }
                     >
-                        <option>Easy</option>
-                        <option>Medium</option>
-                        <option>Hard</option>
+
+                        <option value="Easy">
+                            {t("interview.easy")}
+                        </option>
+
+                        <option value="Medium">
+                            {t("interview.medium")}
+                        </option>
+
+                        <option value="Hard">
+                            {t("interview.hard")}
+                        </option>
+
                     </select>
 
-                    <label>Duration</label>
+
+                    {/* DURATION */}
+
+                    <label>
+                        {t("interview.duration")}
+                    </label>
 
                     <select
                         value={duration}
-                        onChange={(e) => setDuration(e.target.value)}
+                        onChange={(e) =>
+                            setDuration(e.target.value)
+                        }
                     >
-                        <option>15</option>
-                        <option>30</option>
-                        <option>45</option>
-                        <option>60</option>
+
+                        <option value="15">
+                            15
+                        </option>
+
+                        <option value="30">
+                            30
+                        </option>
+
+                        <option value="45">
+                            45
+                        </option>
+
+                        <option value="60">
+                            60
+                        </option>
+
                     </select>
 
-                    <label>Language</label>
+
+                    {/* LANGUAGE */}
+
+                    <label>
+                        {t("interview.language")}
+                    </label>
 
                     <select
                         value={language}
-                        onChange={(e) => setLanguage(e.target.value)}
+                        onChange={(e) =>
+                            setLanguage(e.target.value)
+                        }
                     >
-                        <option>English</option>
-                        <option>Hindi</option>
-                        <option>Hinglish</option>
+
+                        <option value="English">
+                            English
+                        </option>
+
+                        <option value="Hindi">
+                            Hindi
+                        </option>
+
+                        <option value="Hinglish">
+                            Hinglish
+                        </option>
+
                     </select>
+
+
+                    {/* START */}
 
                     <button className="start-btn">
 
                         <Play size={20} />
 
-                        Start Interview
+                        {t("interview.startInterview")}
 
                     </button>
+
 
                 </div>
 
@@ -124,5 +230,6 @@ const MockInterview = () => {
     );
 
 };
+
 
 export default MockInterview;

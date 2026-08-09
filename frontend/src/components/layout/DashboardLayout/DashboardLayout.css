@@ -1,10 +1,16 @@
-.dashboard-layout{
+.dashboard-layout {
 
-    display:flex;
+    display: flex;
 
-    min-height:100vh;
+    min-height: 100vh;
 
-    background:#f8fafc;
+    background: var(--bg-primary);
+
+    color: var(--text-primary);
+
+    transition:
+        background-color .25s ease,
+        color .25s ease;
 
 }
 

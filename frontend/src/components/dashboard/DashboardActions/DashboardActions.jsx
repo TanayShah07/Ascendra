@@ -5,9 +5,11 @@ import {
     ArrowRight
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "../../../context/LanguageContext";
 
 const DashboardActions = () => {
 
+    const { t } = useLanguage();
     const navigate = useNavigate();
 
     return (
@@ -20,13 +22,13 @@ const DashboardActions = () => {
 
                 <h2>
 
-                    Start AI Interview
+                    {t("dashboard.startAIInterview")}
 
                 </h2>
 
                 <p>
 
-                    Practice with AI and improve your interview skills.
+                    {t("dashboard.startAIInterviewDescription")}
 
                 </p>
 
@@ -34,7 +36,7 @@ const DashboardActions = () => {
                     onClick={() => navigate("/interview")}
                 >
 
-                    Start
+                    {t("dashboard.start")}
 
                     <ArrowRight size={18} />
 
@@ -48,13 +50,13 @@ const DashboardActions = () => {
 
                 <h2>
 
-                    Resume Analysis
+                    {t("dashboard.resumeAnalysis")}
 
                 </h2>
 
                 <p>
 
-                    Get ATS score and AI-powered resume suggestions.
+                    {t("dashboard.resumeAnalysisDescription")}
 
                 </p>
 
@@ -62,7 +64,7 @@ const DashboardActions = () => {
                     onClick={() => navigate("/resume")}
                 >
 
-                    Analyze
+                    {t("dashboard.analyze")}
 
                     <ArrowRight size={18} />
 

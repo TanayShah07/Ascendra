@@ -8,12 +8,16 @@ import {
     Server,
     ShieldCheck
 } from "lucide-react";
+import { useLanguage } from "../../context/LanguageContext";
 
-const technologies = [
+const Technology = () => {
+    const { t } = useLanguage();
+
+    const technologies = [
 
     {
         icon: <Globe size={30} />,
-        title: "Frontend",
+        title: t("landing.technology.frontend"),
         stack: [
             "React",
             "Vite",
@@ -25,7 +29,7 @@ const technologies = [
 
     {
         icon: <Server size={30} />,
-        title: "Backend",
+        title: t("landing.technology.backend"),
         stack: [
             "FastAPI",
             "JWT Authentication",
@@ -37,7 +41,7 @@ const technologies = [
 
     {
         icon: <Database size={30} />,
-        title: "Database",
+        title: t("landing.technology.database"),
         stack: [
             "PostgreSQL",
             "Alembic",
@@ -49,7 +53,7 @@ const technologies = [
 
     {
         icon: <Brain size={30} />,
-        title: "Artificial Intelligence",
+        title: t("landing.technology.ai"),
         stack: [
             "NLP",
             "Deep Learning",
@@ -61,7 +65,7 @@ const technologies = [
 
     {
         icon: <Cpu size={30} />,
-        title: "AI Models",
+        title: t("landing.technology.aiModels"),
         stack: [
             "Whisper",
             "MediaPipe",
@@ -73,7 +77,7 @@ const technologies = [
 
     {
         icon: <ShieldCheck size={30} />,
-        title: "Security",
+        title: t("landing.technology.security"),
         stack: [
             "JWT",
             "Password Hashing",
@@ -84,8 +88,6 @@ const technologies = [
     }
 
 ];
-
-const Technology = () => {
 
     return (
 
@@ -103,21 +105,19 @@ const Technology = () => {
 
                 <span>
 
-                    TECHNOLOGY
+                    {t("landing.technology.label")}
 
                 </span>
 
                 <h2>
 
-                    Powered By Modern Technologies
+                    {t("landing.technology.title")}
 
                 </h2>
 
                 <p>
 
-                    Built with a production-ready technology stack
-                    combining Artificial Intelligence, Deep Learning,
-                    NLP and scalable backend architecture.
+                    {t("landing.technology.description")}
 
                 </p>
 

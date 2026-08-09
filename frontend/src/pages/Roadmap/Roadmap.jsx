@@ -3,24 +3,26 @@ import "./Roadmap.css";
 import DashboardLayout from "../../components/layout/DashboardLayout/DashboardLayout";
 
 import {
-
     Map,
-
     Sparkles,
-
     Lock
-
 } from "lucide-react";
 
 import { useState } from "react";
 
+import { useLanguage } from "../../context/LanguageContext";
+
+
 const Roadmap = () => {
 
-    const [goal,setGoal]=useState("");
+    const [goal, setGoal] = useState("");
 
-    const roadmapGenerated=false;
+    const roadmapGenerated = false;
 
-    return(
+    const { t } = useLanguage();
+
+
+    return (
 
         <DashboardLayout>
 
@@ -30,117 +32,124 @@ const Roadmap = () => {
 
                     <div className="roadmap-icon">
 
-                        <Map size={45}/>
+                        <Map size={45} />
 
                     </div>
 
+
                     <h1>
 
-                        AI Career Roadmap
+                        {t("roadmap.title")}
 
                     </h1>
 
+
                     <p>
 
-                        Generate a personalized placement roadmap using AI based on your dream role, company and current skill level.
+                        {t("roadmap.description")}
 
                     </p>
 
-                    {
 
-                        !roadmapGenerated &&
+                    {!roadmapGenerated && (
 
                         <>
 
                             <div className="examples">
 
                                 <span>
-
-                                    Google SDE
-
+                                    {t("roadmap.googleSDE")}
                                 </span>
 
                                 <span>
-
-                                    AI Engineer
-
+                                    {t("roadmap.aiEngineer")}
                                 </span>
 
                                 <span>
-
-                                    Data Scientist
-
+                                    {t("roadmap.dataScientist")}
                                 </span>
 
                                 <span>
-
-                                    Full Stack Developer
-
+                                    {t("roadmap.fullStackDeveloper")}
                                 </span>
 
                                 <span>
-
-                                    ML Engineer
-
+                                    {t("roadmap.mlEngineer")}
                                 </span>
 
                             </div>
 
+
                             <label>
 
-                                What's your goal?
+                                {t("roadmap.goalLabel")}
 
                             </label>
+
 
                             <textarea
 
                                 value={goal}
 
-                                onChange={(e)=>setGoal(e.target.value)}
+                                onChange={(e) =>
+                                    setGoal(e.target.value)
+                                }
 
-                                placeholder="Example: I want to become an AI Engineer at NVIDIA within 8 months."
+                                placeholder={t(
+                                    "roadmap.goalPlaceholder"
+                                )}
 
                             />
 
+
                             <button>
 
-                                <Sparkles size={18}/>
+                                <Sparkles size={18} />
 
-                                Generate Roadmap
+                                {t(
+                                    "roadmap.generateRoadmap"
+                                )}
 
                             </button>
 
                         </>
 
-                    }
+                    )}
 
-                    {
 
-                        roadmapGenerated &&
+                    {roadmapGenerated && (
 
                         <div className="generated-placeholder">
 
-                            Roadmap will appear here.
+                            {t(
+                                "roadmap.roadmapWillAppear"
+                            )}
 
                         </div>
 
-                    }
+                    )}
 
                 </div>
 
+
                 <div className="future-card">
 
-                    <Lock/>
+                    <Lock />
 
                     <h2>
 
-                        AI Personalized Roadmaps
+                        {t(
+                            "roadmap.personalizedRoadmaps"
+                        )}
 
                     </h2>
 
+
                     <p>
 
-                        Ascendra AI will generate weekly learning plans, coding schedules, interview preparation, resume milestones and personalized recommendations based on your progress.
+                        {t(
+                            "roadmap.personalizedRoadmapsDescription"
+                        )}
 
                     </p>
 
@@ -153,5 +162,6 @@ const Roadmap = () => {
     );
 
 };
+
 
 export default Roadmap;

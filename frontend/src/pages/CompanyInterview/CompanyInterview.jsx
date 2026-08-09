@@ -1,16 +1,27 @@
 import "./CompanyInterview.css";
-import DashboardLayout from "../../components/layout/DashboardLayout/DashboardLayout";
+
+import DashboardLayout
+    from "../../components/layout/DashboardLayout/DashboardLayout";
+
 import { useState } from "react";
+
 import {
     Building2,
     Play,
     ArrowLeft
 } from "lucide-react";
+
 import { useNavigate } from "react-router-dom";
+
+import { useLanguage } from "../../context/LanguageContext";
+
 
 const CompanyInterview = () => {
 
     const navigate = useNavigate();
+
+    const { t } = useLanguage();
+
 
     const companies = [
         "Google",
@@ -30,6 +41,7 @@ const CompanyInterview = () => {
         "Accenture"
     ];
 
+
     const roles = [
         "Software Engineer",
         "Frontend Developer",
@@ -41,139 +53,241 @@ const CompanyInterview = () => {
         "Cloud Engineer"
     ];
 
+
     const [company, setCompany] = useState("");
     const [role, setRole] = useState("");
     const [difficulty, setDifficulty] = useState("Medium");
     const [duration, setDuration] = useState("30");
     const [language, setLanguage] = useState("English");
 
+
     return (
 
         <DashboardLayout>
 
-            <div className="company-page">
+            <div className="company-interview-page">
+
+                {/* BACK BUTTON */}
 
                 <button
-                    className="back-btn"
+                    className="company-interview-back-btn"
                     onClick={() => navigate("/interview")}
                 >
                     <ArrowLeft size={18} />
-                    Back to Interview
+
+                    {t("interview.backToInterview")}
                 </button>
 
-                <h1>
 
-                    <Building2 />
+                {/* HEADER */}
 
-                    Company Specific Interview
+                <div className="company-interview-header">
 
-                </h1>
+                    <h1>
+                        <Building2 size={38} />
 
-                <p>
+                        {t("interview.companyInterview")}
+                    </h1>
 
-                    Practice interviews based on real company hiring patterns.
+                    <p>
+                        {t(
+                            "interview.companyInterviewDescription"
+                        )}
+                    </p>
 
-                </p>
+                </div>
 
-                <div className="company-card">
 
-                    <label>Company</label>
+                {/* FORM */}
 
-                    <select
-                        value={company}
-                        onChange={(e) => setCompany(e.target.value)}
-                    >
+                <div className="company-interview-card">
 
-                        <option value="">
 
-                            Select Company
+                    {/* COMPANY */}
 
-                        </option>
+                    <div className="company-interview-field">
 
-                        {companies.map((item, index) => (
+                        <label>
+                            {t("interview.company")}
+                        </label>
 
-                            <option
-                                key={index}
-                                value={item}
-                            >
-                                {item}
+                        <select
+                            value={company}
+                            onChange={(e) =>
+                                setCompany(e.target.value)
+                            }
+                        >
+
+                            <option value="">
+                                {t("interview.selectCompany")}
                             </option>
 
-                        ))}
+                            {companies.map(
+                                (item, index) => (
 
-                    </select>
+                                    <option
+                                        key={index}
+                                        value={item}
+                                    >
+                                        {item}
+                                    </option>
 
-                    <label>Job Role</label>
+                                )
+                            )}
 
-                    <select
-                        value={role}
-                        onChange={(e) => setRole(e.target.value)}
-                    >
+                        </select>
 
-                        <option value="">
+                    </div>
 
-                            Select Role
 
-                        </option>
+                    {/* JOB ROLE */}
 
-                        {roles.map((item, index) => (
+                    <div className="company-interview-field">
 
-                            <option
-                                key={index}
-                                value={item}
-                            >
-                                {item}
+                        <label>
+                            {t("interview.jobRole")}
+                        </label>
+
+                        <select
+                            value={role}
+                            onChange={(e) =>
+                                setRole(e.target.value)
+                            }
+                        >
+
+                            <option value="">
+                                {t("interview.selectRole")}
                             </option>
 
-                        ))}
+                            {roles.map(
+                                (item, index) => (
 
-                    </select>
+                                    <option
+                                        key={index}
+                                        value={item}
+                                    >
+                                        {item}
+                                    </option>
 
-                    <label>Difficulty</label>
+                                )
+                            )}
 
-                    <select
-                        value={difficulty}
-                        onChange={(e) => setDifficulty(e.target.value)}
+                        </select>
+
+                    </div>
+
+
+                    {/* DIFFICULTY */}
+
+                    <div className="company-interview-field">
+
+                        <label>
+                            {t("interview.difficulty")}
+                        </label>
+
+                        <select
+                            value={difficulty}
+                            onChange={(e) =>
+                                setDifficulty(e.target.value)
+                            }
+                        >
+
+                            <option value="Easy">
+                                {t("interview.easy")}
+                            </option>
+
+                            <option value="Medium">
+                                {t("interview.medium")}
+                            </option>
+
+                            <option value="Hard">
+                                {t("interview.hard")}
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    {/* DURATION */}
+
+                    <div className="company-interview-field">
+
+                        <label>
+                            {t("interview.durationMinutes")}
+                        </label>
+
+                        <select
+                            value={duration}
+                            onChange={(e) =>
+                                setDuration(e.target.value)
+                            }
+                        >
+
+                            <option value="15">
+                                15
+                            </option>
+
+                            <option value="30">
+                                30
+                            </option>
+
+                            <option value="45">
+                                45
+                            </option>
+
+                            <option value="60">
+                                60
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    {/* LANGUAGE */}
+
+                    <div className="company-interview-field">
+
+                        <label>
+                            {t("interview.language")}
+                        </label>
+
+                        <select
+                            value={language}
+                            onChange={(e) =>
+                                setLanguage(e.target.value)
+                            }
+                        >
+
+                            <option value="English">
+                                English
+                            </option>
+
+                            <option value="Hindi">
+                                Hindi
+                            </option>
+
+                            <option value="Hinglish">
+                                Hinglish
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    {/* START BUTTON */}
+
+                    <button
+                        className="company-interview-start-btn"
                     >
-
-                        <option>Easy</option>
-                        <option>Medium</option>
-                        <option>Hard</option>
-
-                    </select>
-
-                    <label>Interview Duration</label>
-
-                    <select
-                        value={duration}
-                        onChange={(e) => setDuration(e.target.value)}
-                    >
-
-                        <option>15</option>
-                        <option>30</option>
-                        <option>45</option>
-                        <option>60</option>
-
-                    </select>
-
-                    <label>Language</label>
-
-                    <select
-                        value={language}
-                        onChange={(e) => setLanguage(e.target.value)}
-                    >
-
-                        <option>English</option>
-                        <option>Hindi</option>
-                        <option>Hinglish</option>
-
-                    </select>
-
-                    <button className="start-btn">
 
                         <Play size={20} />
 
-                        Start Company Interview
+                        {t(
+                            "interview.startCompanyInterview"
+                        )}
 
                     </button>
 
@@ -182,9 +296,8 @@ const CompanyInterview = () => {
             </div>
 
         </DashboardLayout>
-
     );
-
 };
+
 
 export default CompanyInterview;

@@ -1,125 +1,254 @@
-.company-page{
+.company-interview-page {
+    min-height: 100vh;
 
-    max-width:850px;
+    padding: 40px 7%;
 
-    margin:auto;
+    background: var(--bg-primary);
 
+    color: var(--text-primary);
 }
 
-.company-page h1{
 
-    display:flex;
+/* ================================
+   BACK BUTTON
+================================ */
 
-    align-items:center;
+.company-interview-back-btn {
+    display: flex;
 
-    gap:12px;
+    align-items: center;
 
-    font-size:2.6rem;
+    gap: 9px;
 
-    margin-bottom:12px;
+    padding: 12px 20px;
 
+    border: none;
+
+    border-radius: 12px;
+
+    background: #2563eb;
+
+    color: white;
+
+    cursor: pointer;
+
+    margin-bottom: 35px;
+
+    font-weight: 600;
+
+    font-size: 14px;
+
+    transition: 0.3s;
 }
 
-.company-page p{
+.company-interview-back-btn:hover {
+    transform: translateY(-2px);
 
-    color:#64748b;
-
-    margin-bottom:35px;
-
+    box-shadow:
+        0 8px 20px rgba(37, 99, 235, 0.25);
 }
 
-.company-card{
 
-    background:white;
+/* ================================
+   HEADER
+================================ */
 
-    padding:40px;
+.company-interview-header {
+    max-width: 850px;
 
-    border-radius:22px;
-
-    box-shadow:0 12px 40px rgba(0,0,0,.08);
-
+    margin: 0 auto 35px;
 }
 
-.company-card label{
+.company-interview-header h1 {
+    display: flex;
 
-    display:block;
+    align-items: center;
 
-    margin:22px 0 10px;
+    gap: 12px;
 
-    font-weight:700;
+    font-size: 2.6rem;
 
+    margin-bottom: 12px;
+
+    color: var(--text-primary);
 }
 
-.company-card select{
+.company-interview-header h1 svg {
+    color: #2563eb;
 
-    width:100%;
-
-    padding:16px;
-
-    border-radius:14px;
-
-    border:1px solid #dbe2ea;
-
-    font-size:1rem;
-
+    flex-shrink: 0;
 }
 
-.back-btn{
+.company-interview-header p {
+    color: var(--text-secondary);
 
-    display:flex;
+    line-height: 1.7;
 
-    align-items:center;
-
-    gap:8px;
-
-    padding:12px 20px;
-
-    border:none;
-
-    border-radius:12px;
-
-    background:#2563eb;
-
-    color:white;
-
-    cursor:pointer;
-
-    margin-bottom:35px;
-
+    margin: 0;
 }
 
-.start-btn{
 
-    margin-top:35px;
+/* ================================
+   FORM CARD
+================================ */
 
-    width:100%;
+.company-interview-card {
+    width: 100%;
 
-    display:flex;
+    max-width: 850px;
 
-    justify-content:center;
+    margin: 0 auto;
 
-    align-items:center;
+    background: var(--bg-card);
 
-    gap:10px;
+    color: var(--text-primary);
 
-    padding:16px;
+    border: 1px solid var(--border-color);
 
-    border:none;
+    padding: 40px;
 
-    border-radius:15px;
+    border-radius: 22px;
 
-    background:linear-gradient(
-        135deg,
-        #2563eb,
-        #7c3aed
-    );
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.08);
 
-    color:white;
+    display: flex;
 
-    font-size:1rem;
+    flex-direction: column;
 
-    font-weight:700;
+    gap: 0;
+}
 
-    cursor:pointer;
+
+/* ================================
+   FORM FIELD
+================================ */
+
+.company-interview-field {
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    margin-bottom: 22px;
+}
+
+.company-interview-field label {
+    display: block;
+
+    width: 100%;
+
+    margin-bottom: 10px;
+
+    font-weight: 700;
+
+    color: var(--text-primary);
+}
+
+.company-interview-field select {
+    display: block;
+
+    width: 100%;
+
+    min-height: 52px;
+
+    padding: 14px 16px;
+
+    border-radius: 14px;
+
+    border: 1px solid var(--border-color);
+
+    background: var(--input-bg);
+
+    color: var(--text-primary);
+
+    font-size: 1rem;
+
+    outline: none;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition: 0.25s;
+}
+
+.company-interview-field select:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+
+/* ================================
+   START BUTTON
+================================ */
+
+.company-interview-start-btn {
+    width: 100%;
+
+    min-height: 54px;
+
+    margin-top: 12px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 16px;
+
+    border: none;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    color: white;
+
+    font-size: 1rem;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.company-interview-start-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 15px 30px rgba(37, 99, 235, 0.22);
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 700px) {
+
+    .company-interview-page {
+        padding: 25px 20px;
+    }
+
+    .company-interview-header h1 {
+        font-size: 2rem;
+    }
+
+    .company-interview-card {
+        padding: 25px;
+    }
 
 }
