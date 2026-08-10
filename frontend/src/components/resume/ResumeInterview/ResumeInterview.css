@@ -195,3 +195,47 @@ grid-template-columns:1fr;
 }
 
 }
+
+.question-card > div {
+
+    flex: 1;
+
+}
+
+.question-meta {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 8px;
+
+}
+
+.question-meta small {
+
+    padding: 4px 9px;
+
+    border-radius: 999px;
+
+    background: #e0e7ff;
+
+    color: #4338ca;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+}
+
+.resume-interview-btn:disabled {
+
+    opacity: 0.55;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+
+}

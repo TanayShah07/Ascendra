@@ -315,7 +315,6 @@ const translations = {
             dragDrop:
                 "Drag & Drop Resume",
 
-            // Used by ResumeUpload
             dragAndDrop:
                 "Drag & Drop Resume",
 
@@ -331,11 +330,62 @@ const translations = {
             chooseResume:
                 "Choose Resume",
 
-            targetCompany:
+            companyLabel:
                 "Target Company",
+            
+            keywordAnalysisDescription:
+                "Compare your resume skills with the requirements of your selected company and role.",
+
+            keywordMatch:
+                "Keyword Match",
+
+            matchedKeywords:
+                "Matched Keywords",
+
+            noMatchedKeywords:
+                "No matching skills found.",
+
+            noMissingKeywords:
+                "No missing skills detected.",
 
             selectTargetCompany:
                 "Select Target Company",
+
+            targetCompany: {
+
+                google:
+                    "Google",
+
+                microsoft:
+                    "Microsoft",
+
+                amazon:
+                    "Amazon",
+
+                adobe:
+                    "Adobe",
+
+                nvidia:
+                    "NVIDIA",
+
+                oracle:
+                    "Oracle",
+
+                jpMorgan:
+                    "JP Morgan",
+
+                goldmanSachs:
+                    "Goldman Sachs",
+
+                infosys:
+                    "Infosys",
+
+                tcs:
+                    "TCS",
+
+                accenture:
+                    "Accenture"
+            },
 
             targetRole:
                 "Target Role",
@@ -343,22 +393,33 @@ const translations = {
             selectTargetRole:
                 "Select Target Role",
 
+            role: {
+
+                softwareEngineer:
+                    "Software Engineer",
+
+                frontendDeveloper:
+                    "Frontend Developer",
+
+                backendDeveloper:
+                    "Backend Developer",
+
+                fullStackDeveloper:
+                    "Full Stack Developer",
+
+                aiEngineer:
+                    "AI Engineer",
+
+                machineLearningEngineer:
+                    "Machine Learning Engineer",
+
+                dataScientist:
+                    "Data Scientist"
+            },
+
             experienceLevel:
                 "Experience Level",
 
-            fresher:
-                "Fresher",
-
-            intern:
-                "Intern",
-
-            zeroToTwo:
-                "0-2 Years",
-
-            twoToFive:
-                "2-5 Years",
-
-            // Used by ResumeUpload
             experience: {
 
                 fresher:
@@ -377,32 +438,21 @@ const translations = {
             resumeVersion:
                 "Resume Version",
 
-            latestResume:
-                "Latest Resume",
-
-            versionTwo:
-                "Version 2",
-
-            versionOne:
-                "Version 1",
-
-            // Used by ResumeUpload
             version: {
 
                 latest:
                     "Latest Resume",
 
-                versionTwo:
+                two:
                     "Version 2",
 
-                versionOne:
+                one:
                     "Version 1"
             },
 
             analyzeResume:
                 "Analyze Resume",
 
-            // Used by ResumeUpload
             analyzeButton:
                 "Analyze Resume",
 
@@ -425,7 +475,50 @@ const translations = {
                 "AI Suggestions",
 
             resumeInterview:
-                "Resume Interview"
+                "Resume Interview",
+
+            intelligenceReport:
+                "Resume Intelligence Report",
+
+            resumeQuality:
+                "Resume Quality",
+
+            overallQuality:
+                "Overall Quality",
+
+            sectionCompleteness:
+                "Section Completeness",
+
+            impactScore:
+                "Impact Score",
+
+            structureScore:
+                "Structure Score",
+
+            resumeSections:
+                "Resume Sections",
+
+            projectAnalysis:
+                "Project Analysis",
+
+            projectRelevance:
+                "Project Relevance",
+
+            projectStrength:
+                "Project Strength",
+
+            targetMatch:
+                "Target Match",
+
+            company:
+                "Company",
+
+            skillMatch:
+                "Skill Match",
+
+            riskDetector:
+                "Resume Risk Detector"
+
         },
 
         profile: {
@@ -1315,7 +1408,6 @@ forgotPassword: {
             dragDrop:
                 "रिज़्यूमे ड्रैग और ड्रॉप करें",
 
-            // Used by ResumeUpload
             dragAndDrop:
                 "रिज़्यूमे ड्रैग और ड्रॉप करें",
 
@@ -1331,11 +1423,62 @@ forgotPassword: {
             chooseResume:
                 "रिज़्यूमे चुनें",
 
-            targetCompany:
+            keywordAnalysisDescription:
+                "अपने रिज़्यूमे की स्किल्स की तुलना चुनी गई कंपनी और रोल की आवश्यकताओं से करें।",
+
+            keywordMatch:
+                "कीवर्ड मैच",
+
+            matchedKeywords:
+                "मैच किए गए कीवर्ड्स",
+
+            noMatchedKeywords:
+                "कोई मैचिंग स्किल नहीं मिली।",
+
+            noMissingKeywords:
+                "कोई मिसिंग स्किल नहीं मिली।",
+
+            companyLabel:
                 "टारगेट कंपनी",
 
             selectTargetCompany:
                 "टारगेट कंपनी चुनें",
+
+            targetCompany: {
+
+                google:
+                    "Google",
+
+                microsoft:
+                    "Microsoft",
+
+                amazon:
+                    "Amazon",
+
+                adobe:
+                    "Adobe",
+
+                nvidia:
+                    "NVIDIA",
+
+                oracle:
+                    "Oracle",
+
+                jpMorgan:
+                    "JP Morgan",
+
+                goldmanSachs:
+                    "Goldman Sachs",
+
+                infosys:
+                    "Infosys",
+
+                tcs:
+                    "TCS",
+
+                accenture:
+                    "Accenture"
+            },
 
             targetRole:
                 "टारगेट रोल",
@@ -1343,22 +1486,33 @@ forgotPassword: {
             selectTargetRole:
                 "टारगेट रोल चुनें",
 
+            role: {
+
+                softwareEngineer:
+                    "सॉफ्टवेयर इंजीनियर",
+
+                frontendDeveloper:
+                    "फ्रंटएंड डेवलपर",
+
+                backendDeveloper:
+                    "बैकएंड डेवलपर",
+
+                fullStackDeveloper:
+                    "फुल स्टैक डेवलपर",
+
+                aiEngineer:
+                    "AI इंजीनियर",
+
+                machineLearningEngineer:
+                    "मशीन लर्निंग इंजीनियर",
+
+                dataScientist:
+                    "डेटा साइंटिस्ट"
+            },
+
             experienceLevel:
                 "अनुभव स्तर",
 
-            fresher:
-                "फ्रेशर",
-
-            intern:
-                "इंटर्न",
-
-            zeroToTwo:
-                "0-2 वर्ष",
-
-            twoToFive:
-                "2-5 वर्ष",
-
-            // Used by ResumeUpload
             experience: {
 
                 fresher:
@@ -1377,32 +1531,21 @@ forgotPassword: {
             resumeVersion:
                 "रिज़्यूमे वर्ज़न",
 
-            latestResume:
-                "नवीनतम रिज़्यूमे",
-
-            versionTwo:
-                "वर्ज़न 2",
-
-            versionOne:
-                "वर्ज़न 1",
-
-            // Used by ResumeUpload
             version: {
 
                 latest:
                     "नवीनतम रिज़्यूमे",
 
-                versionTwo:
+                two:
                     "वर्ज़न 2",
 
-                versionOne:
+                one:
                     "वर्ज़न 1"
             },
 
             analyzeResume:
                 "रिज़्यूमे का विश्लेषण करें",
 
-            // Used by ResumeUpload
             analyzeButton:
                 "रिज़्यूमे का विश्लेषण करें",
 
@@ -1410,7 +1553,7 @@ forgotPassword: {
                 "AI विश्लेषण के लिए तैयार",
 
             analysisDescription:
-                "अपना रिज़्यूमे अपलोड करें और Analyze Resume पर क्लिक करके प्राप्त करें:",
+                "अपना रिज़्यूमे अपलोड करें और रिज़्यूमे का विश्लेषण करने के लिए Analyze Resume पर क्लिक करें:",
 
             atsScore:
                 "ATS स्कोर",
@@ -1425,7 +1568,49 @@ forgotPassword: {
                 "AI सुझाव",
 
             resumeInterview:
-                "रिज़्यूमे इंटरव्यू"
+                "रिज़्यूमे इंटरव्यू",
+
+            intelligenceReport:
+                "रिज़्यूमे इंटेलिजेंस रिपोर्ट",
+
+            resumeQuality:
+                "रिज़्यूमे गुणवत्ता",
+
+            overallQuality:
+                "कुल गुणवत्ता",
+
+            sectionCompleteness:
+                "सेक्शन पूर्णता",
+
+            impactScore:
+                "इम्पैक्ट स्कोर",
+
+            structureScore:
+                "स्ट्रक्चर स्कोर",
+
+            resumeSections:
+                "रिज़्यूमे सेक्शन",
+
+            projectAnalysis:
+                "प्रोजेक्ट विश्लेषण",
+
+            projectRelevance:
+                "प्रोजेक्ट प्रासंगिकता",
+
+            projectStrength:
+                "प्रोजेक्ट स्ट्रेंथ",
+
+            targetMatch:
+                "टारगेट मैच",
+
+            company:
+                "कंपनी",
+
+            skillMatch:
+                "स्किल मैच",
+
+            riskDetector:
+                "रिज़्यूमे रिस्क डिटेक्टर"
         },
 
         profile: {

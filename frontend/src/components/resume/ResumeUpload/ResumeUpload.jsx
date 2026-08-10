@@ -1,5 +1,7 @@
 import "./ResumeUpload.css";
+
 import { useState } from "react";
+
 import {
     UploadCloud,
     Building2,
@@ -11,24 +13,73 @@ import {
 
 import { useLanguage } from "../../../context/LanguageContext";
 
+
 const ResumeUpload = ({ onAnalyze }) => {
 
+    const [file, setFile] = useState(null);
     const [fileName, setFileName] = useState("");
+
+    const [targetCompany, setTargetCompany] = useState("");
+    const [targetRole, setTargetRole] = useState("");
+    const [experienceLevel, setExperienceLevel] = useState("Fresher");
+
     const { t } = useLanguage();
+
 
     const handleFile = (e) => {
 
-        if (e.target.files.length > 0) {
+        if (
+            e.target.files &&
+            e.target.files.length > 0
+        ) {
 
-            setFileName(e.target.files[0].name);
+            const selectedFile =
+                e.target.files[0];
+
+            setFile(selectedFile);
+
+            setFileName(
+                selectedFile.name
+            );
 
         }
 
     };
 
+
+    const handleAnalyze = () => {
+
+        if (!file) {
+            return;
+        }
+
+        if (!targetCompany) {
+            return;
+        }
+
+        if (!targetRole) {
+            return;
+        }
+
+        onAnalyze({
+
+            file,
+
+            targetCompany,
+
+            targetRole,
+
+            experienceLevel
+
+        });
+
+    };
+
+
     return (
 
         <div className="resume-upload-card">
+
 
             <div className="upload-header">
 
@@ -37,36 +88,32 @@ const ResumeUpload = ({ onAnalyze }) => {
                 <div>
 
                     <h2>
-
                         {t("resume.title")}
-
                     </h2>
 
                     <p>
-
                         {t("resume.description")}
-
                     </p>
 
                 </div>
 
             </div>
 
+
+            {/* UPLOAD */}
+
             <div className="upload-box">
 
                 <UploadCloud size={60} />
 
                 <h3>
-
-                    {t("resume.dragAndDrop")}
-
+                    {t("resume.dragDrop")}
                 </h3>
 
                 <p>
-
-                    {t("resume.fileTypes")} • {t("resume.maxSize")}
-
+                    {t("resume.fileFormat")}
                 </p>
+
 
                 <label className="upload-btn">
 
@@ -74,32 +121,35 @@ const ResumeUpload = ({ onAnalyze }) => {
 
                     <input
                         type="file"
-                        accept=".pdf,.doc,.docx"
+                        accept=".pdf,.docx"
                         hidden
                         onChange={handleFile}
                     />
 
                 </label>
 
-                {
 
-                    fileName && (
+                {fileName && (
 
-                        <span className="selected-file">
+                    <span className="selected-file">
 
-                            <FileText size={18} />
+                        <FileText size={18} />
 
-                            {fileName}
+                        {fileName}
 
-                        </span>
+                    </span>
 
-                    )
-
-                }
+                )}
 
             </div>
 
+
+            {/* TARGET FORM */}
+
             <div className="resume-form">
+
+
+                {/* COMPANY */}
 
                 <div>
 
@@ -107,33 +157,83 @@ const ResumeUpload = ({ onAnalyze }) => {
 
                         <Building2 size={18} />
 
-                        {t("resume.targetCompany")}
+                        {t("resume.companyLabel")}
 
                     </label>
 
-                    <select defaultValue="">
 
-                        <option value="" disabled>
+                    <select
 
-                            {t("resume.selectTargetCompany")}
+                        value={targetCompany}
 
+                        onChange={(e) =>
+                            setTargetCompany(
+                                e.target.value
+                            )
+                        }
+
+                    >
+
+                        <option
+                            value=""
+                            disabled
+                        >
+                            {t(
+                                "resume.selectTargetCompany"
+                            )}
                         </option>
 
-                        <option>{t("resume.targetCompany.google")}</option>
-                        <option>{t("resume.targetCompany.microsoft")}</option>
-                        <option>{t("resume.targetCompany.amazon")}</option>
-                        <option>{t("resume.targetCompany.adobe")}</option>
-                        <option>{t("resume.targetCompany.nvidia")}</option>
-                        <option>{t("resume.targetCompany.oracle")}</option>
-                        <option>{t("resume.targetCompany.jpMorgan")}</option>
-                        <option>{t("resume.targetCompany.goldmanSachs")}</option>
-                        <option>{t("resume.targetCompany.infosys")}</option>
-                        <option>{t("resume.targetCompany.tcs")}</option>
-                        <option>{t("resume.targetCompany.accenture")}</option>
+
+                        <option value="Google">
+                            Google
+                        </option>
+
+                        <option value="Microsoft">
+                            Microsoft
+                        </option>
+
+                        <option value="Amazon">
+                            Amazon
+                        </option>
+
+                        <option value="Adobe">
+                            Adobe
+                        </option>
+
+                        <option value="NVIDIA">
+                            NVIDIA
+                        </option>
+
+                        <option value="Oracle">
+                            Oracle
+                        </option>
+
+                        <option value="JP Morgan">
+                            JP Morgan
+                        </option>
+
+                        <option value="Goldman Sachs">
+                            Goldman Sachs
+                        </option>
+
+                        <option value="Infosys">
+                            Infosys
+                        </option>
+
+                        <option value="TCS">
+                            TCS
+                        </option>
+
+                        <option value="Accenture">
+                            Accenture
+                        </option>
 
                     </select>
 
                 </div>
+
+
+                {/* ROLE */}
 
                 <div>
 
@@ -145,25 +245,63 @@ const ResumeUpload = ({ onAnalyze }) => {
 
                     </label>
 
-                    <select defaultValue="">
 
-                        <option value="" disabled>
+                    <select
 
-                            {t("resume.selectTargetRole")}
+                        value={targetRole}
 
+                        onChange={(e) =>
+                            setTargetRole(
+                                e.target.value
+                            )
+                        }
+
+                    >
+
+                        <option
+                            value=""
+                            disabled
+                        >
+                            {t(
+                                "resume.selectTargetRole"
+                            )}
                         </option>
 
-                        <option>{t("resume.role.softwareEngineer")}</option>
-                        <option>{t("resume.role.frontendDeveloper")}</option>
-                        <option>{t("resume.role.backendDeveloper")}</option>
-                        <option>{t("resume.role.fullStackDeveloper")}</option>
-                        <option>{t("resume.role.aiEngineer")}</option>
-                        <option>{t("resume.role.machineLearningEngineer")}</option>
-                        <option>{t("resume.role.dataScientist")}</option>
+
+                        <option value="Software Engineer">
+                            Software Engineer
+                        </option>
+
+                        <option value="Frontend Developer">
+                            Frontend Developer
+                        </option>
+
+                        <option value="Backend Developer">
+                            Backend Developer
+                        </option>
+
+                        <option value="Full Stack Developer">
+                            Full Stack Developer
+                        </option>
+
+                        <option value="AI Engineer">
+                            AI Engineer
+                        </option>
+
+                        <option value="Machine Learning Engineer">
+                            Machine Learning Engineer
+                        </option>
+
+                        <option value="Data Scientist">
+                            Data Scientist
+                        </option>
 
                     </select>
 
                 </div>
+
+
+                {/* EXPERIENCE */}
 
                 <div>
 
@@ -171,34 +309,86 @@ const ResumeUpload = ({ onAnalyze }) => {
 
                         <GraduationCap size={18} />
 
-                        {t("resume.experienceLevel")}
+                        {t(
+                            "resume.experienceLevel"
+                        )}
 
                     </label>
 
-                    <select>
 
-                        <option>{t("resume.experience.fresher")}</option>
-                        <option>{t("resume.experience.intern")}</option>
-                        <option>{t("resume.experience.0-2-years")}</option>
-                        <option>{t("resume.experience.2-5-years")}</option>
+                    <select
+
+                        value={experienceLevel}
+
+                        onChange={(e) =>
+                            setExperienceLevel(
+                                e.target.value
+                            )
+                        }
+
+                    >
+
+                        <option value="Fresher">
+                            {t(
+                                "resume.experience.fresher"
+                            )}
+                        </option>
+
+                        <option value="Intern">
+                            {t(
+                                "resume.experience.intern"
+                            )}
+                        </option>
+
+                        <option value="0-2 Years">
+                            {t(
+                                "resume.experience.0-2-years"
+                            )}
+                        </option>
+
+                        <option value="2-5 Years">
+                            {t(
+                                "resume.experience.2-5-years"
+                            )}
+                        </option>
 
                     </select>
 
                 </div>
 
+
+                {/* VERSION */}
+
                 <div>
 
                     <label>
 
-                        {t("resume.resumeVersion")}
+                        {t(
+                            "resume.resumeVersion"
+                        )}
 
                     </label>
 
+
                     <select>
 
-                        <option>{t("resume.version.latest")}</option>
-                        <option>{t("resume.version.2")}</option>
-                        <option>{t("resume.version.1")}</option>
+                        <option>
+                            {t(
+                                "resume.version.latest"
+                            )}
+                        </option>
+
+                        <option>
+                            {t(
+                                "resume.version.2"
+                            )}
+                        </option>
+
+                        <option>
+                            {t(
+                                "resume.version.1"
+                            )}
+                        </option>
 
                     </select>
 
@@ -206,19 +396,37 @@ const ResumeUpload = ({ onAnalyze }) => {
 
             </div>
 
+
+            {/* ANALYZE */}
+
             <button
+
                 className="analyze-btn"
-                onClick={onAnalyze}
+
+                onClick={handleAnalyze}
+
+                disabled={
+                    !file ||
+                    !targetCompany ||
+                    !targetRole
+                }
+
             >
 
-                {t("resume.analyzeButton")}
+                <Sparkles size={18} />
+
+                {t(
+                    "resume.analyzeResume"
+                )}
 
             </button>
+
 
         </div>
 
     );
 
 };
+
 
 export default ResumeUpload;

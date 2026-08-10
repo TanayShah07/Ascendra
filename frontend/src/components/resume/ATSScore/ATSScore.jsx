@@ -1,4 +1,5 @@
 import "./ATSScore.css";
+
 import {
     FileCheck,
     TrendingUp,
@@ -7,17 +8,87 @@ import {
     CircleCheckBig
 } from "lucide-react";
 
-const ATSScore = () => {
+import { useLanguage } from "../../../context/LanguageContext";
+
+
+const ATSScore = ({
+    atsAnalysis,
+    targetAnalysis
+}) => {
+
+    const { t } = useLanguage();
+
+
+    if (!atsAnalysis) {
+        return null;
+    }
+
+
+    const score =
+        atsAnalysis.score || 0;
+
+
+    const skillMatch =
+        atsAnalysis.skill_match_percentage || 0;
+
+
+    const company =
+        targetAnalysis?.target_company ||
+        "Target Company";
+
+
+    const role =
+        targetAnalysis?.target_role ||
+        "Target Role";
+
+
+    const circumference = 452;
+
+
+    const strokeOffset =
+        circumference -
+        (
+            score /
+            100
+        ) *
+        circumference;
+
+
+    const getVerdictText = () => {
+
+        if (score >= 85) {
+            return "Resume Ready for Applications";
+        }
+
+        if (score >= 70) {
+            return "Good Resume — Some Improvements Recommended";
+        }
+
+        if (score >= 50) {
+            return "Resume Needs Improvement";
+        }
+
+        return "Resume Needs Major Improvement";
+
+    };
+
 
     return (
 
         <div className="ats-container">
 
+
+            {/* MAIN SCORE */}
+
             <div className="ats-main-card">
+
 
                 <div className="ats-circle">
 
-                    <svg width="180" height="180">
+                    <svg
+                        width="180"
+                        height="180"
+                    >
 
                         <circle
                             cx="90"
@@ -26,49 +97,63 @@ const ATSScore = () => {
                             className="bg-circle"
                         />
 
+
                         <circle
                             cx="90"
                             cy="90"
                             r="72"
                             className="progress-circle"
-                            strokeDasharray="452"
-                            strokeDashoffset="49"
+                            strokeDasharray={
+                                circumference
+                            }
+                            strokeDashoffset={
+                                strokeOffset
+                            }
                         />
 
                     </svg>
 
+
                     <div className="score-text">
 
-                        <h1>89</h1>
+                        <h1>
+                            {score}
+                        </h1>
 
-                        <span>/100</span>
+                        <span>
+                            /100
+                        </span>
 
                     </div>
 
                 </div>
+
 
                 <div className="score-info">
 
                     <h2>
 
-                        <FileCheck size={24}/>
+                        <FileCheck size={24} />
 
-                        ATS Score
+                        {t("resume.atsScore")}
 
                     </h2>
 
+
                     <p>
 
-                        Excellent! Your resume passes most Applicant Tracking
-                        Systems and is highly recruiter friendly.
+                        {atsAnalysis.message}
 
                     </p>
 
+
                     <div className="verdict">
 
-                        <CircleCheckBig size={18}/>
+                        <CircleCheckBig
+                            size={18}
+                        />
 
-                        Resume Ready for Applications
+                        {getVerdictText()}
 
                     </div>
 
@@ -76,44 +161,82 @@ const ATSScore = () => {
 
             </div>
 
+
+            {/* ATS STATS */}
+
             <div className="ats-stats">
 
+
+                {/* SKILL MATCH */}
+
                 <div className="ats-card">
 
-                    <TrendingUp size={32}/>
+                    <TrendingUp size={32} />
 
-                    <h3>Recruiter Readiness</h3>
+                    <h3>
 
-                    <span>92%</span>
+                        Target Skill Match
+
+                    </h3>
+
+                    <span>
+
+                        {skillMatch}%
+
+                    </span>
 
                 </div>
 
+
+                {/* COMPANY MATCH */}
+
                 <div className="ats-card">
 
-                    <Building2 size={32}/>
+                    <Building2 size={32} />
 
-                    <h3>Company Match</h3>
+                    <h3>
 
-                    <span>Google • 87%</span>
+                        Company Match
+
+                    </h3>
+
+                    <span>
+
+                        {company}
+
+                    </span>
 
                 </div>
 
+
+                {/* ROLE MATCH */}
+
                 <div className="ats-card">
 
-                    <BadgeCheck size={32}/>
+                    <BadgeCheck size={32} />
 
-                    <h3>AI Confidence</h3>
+                    <h3>
 
-                    <span>High</span>
+                        Target Role
+
+                    </h3>
+
+                    <span>
+
+                        {role}
+
+                    </span>
 
                 </div>
 
             </div>
+
 
         </div>
 
     );
 
 };
+
 
 export default ATSScore;

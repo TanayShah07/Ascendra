@@ -1,4 +1,5 @@
 import "./ResumeInterview.css";
+
 import {
     Brain,
     Play,
@@ -8,27 +9,23 @@ import {
     FileQuestion
 } from "lucide-react";
 
-const questions = [
+import { useLanguage } from "../../../context/LanguageContext";
 
-    "Tell me about yourself based on your resume.",
 
-    "Explain your Ascendra project in detail.",
+const ResumeInterview = ({
+    questions = []
+}) => {
 
-    "Why did you choose React over Angular?",
+    const { t } = useLanguage();
 
-    "What challenges did you face while building FaceSense?",
-
-    "Explain JWT Authentication.",
-
-    "Which project are you most proud of and why?"
-
-];
-
-const ResumeInterview = () => {
 
     return (
 
         <div className="resume-interview">
+
+            {/* ============================================
+                HEADER
+            ============================================ */}
 
             <div className="resume-interview-header">
 
@@ -37,47 +34,90 @@ const ResumeInterview = () => {
                 <div>
 
                     <h2>
-
-                        Resume Based Interview
-
+                        {t("resume.resumeInterview")}
                     </h2>
 
                     <p>
-
-                        AI generates interview questions directly from your uploaded resume.
-
+                        AI-generated interview questions
+                        based on your actual resume and
+                        selected career target.
                     </p>
 
                 </div>
 
             </div>
 
+
+            {/* ============================================
+                QUESTIONS
+            ============================================ */}
+
             <div className="question-preview">
 
-                {
+                {questions.length > 0 ? (
 
-                    questions.map((question,index)=>(
+                    questions.map(
+                        (item, index) => (
 
-                        <div
-                            key={index}
-                            className="question-card"
-                        >
+                            <div
+                                key={index}
+                                className="question-card"
+                            >
 
-                            <MessageSquare size={20}/>
+                                <MessageSquare
+                                    size={20}
+                                />
 
-                            <span>
+                                <div>
 
-                                {question}
+                                    <span>
+                                        {item.question}
+                                    </span>
 
-                            </span>
+                                    <div
+                                        className="question-meta"
+                                    >
 
-                        </div>
+                                        <small>
+                                            {item.type}
+                                        </small>
 
-                    ))
+                                        <small>
+                                            {item.difficulty}
+                                        </small>
 
-                }
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        )
+                    )
+
+                ) : (
+
+                    <div className="question-card">
+
+                        <MessageSquare
+                            size={20}
+                        />
+
+                        <span>
+                            No resume-based interview
+                            questions generated yet.
+                        </span>
+
+                    </div>
+
+                )}
 
             </div>
+
+
+            {/* ============================================
+                FEATURES
+            ============================================ */}
 
             <div className="resume-interview-info">
 
@@ -88,20 +128,19 @@ const ResumeInterview = () => {
                     <div>
 
                         <h3>
-
                             AI Generated Questions
-
                         </h3>
 
                         <p>
-
-                            Every interview is personalized according to your resume.
-
+                            Questions are generated from
+                            your actual resume, skills,
+                            projects and target role.
                         </p>
 
                     </div>
 
                 </div>
+
 
                 <div className="feature">
 
@@ -110,15 +149,14 @@ const ResumeInterview = () => {
                     <div>
 
                         <h3>
-
-                            Dynamic Follow-Up Questions
-
+                            Resume-Based Follow-Ups
                         </h3>
 
                         <p>
-
-                            AI asks deeper questions depending on your responses.
-
+                            Questions include technical
+                            project deep-dives, role fit,
+                            company fit and experience-level
+                            challenges.
                         </p>
 
                     </div>
@@ -127,7 +165,15 @@ const ResumeInterview = () => {
 
             </div>
 
-            <button className="resume-interview-btn">
+
+            {/* ============================================
+                START BUTTON
+            ============================================ */}
+
+            <button
+                className="resume-interview-btn"
+                disabled={questions.length === 0}
+            >
 
                 <Play size={20}/>
 
@@ -142,5 +188,6 @@ const ResumeInterview = () => {
     );
 
 };
+
 
 export default ResumeInterview;

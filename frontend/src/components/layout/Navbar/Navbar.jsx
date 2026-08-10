@@ -81,7 +81,7 @@ const Navbar = () => {
                 <Link to="/">
 
                     <img
-                        src="/logo/logo-without-tagline.png"
+                        src="/logo/logo-white.png"
                         alt="Ascendra"
                         className="logo"
                     />
