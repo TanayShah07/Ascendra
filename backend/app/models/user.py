@@ -58,6 +58,11 @@ class User(Base):
 
     streak = Column(Integer, default=0)
 
+    last_streak_at = Column(
+        DateTime(timezone=True),
+        nullable=True
+    )
+
     # ---------- Resume ----------
 
     resume_url = Column(String(500))

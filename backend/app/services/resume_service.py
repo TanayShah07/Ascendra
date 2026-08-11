@@ -4,6 +4,11 @@ import re
 from pypdf import PdfReader
 from docx import Document
 
+from app.services.resume_nlp_service import (
+    extract_resume_entities,
+    analyze_resume_with_nlp
+)
+
 
 # =========================================================
 # PDF EXTRACTION
@@ -277,6 +282,161 @@ def parse_resume(text: str) -> dict:
         "raw_text": text
 
     }
+
+def parse_resume(text: str) -> dict:
+
+    parsed_resume = {
+
+        "contact": {
+
+            "email":
+                extract_email(text),
+
+            "phone":
+                extract_phone(text)
+
+        },
+
+        "sections": {
+
+            "summary":
+                find_section(
+                    text,
+                    [
+                        "summary",
+                        "professional summary",
+                        "profile",
+                        "objective"
+                    ]
+                ),
+
+            "skills":
+                find_section(
+                    text,
+                    [
+                        "skills",
+                        "technical skills",
+                        "technical skill",
+                        "key skills"
+                    ]
+                ),
+
+            "education":
+                find_section(
+                    text,
+                    [
+                        "education",
+                        "academic background",
+                        "educational background"
+                    ]
+                ),
+
+            "experience":
+                find_section(
+                    text,
+                    [
+                        "experience",
+                        "work experience",
+                        "professional experience",
+                        "internship",
+                        "internships"
+                    ]
+                ),
+
+            "projects":
+                find_section(
+                    text,
+                    [
+                        "projects",
+                        "academic projects",
+                        "personal projects"
+                    ]
+                ),
+
+            "certifications":
+                find_section(
+                    text,
+                    [
+                        "certifications",
+                        "certificates"
+                    ]
+                ),
+
+            "achievements":
+                find_section(
+                    text,
+                    [
+                        "achievements",
+                        "accomplishments"
+                    ]
+                )
+
+        },
+
+        "raw_text":
+            text
+
+    }
+
+    # =====================================================
+    # ADVANCED NLP / NER
+    # =====================================================
+
+    nlp_entities = extract_resume_entities(
+        text
+    )
+
+    print("\n================ NLP ENTITIES ================\n")
+
+    print("SKILLS:")
+    print(nlp_entities["skills"])
+
+    print("\nROLES:")
+    print(nlp_entities["roles"])
+
+    print("\nDEGREES:")
+    print(nlp_entities["degrees"])
+
+    print("\nORGANIZATIONS:")
+    print(nlp_entities["organizations"])
+
+    print("\nPEOPLE:")
+    print(nlp_entities["people"])
+
+    print("\nDATES:")
+    print(nlp_entities["dates"])
+
+    print("\nALL ENTITIES:")
+    print(nlp_entities["entities"])
+
+    print("\n===============================================\n")
+
+    parsed_resume["nlp"] = {
+
+        "entities":
+            nlp_entities["entities"],
+
+        "skills":
+            nlp_entities["skills"],
+
+        "roles":
+            nlp_entities["roles"],
+
+        "degrees":
+            nlp_entities["degrees"],
+
+        "organizations":
+            nlp_entities["organizations"],
+
+        "people":
+            nlp_entities["people"],
+
+        "dates":
+            nlp_entities["dates"]
+
+    }
+
+    return parsed_resume
 
 
 # =========================================================
@@ -635,27 +795,28 @@ def analyze_resume_target(
         {}
     )
 
-    resume_text = " ".join([
+    # =====================================================
+    # BUILD RESUME TEXT
+    # =====================================================
 
-        sections.get("summary", ""),
-
-        sections.get("skills", ""),
-
-        sections.get("education", ""),
-
-        sections.get("experience", ""),
-
-        sections.get("projects", ""),
-
-        sections.get("certifications", ""),
-
-        sections.get("achievements", "")
-
-    ])
-
-    normalized_resume = normalize_text(
-        resume_text
+    resume_text = " ".join(
+        filter(
+            None,
+            [
+                sections.get("summary", ""),
+                sections.get("skills", ""),
+                sections.get("education", ""),
+                sections.get("experience", ""),
+                sections.get("projects", ""),
+                sections.get("certifications", ""),
+                sections.get("achievements", "")
+            ]
+        )
     )
+
+    # =====================================================
+    # TARGET SKILLS
+    # =====================================================
 
     role_skills = ROLE_SKILLS.get(
         target_role,
@@ -673,8 +834,17 @@ def analyze_resume_target(
         )
     )
 
-    matched_skills = []
-    missing_skills = []
+    # =====================================================
+    # EXACT MATCHING
+    # =====================================================
+
+    normalized_resume = normalize_text(
+        resume_text
+    )
+
+    exact_matched = []
+
+    exact_missing = []
 
     for skill in required_skills:
 
@@ -684,24 +854,212 @@ def analyze_resume_target(
 
         if normalized_skill in normalized_resume:
 
-            matched_skills.append(skill)
+            exact_matched.append(
+                skill
+            )
 
         else:
 
-            missing_skills.append(skill)
+            exact_missing.append(
+                skill
+            )
+
+    # =====================================================
+    # NER MATCHING
+    # =====================================================
+
+    nlp_data = parsed_resume.get(
+        "nlp",
+        {}
+    )
+
+    detected_skills = nlp_data.get(
+        "skills",
+        []
+    )
+
+    normalized_detected_skills = {
+
+        normalize_text(skill)
+
+        for skill in detected_skills
+
+    }
+
+    ner_matched = []
+
+    for skill in required_skills:
+
+        if normalize_text(skill) in normalized_detected_skills:
+
+            ner_matched.append(
+                skill
+            )
+
+    # =====================================================
+    # SEMANTIC MATCHING
+    # =====================================================
+
+    semantic_result = analyze_resume_with_nlp(
+
+        resume_text,
+
+        required_skills
+
+    )
+
+    semantic_data = semantic_result.get(
+        "semantic_matching",
+        {}
+    )
+
+    semantic_matched = semantic_data.get(
+        "matched",
+        []
+    )
+
+    semantic_scores = semantic_data.get(
+        "scores",
+        {}
+    )
+
+    semantic_evidence = semantic_data.get(
+        "evidence",
+        {}
+    )
+
+    # =====================================================
+    # HYBRID MATCHING
+    # =====================================================
+
+    matched_skills = []
+
+    missing_skills = []
+
+    skill_scores = {}
+
+    match_methods = {}
+
+    for skill in required_skills:
+
+        exact_match = (
+            skill in exact_matched
+        )
+
+        ner_match = (
+            skill in ner_matched
+        )
+
+        semantic_match = (
+            skill in semantic_matched
+        )
+
+        semantic_score = semantic_scores.get(
+            skill,
+            0
+        )
+
+        # -------------------------------------------------
+        # HYBRID CONFIDENCE
+        # -------------------------------------------------
+
+        confidence = 0
+
+        if exact_match:
+
+            confidence += 50
+
+        if ner_match:
+
+            confidence += 30
+
+        if semantic_match:
+
+            confidence += 20
+
+        # Strong semantic evidence can independently
+        # support a match.
+
+        if semantic_score >= 70:
+
+            confidence = max(
+                confidence,
+                round(semantic_score)
+            )
+
+        confidence = min(
+            confidence,
+            100
+        )
+
+        skill_scores[skill] = confidence
+
+        # -------------------------------------------------
+        # MATCH METHODS
+        # -------------------------------------------------
+
+        methods = []
+
+        if exact_match:
+
+            methods.append(
+                "exact"
+            )
+
+        if ner_match:
+
+            methods.append(
+                "ner"
+            )
+
+        if semantic_match:
+
+            methods.append(
+                "semantic"
+            )
+
+        match_methods[skill] = methods
+
+        # -------------------------------------------------
+        # FINAL DECISION
+        # -------------------------------------------------
+
+        if confidence >= 50:
+
+            matched_skills.append(
+                skill
+            )
+
+        else:
+
+            missing_skills.append(
+                skill
+            )
+
+    # =====================================================
+    # FINAL KEYWORD MATCH
+    # =====================================================
 
     if required_skills:
 
-        skill_match_percentage = round(
+        keyword_match = round(
+
             (
                 len(matched_skills)
-                / len(required_skills)
-            ) * 100
+                /
+                len(required_skills)
+            )
+            * 100
+
         )
 
     else:
 
-        skill_match_percentage = 0
+        keyword_match = 0
+
+    # =====================================================
+    # EXPERIENCE RECOMMENDATIONS
+    # =====================================================
 
     recommendations = (
         EXPERIENCE_RECOMMENDATIONS.get(
@@ -709,6 +1067,10 @@ def analyze_resume_target(
             []
         )
     )
+
+    # =====================================================
+    # RETURN
+    # =====================================================
 
     return {
 
@@ -721,14 +1083,12 @@ def analyze_resume_target(
         "experience_level":
             experience_level,
 
+        # Main frontend-compatible fields
+        "keyword_match":
+            keyword_match,
+
         "skill_match_percentage":
-            skill_match_percentage,
-
-        "matched_skills":
-            matched_skills,
-
-        "missing_skills":
-            missing_skills,
+            keyword_match,
 
         "matched_keywords":
             matched_skills,
@@ -736,12 +1096,35 @@ def analyze_resume_target(
         "missing_keywords":
             missing_skills,
 
-        "keyword_match":
-            skill_match_percentage,
+        "matched_skills":
+            matched_skills,
 
-        "experience_recommendations":
-            recommendations,
+        "missing_skills":
+            missing_skills,
 
+        # Detailed NLP information
+        "skill_scores":
+            skill_scores,
+
+        "match_methods":
+            match_methods,
+
+        "exact_matches":
+            exact_matched,
+
+        "ner_matches":
+            ner_matched,
+
+        "semantic_matches":
+            semantic_matched,
+
+        "semantic_scores":
+            semantic_scores,
+
+        "semantic_evidence":
+            semantic_evidence,
+
+        # Statistics
         "total_required_skills":
             len(required_skills),
 
@@ -749,10 +1132,12 @@ def analyze_resume_target(
             len(matched_skills),
 
         "missing_skill_count":
-            len(missing_skills)
+            len(missing_skills),
+
+        "experience_recommendations":
+            recommendations
 
     }
-
 
 # =========================================================
 # MISSING KEYWORD ANALYSIS

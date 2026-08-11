@@ -6,22 +6,302 @@ import {
     Palette,
     Languages,
     LockKeyhole,
-    Bell,
     Target,
     ShieldCheck,
-    LogOut
+    LogOut,
+    Download
 } from "lucide-react";
+
+import { useState } from "react";
+
+import toast from "react-hot-toast";
 
 import { useAuth } from "../../context/AuthContext";
 import { useTheme } from "../../context/ThemeContext";
 import { useLanguage } from "../../context/LanguageContext";
+
+import {
+    changePassword,
+    exportUserData
+} from "../../services/authService";
+
 const Settings = () => {
 
     const { logout } = useAuth();
 
     const { theme, changeTheme } = useTheme();
 
-    const { language, changeLanguage, t } = useLanguage();
+    const {
+        language,
+        changeLanguage,
+        t
+    } = useLanguage();
+
+    const [
+        exportLoading,
+        setExportLoading
+    ] = useState(false);
+
+    // =====================================================
+    // CHANGE PASSWORD STATE
+    // =====================================================
+
+    const [
+        showPasswordForm,
+        setShowPasswordForm
+    ] = useState(false);
+
+    const [
+        currentPassword,
+        setCurrentPassword
+    ] = useState("");
+
+    const [
+        newPassword,
+        setNewPassword
+    ] = useState("");
+
+    const [
+        confirmPassword,
+        setConfirmPassword
+    ] = useState("");
+
+    const [
+        passwordLoading,
+        setPasswordLoading
+    ] = useState(false);
+
+    // =====================================================
+    // PREPARATION PREFERENCES
+    // =====================================================
+
+    const [
+        dailyGoal,
+        setDailyGoal
+    ] = useState(
+        () =>
+            localStorage.getItem(
+                "ascendra_daily_goal"
+            ) || "1"
+    );
+
+    const [
+        difficulty,
+        setDifficulty
+    ] = useState(
+        () =>
+            localStorage.getItem(
+                "ascendra_difficulty"
+            ) || "medium"
+    );
+
+    // =====================================================
+    // CHANGE PASSWORD
+    // =====================================================
+
+    const handleChangePassword = async (e) => {
+
+        e.preventDefault();
+
+        if (!currentPassword) {
+
+            toast.error(
+                t("settings.currentPasswordRequired")
+            );
+
+            return;
+
+        }
+
+        if (!newPassword) {
+
+            toast.error(
+                t("settings.newPasswordRequired")
+            );
+
+            return;
+
+        }
+
+        if (newPassword.length < 8) {
+
+            toast.error(
+                t("settings.passwordLength")
+            );
+
+            return;
+
+        }
+
+        if (
+            newPassword !==
+            confirmPassword
+        ) {
+
+            toast.error(
+                t("settings.passwordMismatch")
+            );
+
+            return;
+
+        }
+
+        if (
+            currentPassword ===
+            newPassword
+        ) {
+
+            toast.error(
+                t("settings.newPasswordDifferent")
+            );
+
+            return;
+
+        }
+
+        setPasswordLoading(true);
+
+        try {
+
+            await changePassword({
+
+                current_password:
+                    currentPassword,
+
+                new_password:
+                    newPassword
+
+            });
+
+            toast.success(
+                t("settings.passwordChanged")
+            );
+
+            setCurrentPassword("");
+
+            setNewPassword("");
+
+            setConfirmPassword("");
+
+            setShowPasswordForm(false);
+
+        }
+
+        catch (error) {
+
+            toast.error(
+
+                error.response?.data?.detail ||
+
+                t(
+                    "settings.passwordChangeFailed"
+                )
+
+            );
+
+        }
+
+        finally {
+
+            setPasswordLoading(false);
+
+        }
+
+    };
+
+    // =====================================================
+    // PREPARATION PREFERENCES
+    // =====================================================
+
+    const handleDailyGoalChange = (value) => {
+
+        setDailyGoal(value);
+
+        localStorage.setItem(
+            "ascendra_daily_goal",
+            value
+        );
+
+    };
+
+    const handleDifficultyChange = (value) => {
+
+        setDifficulty(value);
+
+        localStorage.setItem(
+            "ascendra_difficulty",
+            value
+        );
+
+    };
+
+    // =====================================================
+// EXPORT DATA
+// =====================================================
+
+const handleExportData = async (format) => {
+
+    setExportLoading(true);
+
+    try {
+
+        const response =
+            await exportUserData(format);
+
+        const blob =
+            response.data;
+
+        const url =
+            window.URL.createObjectURL(
+                blob
+            );
+
+        const link =
+            document.createElement("a");
+
+        link.href = url;
+
+        const extension =
+            format === "excel"
+                ? "xlsx"
+                : format;
+
+        link.download =
+            `Ascendra_Data.${extension}`;
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        document.body.removeChild(link);
+
+        window.URL.revokeObjectURL(url);
+
+        toast.success(
+            t("settings.exportSuccess")
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Export error:",
+            error
+        );
+
+        toast.error(
+            t("settings.exportFailed")
+        );
+
+    } finally {
+
+        setExportLoading(false);
+
+    }
+};
+
+    // =====================================================
+    // RENDER
+    // =====================================================
 
     return (
 
@@ -29,14 +309,15 @@ const Settings = () => {
 
             <div className="settings-page">
 
-
                 {/* =================================================
                     HEADER
                 ================================================= */}
 
                 <div className="settings-header">
 
-                    <h1>{t("settings.title")}</h1>
+                    <h1>
+                        {t("settings.title")}
+                    </h1>
 
                     <p>
                         {t("settings.subtitle")}
@@ -61,10 +342,16 @@ const Settings = () => {
 
                         <div>
 
-                            <h2>{t("settings.appearance")}</h2>
+                            <h2>
+                                {t(
+                                    "settings.appearance"
+                                )}
+                            </h2>
 
-                           <p>
-                                {t("settings.appearanceDescription")}
+                            <p>
+                                {t(
+                                    "settings.appearanceDescription"
+                                )}
                             </p>
 
                         </div>
@@ -75,43 +362,67 @@ const Settings = () => {
                     <div className="settings-options">
 
                         <button
+                            type="button"
                             className={
                                 theme === "light"
                                     ? "setting-option active"
                                     : "setting-option"
                             }
-                            onClick={() => changeTheme("light")}
+                            onClick={() =>
+                                changeTheme("light")
+                            }
                         >
 
-                            <span>☀️ {t("settings.light")}</span>
+                            <span>
+                                ☀️{" "}
+                                {t(
+                                    "settings.light"
+                                )}
+                            </span>
 
                         </button>
 
 
                         <button
+                            type="button"
                             className={
                                 theme === "dark"
                                     ? "setting-option active"
                                     : "setting-option"
                             }
-                            onClick={() => changeTheme("dark")}
+                            onClick={() =>
+                                changeTheme("dark")
+                            }
                         >
 
-                            <span>🌙 {t("settings.dark")}</span>
+                            <span>
+                                🌙{" "}
+                                {t(
+                                    "settings.dark"
+                                )}
+                            </span>
 
                         </button>
 
 
                         <button
+                            type="button"
                             className={
                                 theme === "system"
                                     ? "setting-option active"
                                     : "setting-option"
                             }
-                            onClick={() => changeTheme("system")}
+                            onClick={() =>
+                                changeTheme("system")
+                            }
                         >
 
-                            <span>💻 {t("settings.system")}</span>
+                            <span>
+                                💻{" "}
+                                {t(
+                                    "settings.system"
+                                )}
+                            </span>
 
                         </button>
 
@@ -137,11 +448,15 @@ const Settings = () => {
                         <div>
 
                             <h2>
-                                {t("settings.language")}
+                                {t(
+                                    "settings.language"
+                                )}
                             </h2>
 
                             <p>
-                                {t("settings.languageDescription")}
+                                {t(
+                                    "settings.languageDescription"
+                                )}
                             </p>
 
                         </div>
@@ -150,9 +465,12 @@ const Settings = () => {
 
 
                     <select
+                        className="settings-select"
                         value={language}
                         onChange={(e) =>
-                            changeLanguage(e.target.value)
+                            changeLanguage(
+                                e.target.value
+                            )
                         }
                     >
 
@@ -160,92 +478,8 @@ const Settings = () => {
                             🇺🇸 English (US)
                         </option>
 
-                        <option value="en-GB">
-                            🇬🇧 English (UK)
-                        </option>
-
-                        <option value="en-AU">
-                            🇦🇺 English (Australia)
-                        </option>
-
                         <option value="hi">
-                            🇮🇳 Hindi
-                        </option>
-
-                        <option value="gu">
-                            🇮🇳 Gujarati
-                        </option>
-
-                        <option value="kn">
-                            🇮🇳 Kannada
-                        </option>
-
-                        <option value="ml">
-                            🇮🇳 Malayalam
-                        </option>
-
-                        <option value="ta">
-                            🇮🇳 Tamil
-                        </option>
-
-                        <option value="te">
-                            🇮🇳 Telugu
-                        </option>
-
-                        <option value="mr">
-                            🇮🇳 Marathi
-                        </option>
-
-                        <option value="pa">
-                            🇮🇳 Punjabi
-                        </option>
-
-                        <option value="bn">
-                            🇮🇳 Bengali
-                        </option>
-
-                        <option value="ur">
-                            🇵🇰 Urdu
-                        </option>
-
-                        <option value="zh">
-                            🇨🇳 Chinese
-                        </option>
-
-                        <option value="de">
-                            🇩🇪 German
-                        </option>
-
-                        <option value="fr">
-                            🇫🇷 French
-                        </option>
-
-                        <option value="it">
-                            🇮🇹 Italian
-                        </option>
-
-                        <option value="es">
-                            🇪🇸 Spanish
-                        </option>
-
-                        <option value="ko">
-                            🇰🇷 Korean
-                        </option>
-
-                        <option value="ja">
-                            🇯🇵 Japanese
-                        </option>
-
-                        <option value="pl">
-                            🇵🇱 Polish
-                        </option>
-
-                        <option value="ru">
-                            🇷🇺 Russian
-                        </option>
-
-                        <option value="pt">
-                            🇵🇹 Portuguese
+                            🇮🇳 हिन्दी
                         </option>
 
                     </select>
@@ -270,11 +504,15 @@ const Settings = () => {
                         <div>
 
                             <h2>
-                                {t("settings.changePassword")}
+                                {t(
+                                    "settings.changePassword"
+                                )}
                             </h2>
 
                             <p>
-                                {t("settings.changePasswordDescription")}
+                                {t(
+                                    "settings.changePasswordDescription"
+                                )}
                             </p>
 
                         </div>
@@ -282,124 +520,174 @@ const Settings = () => {
                     </div>
 
 
-                    <button className="settings-action-btn">
+                    {!showPasswordForm && (
 
-                        {t("settings.changePassword")}
+                        <button
+                            type="button"
+                            className="settings-action-btn"
+                            onClick={() =>
+                                setShowPasswordForm(
+                                    true
+                                )
+                            }
+                        >
 
-                    </button>
+                            {t(
+                                "settings.changePassword"
+                            )}
 
-                </div>
+                        </button>
 
-
-                {/* =================================================
-                    NOTIFICATIONS
-                ================================================= */}
-
-                <div className="settings-card">
-
-                    <div className="settings-card-header">
-
-                        <div className="settings-icon">
-
-                            <Bell size={22} />
-
-                        </div>
-
-                        <div>
-
-                            <h2>{t("settings.notifications")}</h2>
-
-                            <p>
-                                {t("settings.notificationsDescription")}
-                            </p>
-
-                        </div>
-
-                    </div>
+                    )}
 
 
-                    <div className="notification-row">
+                    {showPasswordForm && (
 
-                        <div>
+                        <form
+                            className="password-form"
+                            onSubmit={
+                                handleChangePassword
+                            }
+                        >
 
-                            <strong>
-                                {t("settings.emailNotifications")}
-                            </strong>
+                            <div className="password-field">
 
-                            <span>
-                                {t("settings.emailNotificationsDescription")}
-                            </span>
+                                <label>
+                                    {t(
+                                        "settings.currentPassword"
+                                    )}
+                                </label>
 
-                        </div>
+                                <input
+                                    type="password"
+                                    value={
+                                        currentPassword
+                                    }
+                                    onChange={(e) =>
+                                        setCurrentPassword(
+                                            e.target.value
+                                        )
+                                    }
+                                    placeholder={t(
+                                        "settings.currentPasswordPlaceholder"
+                                    )}
+                                    autoComplete="current-password"
+                                />
 
-                        <label className="switch">
-
-                            <input
-                                type="checkbox"
-                                defaultChecked
-                            />
-
-                            <span className="slider"></span>
-
-                        </label>
-
-                    </div>
-
-
-                    <div className="notification-row">
-
-                        <div>
-
-                            <strong>
-                                {t("settings.preparationReminders")}
-                            </strong>
-
-                            <span>
-                                {t("settings.preparationRemindersDescription")}
-                            </span>
-
-                        </div>
-
-                        <label className="switch">
-
-                            <input
-                                type="checkbox"
-                                defaultChecked
-                            />
-
-                            <span className="slider"></span>
-
-                        </label>
-
-                    </div>
+                            </div>
 
 
-                    <div className="notification-row">
+                            <div className="password-field">
 
-                        <div>
+                                <label>
+                                    {t(
+                                        "settings.newPassword"
+                                    )}
+                                </label>
 
-                            <strong>
-                                {t("settings.interviewGDReminders")}
-                            </strong>
+                                <input
+                                    type="password"
+                                    value={
+                                        newPassword
+                                    }
+                                    onChange={(e) =>
+                                        setNewPassword(
+                                            e.target.value
+                                        )
+                                    }
+                                    placeholder={t(
+                                        "settings.newPasswordPlaceholder"
+                                    )}
+                                    autoComplete="new-password"
+                                />
 
-                            <span>
-                                {t("settings.interviewGDRemindersDescription")}
-                            </span>
+                            </div>
 
-                        </div>
 
-                        <label className="switch">
+                            <div className="password-field">
 
-                            <input
-                                type="checkbox"
-                                defaultChecked
-                            />
+                                <label>
+                                    {t(
+                                        "settings.confirmPassword"
+                                    )}
+                                </label>
 
-                            <span className="slider"></span>
+                                <input
+                                    type="password"
+                                    value={
+                                        confirmPassword
+                                    }
+                                    onChange={(e) =>
+                                        setConfirmPassword(
+                                            e.target.value
+                                        )
+                                    }
+                                    placeholder={t(
+                                        "settings.confirmPasswordPlaceholder"
+                                    )}
+                                    autoComplete="new-password"
+                                />
 
-                        </label>
+                            </div>
 
-                    </div>
+
+                            <div className="password-actions">
+
+                                <button
+                                    type="submit"
+                                    className="settings-action-btn"
+                                    disabled={
+                                        passwordLoading
+                                    }
+                                >
+
+                                    {passwordLoading
+                                        ? t(
+                                            "settings.changingPassword"
+                                        )
+                                        : t(
+                                            "settings.savePassword"
+                                        )
+                                    }
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    className="secondary-settings-btn"
+                                    onClick={() => {
+
+                                        setShowPasswordForm(
+                                            false
+                                        );
+
+                                        setCurrentPassword(
+                                            ""
+                                        );
+
+                                        setNewPassword(
+                                            ""
+                                        );
+
+                                        setConfirmPassword(
+                                            ""
+                                        );
+
+                                    }}
+                                >
+
+                                    {t(
+                                        "settings.cancel"
+                                    )}
+
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    )}
 
                 </div>
 
@@ -421,11 +709,15 @@ const Settings = () => {
                         <div>
 
                             <h2>
-                                {t("settings.preparationPreferences")}
+                                {t(
+                                    "settings.preparationPreferences"
+                                )}
                             </h2>
 
                             <p>
-                                {t("settings.preparationPreferencesDescription")}
+                                {t(
+                                    "settings.preparationPreferencesDescription"
+                                )}
                             </p>
 
                         </div>
@@ -438,25 +730,42 @@ const Settings = () => {
                         <div className="preference-item">
 
                             <label>
-                                {t("settings.dailyPreparationGoal")}
+                                {t(
+                                    "settings.dailyGoal"
+                                )}
                             </label>
 
-                            <select>
+                            <select
+                                value={dailyGoal}
+                                onChange={(e) =>
+                                    handleDailyGoalChange(
+                                        e.target.value
+                                    )
+                                }
+                            >
 
-                                <option>
-                                    {t("settings.thirtyMinutes")}
+                                <option value="0.5">
+                                    {t(
+                                        "settings.thirtyMinutes"
+                                    )}
                                 </option>
 
-                                <option>
-                                    {t("settings.oneHour")}
+                                <option value="1">
+                                    {t(
+                                        "settings.oneHour"
+                                    )}
                                 </option>
 
-                                <option>
-                                    {t("settings.twoHours")}
+                                <option value="2">
+                                    {t(
+                                        "settings.twoHours"
+                                    )}
                                 </option>
 
-                                <option>
-                                    {t("settings.threePlusHours")}
+                                <option value="3">
+                                    {t(
+                                        "settings.threePlusHours"
+                                    )}
                                 </option>
 
                             </select>
@@ -467,21 +776,36 @@ const Settings = () => {
                         <div className="preference-item">
 
                             <label>
-                                {t("settings.preferredDifficulty")}
+                                {t(
+                                    "settings.difficulty"
+                                )}
                             </label>
 
-                            <select>
+                            <select
+                                value={difficulty}
+                                onChange={(e) =>
+                                    handleDifficultyChange(
+                                        e.target.value
+                                    )
+                                }
+                            >
 
-                                <option>
-                                    {t("settings.easy")}
+                                <option value="easy">
+                                    {t(
+                                        "settings.easy"
+                                    )}
                                 </option>
 
-                                <option>
-                                    {t("settings.medium")}
+                                <option value="medium">
+                                    {t(
+                                        "settings.medium"
+                                    )}
                                 </option>
 
-                                <option>
-                                    {t("settings.hard")}
+                                <option value="hard">
+                                    {t(
+                                        "settings.hard"
+                                    )}
                                 </option>
 
                             </select>
@@ -494,7 +818,7 @@ const Settings = () => {
 
 
                 {/* =================================================
-                    PRIVACY & DATA
+                    PRIVACY
                 ================================================= */}
 
                 <div className="settings-card">
@@ -510,12 +834,15 @@ const Settings = () => {
                         <div>
 
                             <h2>
-                                {t("settings.privacyData")}
+                                {t(
+                                    "settings.privacyData"
+                                )}
                             </h2>
 
                             <p>
-                                {t("settings.privacyDataDescription")}
-
+                                {t(
+                                    "settings.privacyDataDescription"
+                                )}
                             </p>
 
                         </div>
@@ -528,35 +855,72 @@ const Settings = () => {
                         <div>
 
                             <strong>
-                                {t("settings.personalization")}
+                                {t(
+                                    "settings.personalization"
+                                )}
                             </strong>
 
                             <span>
-                                {t("settings.personalizationDescription")}
+                                {t(
+                                    "settings.personalizationDescription"
+                                )}
                             </span>
 
                         </div>
 
-
-                        <label className="switch">
-
-                            <input
-                                type="checkbox"
-                                defaultChecked
-                            />
-
-                            <span className="slider"></span>
-
-                        </label>
-
                     </div>
 
 
-                    <button className="secondary-settings-btn">
+                    <div className="export-actions">
 
-                        {t("settings.exportData")}
+                        <button
+                            type="button"
+                            className="secondary-settings-btn"
+                            disabled={exportLoading}
+                            onClick={() =>
+                                handleExportData("xlsx")
+                            }
+                        >
 
-                    </button>
+                            <Download size={17} />
+
+                            {t("settings.exportExcel")}
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            className="secondary-settings-btn"
+                            disabled={exportLoading}
+                            onClick={() =>
+                                handleExportData("csv")
+                            }
+                        >
+
+                            <Download size={17} />
+
+                            {t("settings.exportCsv")}
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            className="secondary-settings-btn"
+                            disabled={exportLoading}
+                            onClick={() =>
+                                handleExportData("pdf")
+                            }
+                        >
+
+                            <Download size={17} />
+
+                            {t("settings.exportPdf")}
+
+                        </button>
+
+                    </div>
 
                 </div>
 
@@ -578,11 +942,15 @@ const Settings = () => {
                         <div>
 
                             <h2>
-                                {t("settings.logout")}
+                                {t(
+                                    "settings.logout"
+                                )}
                             </h2>
 
                             <p>
-                                {t("settings.logoutDescription")}
+                                {t(
+                                    "settings.logoutDescription"
+                                )}
                             </p>
 
                         </div>
@@ -591,18 +959,20 @@ const Settings = () => {
 
 
                     <button
+                        type="button"
                         className="logout-settings-btn"
                         onClick={logout}
                     >
 
                         <LogOut size={18} />
 
-                        {t("settings.logout")}
+                        {t(
+                            "settings.logout"
+                        )}
 
                     </button>
 
                 </div>
-
 
             </div>
 
@@ -611,6 +981,5 @@ const Settings = () => {
     );
 
 };
-
 
 export default Settings;

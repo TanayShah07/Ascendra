@@ -5,6 +5,7 @@ sqlalchemy
 psycopg2-binary
 
 python-dotenv
+
 python-jose[cryptography]
 passlib[bcrypt]
 
@@ -12,5 +13,10 @@ pydantic
 pydantic-settings
 
 python-multipart
-
 email-validator
+
+pypdf
+python-docx
+
+spacy
+sentence-transformers

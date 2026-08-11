@@ -25,6 +25,18 @@ from app.config.settings import settings
 
 from app.services.email_service import send_otp_email
 
+from app.services.gamification_service import (
+    add_xp,
+    update_login_streak,
+    XP_REWARDS,
+)
+
+from app.schemas.user import (
+    UserRegister,
+    UserLogin,
+    ChangePasswordRequest
+)
+
 
 router = APIRouter(
     prefix="/auth",
@@ -122,19 +134,48 @@ def login_user(
         )
 
     token = create_access_token(
-        {
-            "sub": existing_user.email
-        }
+    {
+        "sub": existing_user.email
+    }
+    )
+
+    # =====================================================
+    # GLOBAL GAMIFICATION
+    # =====================================================
+
+    # Login XP
+    add_xp(
+        db,
+        existing_user,
+        XP_REWARDS["login"]
+    )
+
+    # 24-hour login streak
+    update_login_streak(
+        db,
+        existing_user
     )
 
     return {
 
         "access_token": token,
 
-        "token_type": "bearer"
+        "token_type": "bearer",
+
+        "gamification": {
+
+            "xp":
+                existing_user.xp,
+
+            "level":
+                existing_user.level,
+
+            "streak":
+                existing_user.streak
+
+        }
 
     }
-
 
 # =========================================================
 # GET CURRENT USER
@@ -146,6 +187,97 @@ def get_profile(
 ):
 
     return current_user
+
+# =========================================================
+# CHANGE PASSWORD
+# =========================================================
+
+@router.post("/change-password")
+def change_password(
+    data: ChangePasswordRequest,
+    current_user: User = Depends(
+        get_current_user
+    ),
+    db: Session = Depends(
+        get_database
+    )
+):
+
+    # -----------------------------------------------------
+    # Verify current password
+    # -----------------------------------------------------
+
+    if not verify_password(
+        data.current_password,
+        current_user.password_hash
+    ):
+
+        raise HTTPException(
+
+            status_code=400,
+
+            detail=
+            "Current password is incorrect."
+
+        )
+
+
+    # -----------------------------------------------------
+    # Validate new password
+    # -----------------------------------------------------
+
+    if len(data.new_password) < 8:
+
+        raise HTTPException(
+
+            status_code=400,
+
+            detail=
+            "New password must be at least 8 characters."
+
+        )
+
+
+    # -----------------------------------------------------
+    # Prevent same password
+    # -----------------------------------------------------
+
+    if verify_password(
+        data.new_password,
+        current_user.password_hash
+    ):
+
+        raise HTTPException(
+
+            status_code=400,
+
+            detail=
+            "New password must be different from your current password."
+
+        )
+
+
+    # -----------------------------------------------------
+    # Update password
+    # -----------------------------------------------------
+
+    current_user.password_hash = hash_password(
+        data.new_password
+    )
+
+    db.commit()
+
+    db.refresh(
+        current_user
+    )
+
+
+    return {
+
+        "message":
+        "Password changed successfully."
+
+    }
 
 
 # =========================================================

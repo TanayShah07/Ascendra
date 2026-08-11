@@ -221,8 +221,8 @@ def calculate_placement_readiness(user: User):
 # =========================================================
 
 def get_profile(
-    db: Session,
-    user_id: int
+    db,
+    user_id
 ):
 
     user = (
@@ -234,23 +234,59 @@ def get_profile(
     if not user:
         return None
 
+    return {
+        "id": user.id,
+        "full_name": user.full_name,
+        "email": user.email,
 
-    # Calculate current readiness
-    readiness = calculate_placement_readiness(
-        user
-    )
+        "college": user.college,
+        "branch": user.branch,
+        "graduation_year": user.graduation_year,
 
+        "profile_photo": user.profile_photo,
+        "role": user.role,
 
-    # Keep database value synchronized
-    user.placement_readiness = readiness
+        # Professional Profiles
+        "linkedin": user.linkedin,
+        "github": user.github,
+        "portfolio": user.portfolio,
+        "leetcode": user.leetcode,
 
+        # Placement
+        "dream_company": user.dream_company,
+        "target_role": user.target_role,
+        "preferred_domain": user.preferred_domain,
 
-    db.commit()
+        # Bio
+        "bio": user.bio,
 
-    db.refresh(user)
+        # Readiness / Gamification
+        "placement_readiness": user.placement_readiness,
+        "xp": user.xp,
+        "level": user.level,
+        "streak": user.streak,
+        "last_streak_at": user.last_streak_at,
 
+        # Resume
+        "resume_url": user.resume_url,
+        "resume_score": user.resume_score,
+        "ats_score": user.ats_score,
 
-    return user
+        # Coding
+        "coding_problems_solved": user.coding_problems_solved,
+        "easy_solved": user.easy_solved,
+        "medium_solved": user.medium_solved,
+        "hard_solved": user.hard_solved,
+
+        # Interview / GD
+        "interview_completed": user.interview_completed,
+        "gd_completed": user.gd_completed,
+
+        # Roadmap
+        "roadmap_generated": user.roadmap_generated,
+
+        "created_at": user.created_at
+    }
 
 
 # =========================================================

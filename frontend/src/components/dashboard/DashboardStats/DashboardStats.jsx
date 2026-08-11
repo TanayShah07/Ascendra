@@ -1,84 +1,78 @@
 import "./DashboardStats.css";
+
 import {
     Flame,
     Trophy,
     Brain,
     TrendingUp
 } from "lucide-react";
+
+import { useAuth } from "../../../context/AuthContext";
 import { useLanguage } from "../../../context/LanguageContext";
 
-const DashboardStats=()=>{
+const DashboardStats = () => {
+
+    const { user } = useAuth();
     const { t } = useLanguage();
 
     const stats = [
-    
-    {
-        icon: <Flame size={28} />,
-        title: t("dashboard.currentStreak"),
-        value: "0 Days"
-    },
-    
-    {
-        icon: <Trophy size={28} />,
-        title: t("dashboard.xp"),
-        value: "0"
-    },
-    
-    {
-        icon: <Brain size={28} />,
-        title: t("dashboard.interviews"),
-        value: "0"
-    },
-    
-    {
-        icon: <TrendingUp size={28} />,
-        title: t("dashboard.readiness"),
-        value: "0%"
-    }
-    
-];
 
-    return(
+        {
+            icon: <Flame size={28} />,
+            title: t("dashboard.currentStreak"),
+            value: `${user?.streak ?? 0} Day${user?.streak === 1 ? "" : "s"}`
+        },
 
-<div className="stats-grid">
+        {
+            icon: <Trophy size={28} />,
+            title: t("dashboard.xp"),
+            value: `${user?.xp ?? 0}`
+        },
 
-{
+        {
+            icon: <Brain size={28} />,
+            title: t("dashboard.interviews"),
+            value: `${user?.interview_completed ?? 0}`
+        },
 
-stats.map((item,index)=>(
+        {
+            icon: <TrendingUp size={28} />,
+            title: t("dashboard.readiness"),
+            value: `${user?.placement_readiness ?? 0}%`
+        }
 
-<div
-key={index}
-className="stat-card"
->
+    ];
 
-<div>
+    return (
 
-{item.icon}
+        <div className="stats-grid">
 
-</div>
+            {stats.map((item, index) => (
 
-<h2>
+                <div
+                    key={index}
+                    className="stat-card"
+                >
 
-{item.value}
+                    <div>
+                        {item.icon}
+                    </div>
 
-</h2>
+                    <h2>
+                        {item.value}
+                    </h2>
 
-<p>
+                    <p>
+                        {item.title}
+                    </p>
 
-{item.title}
+                </div>
 
-</p>
+            ))}
 
-</div>
+        </div>
 
-))
-
-}
-
-</div>
-
-);
-
+    );
 };
 
 export default DashboardStats;

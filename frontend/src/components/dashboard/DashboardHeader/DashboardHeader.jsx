@@ -1,5 +1,7 @@
 import "./DashboardHeader.css";
+
 import { Sparkles } from "lucide-react";
+
 import { useAuth } from "../../../context/AuthContext";
 import { useLanguage } from "../../../context/LanguageContext";
 
@@ -21,17 +23,11 @@ const DashboardHeader = () => {
                 </span>
 
                 <h1>
-
-                    {t("dashboard.hi")},
-
+                    Hi,{" "}
                     <span>
-
-                        {user?.full_name?.split(" ")[0]}
-
-                    </span>
-
+                        {user?.full_name?.split(" ")[0] || "User"}
+                    </span>{" "}
                     👋
-
                 </h1>
 
                 <p>
@@ -44,20 +40,16 @@ const DashboardHeader = () => {
 
             <div className="header-level">
 
-                <Sparkles size={26}/>
+                <Sparkles size={26} />
 
                 <div>
 
                     <span>
-
                         {t("level")}
-
                     </span>
 
                     <h2>
-
-                        {t("level_number")}
-
+                        {user?.level ?? 1}
                     </h2>
 
                 </div>
@@ -67,7 +59,6 @@ const DashboardHeader = () => {
         </div>
 
     );
-
 };
 
 export default DashboardHeader;

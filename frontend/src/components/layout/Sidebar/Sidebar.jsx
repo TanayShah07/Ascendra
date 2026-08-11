@@ -1,4 +1,5 @@
 import "./Sidebar.css";
+
 import {
     LayoutDashboard,
     Brain,
@@ -15,20 +16,36 @@ import {
 
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
+
 import { useAuth } from "../../../context/AuthContext";
 import { useLanguage } from "../../../context/LanguageContext";
+
 
 const Sidebar = () => {
 
     const [collapsed, setCollapsed] = useState(false);
 
-    const { logout } = useAuth();
+    const {
+        user,
+        logout
+    } = useAuth();
 
     const { t } = useLanguage();
 
+
     return (
 
-        <aside className={collapsed ? "sidebar collapsed" : "sidebar"}>
+        <aside
+            className={
+                collapsed
+                    ? "sidebar collapsed"
+                    : "sidebar"
+            }
+        >
+
+            {/* =====================================================
+                TOP
+            ===================================================== */}
 
             <div className="sidebar-top">
 
@@ -44,48 +61,66 @@ const Sidebar = () => {
 
                 <button
                     className="collapse-btn"
-                    onClick={() => setCollapsed(!collapsed)}
+                    onClick={() =>
+                        setCollapsed(!collapsed)
+                    }
                 >
 
                     {
-
-                        collapsed ?
-
-                        <ChevronRight size={20}/> :
-
-                        <ChevronLeft size={20}/>
-
+                        collapsed
+                            ? <ChevronRight size={20} />
+                            : <ChevronLeft size={20} />
                     }
 
                 </button>
 
             </div>
 
+
+            {/* =====================================================
+                NAVIGATION
+            ===================================================== */}
+
             <nav>
 
                 <NavLink to="/dashboard">
 
-                    <LayoutDashboard/>
+                    <LayoutDashboard />
 
-                    {!collapsed && <span>{t("sidebar.dashboard")}</span>}
+                    {!collapsed && (
+                        <span>
+                            {t("sidebar.dashboard")}
+                        </span>
+                    )}
 
                 </NavLink>
+
 
                 <NavLink to="/interview">
 
-                    <Brain/>
+                    <Brain />
 
-                    {!collapsed && <span>{t("sidebar.interview")}</span>}
+                    {!collapsed && (
+                        <span>
+                            {t("sidebar.interview")}
+                        </span>
+                    )}
 
                 </NavLink>
+
 
                 <NavLink to="/group-discussion">
 
-                    <Users/>
+                    <Users />
 
-                    {!collapsed && <span>{t("sidebar.groupDiscussion")}</span>}
+                    {!collapsed && (
+                        <span>
+                            {t("sidebar.groupDiscussion")}
+                        </span>
+                    )}
 
                 </NavLink>
+
 
                 <NavLink to="/preparation">
 
@@ -99,29 +134,45 @@ const Sidebar = () => {
 
                 </NavLink>
 
+
                 <NavLink to="/resume">
 
-                    <FileText/>
+                    <FileText />
 
-                    {!collapsed && <span>{t("sidebar.resume")}</span>}
+                    {!collapsed && (
+                        <span>
+                            {t("sidebar.resume")}
+                        </span>
+                    )}
 
                 </NavLink>
+
 
                 <NavLink to="/roadmap">
 
-                    <Route/>
+                    <Route />
 
-                    {!collapsed && <span>{t("sidebar.roadmap")}</span>}
+                    {!collapsed && (
+                        <span>
+                            {t("sidebar.roadmap")}
+                        </span>
+                    )}
 
                 </NavLink>
+
 
                 <NavLink to="/profile">
 
-                    <User/>
+                    <User />
 
-                    {!collapsed && <span>{t("sidebar.profile")}</span>}
+                    {!collapsed && (
+                        <span>
+                            {t("sidebar.profile")}
+                        </span>
+                    )}
 
                 </NavLink>
+
 
                 <NavLink to="/settings">
 
@@ -137,30 +188,81 @@ const Sidebar = () => {
 
             </nav>
 
+
+            {/* =====================================================
+                BOTTOM
+            ===================================================== */}
+
             <div className="sidebar-bottom">
+
+
+                {/* =================================================
+                    GAMIFICATION STATS
+                ================================================= */}
 
                 {!collapsed && (
 
                     <div className="user-stats">
 
-                        <p>🔥 0 Day Streak</p>
+                        <div className="sidebar-stat">
 
-                        <p>⭐ 0 XP</p>
+                            <span className="sidebar-stat-icon">
+                                🔥
+                            </span>
 
-                        <p>🏅 Level 1</p>
+                            <span>
+                                {user?.streak ?? 0} Day Streak
+                            </span>
+
+                        </div>
+
+
+                        <div className="sidebar-stat">
+
+                            <span className="sidebar-stat-icon">
+                                ⭐
+                            </span>
+
+                            <span>
+                                {user?.xp ?? 0} XP
+                            </span>
+
+                        </div>
+
+
+                        <div className="sidebar-stat">
+
+                            <span className="sidebar-stat-icon">
+                                🏅
+                            </span>
+
+                            <span>
+                                Level {user?.level ?? 1}
+                            </span>
+
+                        </div>
 
                     </div>
 
                 )}
+
+
+                {/* =================================================
+                    LOGOUT
+                ================================================= */}
 
                 <button
                     className="logout-sidebar"
                     onClick={logout}
                 >
 
-                    <LogOut/>
+                    <LogOut />
 
-                    {!collapsed && <span>{t("sidebar.logout")}</span>}
+                    {!collapsed && (
+                        <span>
+                            {t("sidebar.logout")}
+                        </span>
+                    )}
 
                 </button>
 
@@ -171,5 +273,6 @@ const Sidebar = () => {
     );
 
 };
+
 
 export default Sidebar;

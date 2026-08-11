@@ -1,176 +1,481 @@
-.sidebar{
+/* =========================================================
+   SIDEBAR
+========================================================= */
 
-    width:280px;
+.sidebar {
 
-    min-height:100vh;
+    width: 280px;
 
-    background:#0f172a;
+    min-height: 100vh;
 
-    color:white;
+    background: #0f172a;
 
-    display:flex;
+    color: white;
 
-    flex-direction:column;
+    display: flex;
 
-    transition:.35s ease;
+    flex-direction: column;
 
-    position:sticky;
+    position: sticky;
 
-    top:0;
+    top: 0;
 
-    left:0;
+    left: 0;
 
-    overflow:hidden;
+    overflow: hidden;
 
-    box-shadow:4px 0 18px rgba(0,0,0,.08);
+    box-shadow:
+        4px 0 18px
+        rgba(0, 0, 0, 0.08);
 
-}
-
-.sidebar.collapsed{
-    width:82px;
-}
-
-.sidebar-top{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:20px 18px;
-
-    margin-bottom:18px;
+    transition:
+        width 0.35s ease;
 
 }
 
-.sidebar-logo{
 
-    width:190px;
+/* =========================================================
+   COLLAPSED
+========================================================= */
 
-    height:auto;
+.sidebar.collapsed {
 
-    object-fit:contain;
-
-}
-
-.collapse-btn{
-    width:38px;
-    height:38px;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    background:#1e293b;
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition:.25s;
-}
-
-.collapse-btn:hover{
-    background:#2563eb;
-}
-
-.sidebar nav{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:8px;
-
-    padding:0 12px;
+    width: 82px;
 
 }
 
-.sidebar nav a{
-    display:flex;
-    align-items:center;
-    gap:14px;
 
-    padding:14px 18px;
+/* =========================================================
+   TOP
+========================================================= */
 
-    border-radius:14px;
+.sidebar-top {
 
-    font-size:1rem;
-    font-weight:500;
+    display: flex;
 
-    transition:.25s;
-}
+    align-items: center;
 
-.sidebar nav a svg{
-    min-width:22px;
-}
+    justify-content: space-between;
 
-.sidebar nav a:hover{
-    background:#1e293b;
-    color:white;
-}
+    padding: 20px 18px;
 
-.sidebar nav a.active{
-    background:#2563eb;
-    color:white;
-}
+    margin-bottom: 18px;
 
-.sidebar-bottom{
-
-    margin-top:auto;
-
-    padding:18px;
-
-    border-top:1px solid rgba(255,255,255,.08);
+    min-height: 48px;
 
 }
 
-.user-stats{
-    margin-bottom:18px;
-    font-size:.92rem;
-    color:#cbd5e1;
-    line-height:2;
+
+.sidebar-logo {
+
+    width: 190px;
+
+    height: auto;
+
+    object-fit: contain;
+
 }
 
-.logout-sidebar{
-    width:100%;
-    display:flex;
-    align-items:center;
-    gap:14px;
-    padding:13px 16px;
-    border:none;
-    border-radius:12px;
-    background:#ef4444;
-    color:white;
-    cursor:pointer;
-    font-size:.95rem;
-    font-weight:600;
-    transition:.25s;
+
+/* =========================================================
+   COLLAPSE BUTTON
+========================================================= */
+
+.collapse-btn {
+
+    width: 38px;
+
+    height: 38px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    background: #1e293b;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+
 }
 
-.logout-sidebar:hover{
-    background:#dc2626;
+
+.collapse-btn:hover {
+
+    background: #334155;
+
+    transform: translateY(-1px);
+
 }
 
-.sidebar.collapsed nav a{
-    justify-content:center;
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.sidebar nav {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    padding: 0 12px;
+
 }
 
-.sidebar.collapsed .logout-sidebar{
-    justify-content:center;
+
+.sidebar nav a {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 14px 18px;
+
+    border-radius: 14px;
+
+    font-size: 1rem;
+
+    font-weight: 500;
+
+    color: #e2e8f0;
+
+    text-decoration: none;
+
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease;
+
 }
 
-.sidebar.collapsed .collapse-btn{
-    margin:auto;
+
+.sidebar nav a svg {
+
+    width: 22px;
+
+    height: 22px;
+
+    min-width: 22px;
+
 }
 
-.sidebar.collapsed .sidebar-top{
-    justify-content:center;
+
+/* =========================================================
+   NAV HOVER
+========================================================= */
+
+.sidebar nav a:hover {
+
+    background: #1e293b;
+
+    color: white;
+
 }
-.lock-badge{
 
-    margin-left:auto;
 
-    font-size:12px;
+/* =========================================================
+   ACTIVE
+========================================================= */
 
-    opacity:.9;
+.sidebar nav a.active {
+
+    background: #2563eb;
+
+    color: white;
+
+}
+
+
+/* =========================================================
+   COLLAPSED NAV
+========================================================= */
+
+.sidebar.collapsed nav a {
+
+    justify-content: center;
+
+    padding-left: 14px;
+
+    padding-right: 14px;
+
+}
+
+
+/* =========================================================
+   BOTTOM
+========================================================= */
+
+.sidebar-bottom {
+
+    margin-top: auto;
+
+    padding: 18px;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+
+}
+
+
+/* =========================================================
+   GAMIFICATION STATS
+========================================================= */
+
+.user-stats {
+
+    margin-bottom: 18px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    font-size: 0.92rem;
+
+    color: #cbd5e1;
+
+}
+
+
+/* Individual stat */
+
+.sidebar-stat {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    min-height: 24px;
+
+    line-height: 1.5;
+
+}
+
+
+.sidebar-stat-icon {
+
+    width: 22px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.logout-sidebar {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 13px 16px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #ef4444;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 0.95rem;
+
+    font-weight: 600;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+
+}
+
+
+.logout-sidebar:hover {
+
+    background: #dc2626;
+
+    transform: translateY(-1px);
+
+}
+
+
+.logout-sidebar svg {
+
+    width: 20px;
+
+    height: 20px;
+
+    flex-shrink: 0;
+
+}
+
+
+/* =========================================================
+   COLLAPSED LOGOUT
+========================================================= */
+
+.sidebar.collapsed .logout-sidebar {
+
+    justify-content: center;
+
+    padding-left: 12px;
+
+    padding-right: 12px;
+
+}
+
+
+/* =========================================================
+   COLLAPSED TOP
+========================================================= */
+
+.sidebar.collapsed .sidebar-top {
+
+    justify-content: center;
+
+}
+
+
+.sidebar.collapsed .collapse-btn {
+
+    margin: auto;
+
+}
+
+
+/* =========================================================
+   LOCK BADGE
+========================================================= */
+
+.lock-badge {
+
+    margin-left: auto;
+
+    font-size: 12px;
+
+    opacity: 0.9;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+
+        width: 240px;
+
+    }
+
+    .sidebar.collapsed {
+
+        width: 76px;
+
+    }
+
+    .sidebar-logo {
+
+        width: 165px;
+
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .sidebar {
+
+        width: 76px;
+
+    }
+
+    .sidebar-logo {
+
+        display: none;
+
+    }
+
+    .sidebar-top {
+
+        justify-content: center;
+
+    }
+
+    .sidebar nav a {
+
+        justify-content: center;
+
+        padding-left: 12px;
+
+        padding-right: 12px;
+
+    }
+
+    .sidebar nav a span {
+
+        display: none;
+
+    }
+
+    .user-stats {
+
+        display: none;
+
+    }
+
+    .logout-sidebar {
+
+        justify-content: center;
+
+        padding-left: 10px;
+
+        padding-right: 10px;
+
+    }
+
+    .logout-sidebar span {
+
+        display: none;
+
+    }
 
 }

@@ -31,54 +31,102 @@ const translations = {
 
         settings: {
 
-            title: "Settings",
+            title:
+                "Settings",
 
             subtitle:
                 "Manage your Ascendra preferences and account settings.",
 
-            appearance: "Appearance",
+            // =====================================================
+            // APPEARANCE
+            // =====================================================
+
+            appearance:
+                "Appearance",
 
             appearanceDescription:
                 "Choose how Ascendra looks.",
 
-            light: "Light",
+            light:
+                "Light",
 
-            dark: "Dark",
+            dark:
+                "Dark",
 
-            system: "System",
+            system:
+                "System",
 
-            language: "Language",
+            // =====================================================
+            // LANGUAGE
+            // =====================================================
+
+            language:
+                "Language",
 
             languageDescription:
                 "Choose the language used across Ascendra.",
 
-            changePassword: "Change Password",
+            // =====================================================
+            // CHANGE PASSWORD
+            // =====================================================
+
+            changePassword:
+                "Change Password",
 
             changePasswordDescription:
                 "Update your account password.",
 
-            notifications: "Notifications",
+            currentPassword:
+                "Current Password",
 
-            notificationsDescription:
-                "Manage your Ascendra notifications.",
+            currentPasswordPlaceholder:
+                "Enter your current password",
 
-            emailNotifications:
-                "Email Notifications",
+            newPassword:
+                "New Password",
 
-            emailNotificationsDescription:
-                "Receive important updates by email.",
+            newPasswordPlaceholder:
+                "Enter your new password",
 
-            preparationReminders:
-                "Preparation Reminders",
+            confirmPassword:
+                "Confirm Password",
 
-            preparationRemindersDescription:
-                "Get reminders about your preparation.",
+            confirmPasswordPlaceholder:
+                "Confirm your new password",
 
-            interviewReminders:
-                "Interview & GD Reminders",
+            savePassword:
+                "Save Password",
 
-            interviewRemindersDescription:
-                "Receive reminders for upcoming practice.",
+            changingPassword:
+                "Changing Password...",
+
+            cancel:
+                "Cancel",
+
+            currentPasswordRequired:
+                "Please enter your current password.",
+
+            newPasswordRequired:
+                "Please enter a new password.",
+
+            passwordLength:
+                "Password must be at least 8 characters.",
+
+            passwordMismatch:
+                "Passwords do not match.",
+
+            newPasswordDifferent:
+                "New password must be different from your current password.",
+
+            passwordChanged:
+                "Password changed successfully!",
+
+            passwordChangeFailed:
+                "Unable to change password.",
+
+            // =====================================================
+            // PREPARATION PREFERENCES
+            // =====================================================
 
             preparationPreferences:
                 "Preparation Preferences",
@@ -89,8 +137,33 @@ const translations = {
             dailyGoal:
                 "Daily Preparation Goal",
 
+            thirtyMinutes:
+                "30 Minutes",
+
+            oneHour:
+                "1 Hour",
+
+            twoHours:
+                "2 Hours",
+
+            threePlusHours:
+                "3+ Hours",
+
             difficulty:
                 "Preferred Difficulty",
+
+            easy:
+                "Easy",
+
+            medium:
+                "Medium",
+
+            hard:
+                "Hard",
+
+            // =====================================================
+            // PRIVACY
+            // =====================================================
 
             privacyData:
                 "Privacy & Data",
@@ -107,14 +180,35 @@ const translations = {
             exportData:
                 "Export My Data",
 
+            exportComingSoon:
+                "Data export will be available soon.",
+
+            // =====================================================
+            // LOGOUT
+            // =====================================================
+
             logout:
                 "Logout",
 
             logoutDescription:
-                "Sign out of your Ascendra account."
+                "Sign out of your Ascendra account.",
+
+            exportExcel:
+                "Export as Excel",
+
+            exportCsv:
+                "Export as CSV",
+
+            exportPdf:
+                "Export as PDF",
+
+            exportSuccess:
+                "Your data has been exported successfully.",
+
+            exportFailed:
+                "Unable to export your data.",
 
         },
-
         dashboard: {
 
             welcome:
@@ -1145,32 +1239,56 @@ forgotPassword: {
             changePasswordDescription:
                 "अपने अकाउंट का पासवर्ड अपडेट करें।",
 
-            notifications:
-                "नोटिफिकेशन",
+            currentPassword:
+                "वर्तमान पासवर्ड",
 
-            notificationsDescription:
-                "अपने Ascendra नोटिफिकेशन को मैनेज करें।",
+            currentPasswordPlaceholder:
+                "अपना वर्तमान पासवर्ड दर्ज करें",
 
-            emailNotifications:
-                "ईमेल नोटिफिकेशन",
+            newPassword:
+                "नया पासवर्ड",
 
-            emailNotificationsDescription:
-                "महत्वपूर्ण अपडेट ईमेल द्वारा प्राप्त करें।",
+            newPasswordPlaceholder:
+                "अपना नया पासवर्ड दर्ज करें",
 
-            preparationReminders:
-                "प्रिपरेशन रिमाइंडर",
+            confirmPassword:
+                "नए पासवर्ड की पुष्टि करें",
 
-            preparationRemindersDescription:
-                "अपनी तैयारी के बारे में रिमाइंडर प्राप्त करें।",
+            confirmPasswordPlaceholder:
+                "अपना नया पासवर्ड दोबारा दर्ज करें",
 
-            interviewReminders:
-                "इंटरव्यू और GD रिमाइंडर",
+            savePassword:
+                "पासवर्ड सेव करें",
 
-            interviewRemindersDescription:
-                "आने वाले प्रैक्टिस सेशन के लिए रिमाइंडर प्राप्त करें।",
+            changingPassword:
+                "पासवर्ड बदला जा रहा है...",
+
+            cancel:
+                "रद्द करें",
+
+            currentPasswordRequired:
+                "कृपया अपना वर्तमान पासवर्ड दर्ज करें।",
+
+            newPasswordRequired:
+                "कृपया नया पासवर्ड दर्ज करें।",
+
+            passwordLength:
+                "पासवर्ड कम से कम 8 अक्षरों का होना चाहिए।",
+
+            passwordMismatch:
+                "पासवर्ड मेल नहीं खाते।",
+
+            newPasswordDifferent:
+                "नया पासवर्ड वर्तमान पासवर्ड से अलग होना चाहिए।",
+
+            passwordChanged:
+                "पासवर्ड सफलतापूर्वक बदल दिया गया!",
+
+            passwordChangeFailed:
+                "पासवर्ड बदलने में असमर्थ।",
 
             preparationPreferences:
-                "प्रिपरेशन प्राथमिकताएँ",
+                "तैयारी की प्राथमिकताएँ",
 
             preparationPreferencesDescription:
                 "अपनी प्लेसमेंट तैयारी को कस्टमाइज़ करें।",
@@ -1178,8 +1296,29 @@ forgotPassword: {
             dailyGoal:
                 "दैनिक तैयारी का लक्ष्य",
 
+            thirtyMinutes:
+                "30 मिनट",
+
+            oneHour:
+                "1 घंटा",
+
+            twoHours:
+                "2 घंटे",
+
+            threePlusHours:
+                "3+ घंटे",
+
             difficulty:
-                "पसंदीदा कठिनाई स्तर",
+                "पसंदीदा कठिनाई",
+
+            easy:
+                "आसान",
+
+            medium:
+                "मध्यम",
+
+            hard:
+                "कठिन",
 
             privacyData:
                 "प्राइवेसी और डेटा",
@@ -1191,18 +1330,36 @@ forgotPassword: {
                 "पर्सनलाइज़ेशन",
 
             personalizationDescription:
-                "Ascendra को आपकी गतिविधि और प्रदर्शन के आधार पर सुझावों को पर्सनलाइज़ करने की अनुमति दें।",
+                "Ascendra को आपकी गतिविधि और प्रदर्शन का उपयोग करके सुझावों को व्यक्तिगत बनाने की अनुमति दें।",
 
             exportData:
                 "मेरा डेटा एक्सपोर्ट करें",
 
+            exportComingSoon:
+                "डेटा एक्सपोर्ट जल्द उपलब्ध होगा।",
+
             logout:
-                "लॉग आउट",
+                "लॉगआउट",
 
             logoutDescription:
-                "अपने Ascendra अकाउंट से साइन आउट करें।"
+                "अपने Ascendra अकाउंट से साइन आउट करें।",
 
-        },
+            exportExcel:
+                "Excel के रूप में Export करें",
+
+            exportCsv:
+                "CSV के रूप में Export करें",
+
+            exportPdf:
+                "PDF के रूप में Export करें",
+
+            exportSuccess:
+                "आपका डेटा सफलतापूर्वक Export हो गया।",
+
+            exportFailed:
+                "आपका डेटा Export नहीं किया जा सका।",
+
+                    },
 
         dashboard: {
 
