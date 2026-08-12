@@ -13,6 +13,16 @@ from app.routes import (
     roadmap_router,
 )
 
+from app.routes import (
+    auth_router,
+    profile_router,
+    dashboard_router,
+    resume_router,
+    coding_router,
+    roadmap_router,
+    aptitude_router,
+)
+
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
@@ -26,6 +36,7 @@ app.include_router(dashboard_router)
 app.include_router(resume_router)
 app.include_router(coding_router)
 app.include_router(roadmap_router)
+app.include_router(aptitude_router)
 
 app.add_middleware(
     CORSMiddleware,

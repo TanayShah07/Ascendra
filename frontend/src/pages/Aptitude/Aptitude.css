@@ -512,3 +512,65 @@
     }
 
 }
+
+/* =========================================================
+   APTITUDE TIMER
+========================================================= */
+
+.aptitude-timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 12px 18px;
+
+    border-radius: 14px;
+
+    background: #eff6ff;
+
+    border: 1px solid #bfdbfe;
+
+    color: #2563eb;
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+    min-width: 130px;
+}
+
+.aptitude-timer.warning {
+    background: #fef2f2;
+
+    border-color: #fecaca;
+
+    color: #dc2626;
+}
+
+@media (max-width: 650px) {
+
+    .aptitude-header {
+        flex-wrap: wrap;
+    }
+
+    .aptitude-timer {
+        width: 100%;
+    }
+
+}
+/* =========================================================
+   APTITUDE TIMER
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .aptitude-header {
+        flex-wrap: wrap;
+    }
+
+    .aptitude-header > div:last-child {
+        width: 100%;
+    }
+
+}
