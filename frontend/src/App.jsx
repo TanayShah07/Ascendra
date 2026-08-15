@@ -17,6 +17,7 @@ import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import PreparationHub from "./pages/PreparationHub/PreparationHub";
 import Aptitude from "./pages/Aptitude/Aptitude";
 import Settings from "./pages/Settings/Settings";
+import CodingProblem from "./pages/CodingProblem/CodingProblem";
 
 import ProtectedRoute from "./routes/ProtectedRoute";
 
@@ -143,6 +144,15 @@ function App() {
                     element={
                         <ProtectedRoute>
                             <Coding />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/coding/problem/:problemId"
+                    element={
+                        <ProtectedRoute>
+                            <CodingProblem />
                         </ProtectedRoute>
                     }
                 />

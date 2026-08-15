@@ -2,100 +2,94 @@ import "./CodingProblems.css";
 
 import ProblemCard from "../ProblemCard/ProblemCard";
 
-const problems = [
 
-{
+const CodingProblems = ({
+    problems,
+    loading,
+    error
+}) => {
 
-id:1,
+    return (
 
-title:"Two Sum",
+        <div className="coding-problems">
 
-difficulty:"Easy",
+            <h2>
+                Coding Problems
+            </h2>
 
-topic:"Arrays",
 
-time:"15 min",
+            {/* LOADING */}
 
-xp:25,
+            {loading && (
 
-company:["Google","Amazon","Microsoft"]
+                <div className="coding-loading">
 
-},
+                    Loading coding problems...
 
-{
+                </div>
 
-id:2,
+            )}
 
-title:"Longest Substring Without Repeating Characters",
 
-difficulty:"Medium",
+            {/* ERROR */}
 
-topic:"Sliding Window",
+            {!loading && error && (
 
-time:"25 min",
+                <div className="coding-error">
 
-xp:40,
+                    {error}
 
-company:["Amazon","Adobe"]
+                </div>
 
-},
+            )}
 
-{
 
-id:3,
+            {/* EMPTY */}
 
-title:"Merge K Sorted Lists",
+            {!loading &&
+                !error &&
+                problems.length === 0 && (
 
-difficulty:"Hard",
+                    <div className="coding-empty">
 
-topic:"Heap",
+                        No coding problems found
+                        for this selection.
 
-time:"40 min",
+                    </div>
 
-xp:70,
+                )
+            }
 
-company:["Google","Microsoft"]
 
-}
+            {/* PROBLEMS */}
 
-];
+            {!loading &&
+                !error &&
+                problems.length > 0 && (
 
-const CodingProblems=()=>{
+                    <div className="problem-list">
 
-return(
+                        {problems.map(
+                            (problem) => (
 
-<div className="coding-problems">
+                                <ProblemCard
+                                    key={problem.id}
+                                    problem={problem}
+                                />
 
-<h2>
+                            )
+                        )}
 
-Popular Coding Problems
+                    </div>
 
-</h2>
+                )
+            }
 
-<div className="problem-list">
+        </div>
 
-{
-
-problems.map(problem=>(
-
-<ProblemCard
-
-key={problem.id}
-
-problem={problem}
-
-/>
-
-))
-
-}
-
-</div>
-
-</div>
-
-);
+    );
 
 };
+
 
 export default CodingProblems;
