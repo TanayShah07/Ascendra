@@ -3,7 +3,15 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
 
+    # --------------------------------------------------
+    # DATABASE
+    # --------------------------------------------------
+
     DATABASE_URL: str
+
+    # --------------------------------------------------
+    # AUTH
+    # --------------------------------------------------
 
     SECRET_KEY: str
 
@@ -11,7 +19,19 @@ class Settings(BaseSettings):
 
     ACCESS_TOKEN_EXPIRE_MINUTES: int
 
-    # ---------- Email ----------
+    # --------------------------------------------------
+    # AI PROVIDERS
+    # --------------------------------------------------
+
+    GEMINI_API_KEY: str | None = None
+
+    XAI_API_KEY: str | None = None
+
+    ANTHROPIC_API_KEY: str | None = None
+
+    # --------------------------------------------------
+    # EMAIL
+    # --------------------------------------------------
 
     SMTP_HOST: str
 
@@ -23,10 +43,11 @@ class Settings(BaseSettings):
 
     SMTP_FROM_EMAIL: str
 
-
     class Config:
 
         env_file = ".env"
+
+        extra = "ignore"
 
 
 settings = Settings()

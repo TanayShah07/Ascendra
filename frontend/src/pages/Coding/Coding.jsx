@@ -31,10 +31,16 @@ import {
 
 import { useAuth } from "../../context/AuthContext";
 
+import { useNavigate } from "react-router-dom";
+
+import { ArrowLeft } from "lucide-react";
+
 
 const Coding = () => {
 
     const { token } = useAuth();
+
+    const navigate = useNavigate();
 
 
     /* =====================================================
@@ -227,6 +233,30 @@ const Coding = () => {
 
             <div className="coding-page">
 
+
+                {/* =====================================================
+                   BACK TO PREPARATION HUB
+                ===================================================== */}
+
+                <button
+                    type="button"
+                    className="back-to-preparation"
+                    onClick={() =>
+                        navigate("/preparation")
+                    }
+                >
+
+                    <ArrowLeft
+                        size={18}
+                    />
+
+                    <span>
+                        Back to Preparation Hub
+                    </span>
+
+                </button>
+
+
                 <CodingHeader />
 
 
@@ -282,6 +312,7 @@ const Coding = () => {
                     error={error}
 
                 />
+
 
             </div>
 

@@ -11,7 +11,6 @@ import GroupDiscussion from "./pages/GroupDiscussion/GroupDiscussion";
 import ResumeAnalysis from "./pages/ResumeAnalysis/ResumeAnalysis";
 import Profile from "./pages/Profile/Profile";
 import Coding from "./pages/Coding/Coding";
-import AICoding from "./pages/AICoding/AICoding";
 import Roadmap from "./pages/Roadmap/Roadmap";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import PreparationHub from "./pages/PreparationHub/PreparationHub";
@@ -162,15 +161,6 @@ function App() {
                     element={
                         <ProtectedRoute>
                             <Aptitude />
-                        </ProtectedRoute>
-                    }
-                />
-
-                <Route
-                    path="/ai-coding"
-                    element={
-                        <ProtectedRoute>
-                            <AICoding />
                         </ProtectedRoute>
                     }
                 />

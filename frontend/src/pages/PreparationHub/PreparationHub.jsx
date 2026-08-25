@@ -4,7 +4,6 @@ import DashboardLayout from "../../components/layout/DashboardLayout/DashboardLa
 
 import {
     Code2,
-    Brain,
     Calculator
 } from "lucide-react";
 
@@ -24,15 +23,6 @@ const PreparationHub = () => {
             icon: Code2,
             path: "/coding",
             button: "Start Coding"
-        },
-
-        {
-            title: "AI Coding",
-            description:
-                "Practice coding with AI-powered assistance and improve your problem-solving skills.",
-            icon: Brain,
-            path: "/ai-coding",
-            button: "Start AI Coding"
         },
 
         {
