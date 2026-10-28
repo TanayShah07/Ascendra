@@ -1,0 +1,183 @@
+.keywords-container {
+
+    margin-bottom: 35px;
+
+    background: var(--bg-card);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 24px;
+
+    padding: 35px;
+
+    box-shadow:
+        0 12px 35px rgba(15,23,42,.08);
+
+}
+
+.keywords-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 30px;
+
+    margin-bottom: 30px;
+
+}
+
+.keywords-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: var(--text-primary);
+
+}
+
+.keywords-title h2 {
+
+    margin: 0;
+
+    font-size: 1.5rem;
+
+}
+
+.keywords-header p {
+
+    margin-top: 8px;
+
+    color: var(--text-secondary);
+
+    line-height: 1.6;
+
+}
+
+.keyword-match {
+
+    min-width: 100px;
+
+    text-align: center;
+
+    font-size: 2rem;
+
+    font-weight: 800;
+
+    color: #2563eb;
+
+}
+
+.keyword-match span {
+
+    display: block;
+
+    font-size: .8rem;
+
+    font-weight: 600;
+
+    color: var(--text-secondary);
+
+    margin-top: 4px;
+
+}
+
+.keyword-sections {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 25px;
+
+}
+
+.keyword-box {
+
+    padding: 25px;
+
+    border-radius: 18px;
+
+    border: 1px solid var(--border-color);
+
+    background: var(--bg-primary);
+
+}
+
+.keyword-box-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+
+}
+
+.keyword-box-header h3 {
+
+    margin: 0;
+
+    color: var(--text-primary);
+
+}
+
+.keyword-list {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+}
+
+.keyword-pill {
+
+    padding: 8px 13px;
+
+    border-radius: 999px;
+
+    font-size: .85rem;
+
+    font-weight: 600;
+
+    background: var(--bg-card);
+
+    border: 1px solid var(--border-color);
+
+    color: var(--text-primary);
+
+}
+
+.keyword-box p {
+
+    color: var(--text-secondary);
+
+}
+
+@media (max-width: 800px) {
+
+    .keywords-header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+    .keyword-sections {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}

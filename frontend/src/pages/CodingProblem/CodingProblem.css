@@ -1,0 +1,1255 @@
+/* =========================================================
+   PAGE
+========================================================= */
+
+.coding-problem-page {
+    min-height: 100vh;
+    height: 100vh;
+    background: #f8fafc;
+    color: #0f172a;
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   LOADING / ERROR
+========================================================= */
+
+.coding-problem-loading,
+.coding-problem-error {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.coding-problem-error button {
+    border: none;
+    background: #2563eb;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.problem-topbar {
+    height: 64px;
+    flex-shrink: 0;
+
+    background: white;
+    border-bottom: 1px solid #e2e8f0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 28px;
+
+    position: relative;
+
+    z-index: 20;
+}
+
+.back-button {
+    border: none;
+    background: transparent;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #475569;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.back-button:hover {
+    color: #2563eb;
+}
+
+.problem-top-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    font-size: 13px;
+    color: #64748b;
+}
+
+.problem-top-meta > span {
+    padding: 6px 10px;
+
+    background: #f8fafc;
+
+    border-radius: 8px;
+}
+
+
+/* =========================================================
+   DIFFICULTY
+========================================================= */
+
+.problem-difficulty.easy {
+    color: #16a34a !important;
+    background: #dcfce7 !important;
+}
+
+.problem-difficulty.medium {
+    color: #d97706 !important;
+    background: #fef3c7 !important;
+}
+
+.problem-difficulty.hard {
+    color: #dc2626 !important;
+    background: #fee2e2 !important;
+}
+
+
+/* =========================================================
+   WORKSPACE
+========================================================= */
+
+.coding-workspace {
+    height: calc(100vh - 64px);
+
+    display: grid;
+    grid-template-columns: 48% 52%;
+
+    overflow: hidden;
+
+    min-height: 0;
+}
+
+
+/* =========================================================
+   LEFT PANEL
+========================================================= */
+
+.problem-panel {
+    min-width: 0;
+    min-height: 0;
+
+    background: white;
+
+    border-right: 1px solid #e2e8f0;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.problem-heading {
+    padding: 28px 30px 18px;
+}
+
+.problem-heading h1 {
+    font-size: 26px;
+    margin: 0 0 8px;
+}
+
+.problem-heading p {
+    color: #64748b;
+    margin: 0;
+}
+
+
+/* =========================================================
+   TABS
+========================================================= */
+
+.problem-tabs {
+    display: flex;
+
+    border-bottom: 1px solid #e2e8f0;
+
+    padding: 0 30px;
+
+    position: sticky;
+    top: 0;
+
+    background: white;
+
+    z-index: 5;
+}
+
+.problem-tabs button {
+    border: none;
+    background: transparent;
+
+    padding: 15px 18px;
+
+    cursor: pointer;
+
+    color: #64748b;
+    font-weight: 600;
+
+    border-bottom: 2px solid transparent;
+
+    white-space: nowrap;
+}
+
+.problem-tabs button:hover {
+    color: #2563eb;
+}
+
+.problem-tabs button.active {
+    color: #2563eb;
+
+    border-bottom-color: #2563eb;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.problem-content,
+.solution-content,
+.submission-content {
+    padding: 30px;
+
+    min-width: 0;
+}
+
+.problem-content section {
+    margin-bottom: 32px;
+}
+
+.problem-content h2,
+.submission-content h2 {
+    font-size: 19px;
+
+    margin: 0 0 14px;
+}
+
+.problem-description {
+    line-height: 1.75;
+
+    color: #334155;
+
+    white-space: pre-wrap;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   EXAMPLES
+========================================================= */
+
+.examples-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.example-card {
+    background: #f8fafc;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 12px;
+
+    padding: 18px;
+
+    overflow: hidden;
+}
+
+.example-card h3 {
+    margin: 0 0 14px;
+
+    font-size: 15px;
+}
+
+.example-card strong {
+    display: block;
+
+    font-size: 13px;
+
+    margin-bottom: 6px;
+
+    color: #475569;
+}
+
+.example-card pre {
+    background: #0f172a;
+
+    color: #e2e8f0;
+
+    border-radius: 8px;
+
+    padding: 12px;
+
+    overflow-x: auto;
+
+    margin: 0 0 12px;
+
+    max-width: 100%;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CONSTRAINTS
+========================================================= */
+
+.constraint-list {
+    padding-left: 22px;
+
+    color: #475569;
+
+    line-height: 1.8;
+}
+
+.constraint-list li {
+    margin-bottom: 5px;
+}
+
+
+/* =========================================================
+   HINTS
+========================================================= */
+
+.hint-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hint-heading svg {
+    color: #f59e0b;
+}
+
+.hints-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.hint-card {
+    border: 1px solid #fde68a;
+
+    background: #fffbeb;
+
+    border-radius: 10px;
+
+    padding: 12px 15px;
+}
+
+.hint-card summary {
+    cursor: pointer;
+
+    font-weight: 600;
+
+    color: #92400e;
+}
+
+.hint-card p {
+    color: #78350f;
+
+    line-height: 1.6;
+
+    margin: 12px 0 0;
+}
+
+
+/* =========================================================
+   SAMPLE TESTS
+========================================================= */
+
+.sample-tests {
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.sample-test {
+    background: #f8fafc;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 10px;
+
+    padding: 14px;
+
+    overflow: hidden;
+}
+
+.sample-test > span {
+    display: block;
+
+    font-weight: 700;
+
+    margin-bottom: 12px;
+}
+
+.sample-test > div {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+
+    margin-bottom: 10px;
+
+    min-width: 0;
+}
+
+.sample-test code {
+    background: white;
+
+    border: 1px solid #e2e8f0;
+
+    padding: 8px 10px;
+
+    border-radius: 6px;
+
+    overflow-x: auto;
+
+    white-space: pre;
+
+    max-width: 100%;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   SOLUTION
+========================================================= */
+
+.solution-warning {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 14px 16px;
+
+    background: #eff6ff;
+
+    color: #1d4ed8;
+
+    border-radius: 10px;
+
+    margin-bottom: 24px;
+}
+
+.solution-section {
+    margin-bottom: 28px;
+
+    min-width: 0;
+}
+
+.solution-toolbar {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-bottom: 10px;
+
+    min-width: 0;
+}
+
+.solution-title {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    min-width: 0;
+}
+
+.solution-title h3 {
+    margin: 0;
+}
+
+.solution-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    flex-shrink: 0;
+}
+
+.solution-copy-button,
+.solution-editor-button {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    border: 1px solid #cbd5e1;
+
+    background: white;
+
+    color: #334155;
+
+    padding: 7px 11px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+.solution-copy-button:hover {
+    background: #f8fafc;
+}
+
+.solution-editor-button {
+    background: #2563eb;
+
+    border-color: #2563eb;
+
+    color: white;
+}
+
+.solution-editor-button:hover {
+    background: #1d4ed8;
+}
+
+.solution-code {
+    display: block;
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    background: #0f172a;
+
+    color: #e2e8f0;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    overflow-x: auto;
+    overflow-y: auto;
+
+    line-height: 1.6;
+
+    font-family:
+        Consolas,
+        Monaco,
+        monospace;
+
+    font-size: 13px;
+
+    white-space: pre;
+
+    max-height: 600px;
+
+    margin: 0;
+}
+
+
+/* =========================================================
+   SUBMISSIONS
+========================================================= */
+
+.submission-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.submission-card {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 16px;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 12px;
+
+    background: #f8fafc;
+}
+
+.accepted-icon {
+    color: #16a34a;
+}
+
+.failed-icon {
+    color: #dc2626;
+}
+
+.submission-main {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+.submission-main strong {
+    font-size: 15px;
+}
+
+.submission-main span {
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+.submission-xp {
+    font-weight: 700;
+
+    color: #2563eb;
+
+    white-space: nowrap;
+}
+
+.no-submissions {
+    min-height: 200px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    color: #94a3b8;
+
+    gap: 10px;
+}
+
+
+/* =========================================================
+   RIGHT EDITOR
+========================================================= */
+
+.editor-panel {
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #0b1120;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   EDITOR HEADER
+========================================================= */
+
+.editor-header {
+    height: 58px;
+
+    flex-shrink: 0;
+
+    background: #111827;
+
+    border-bottom: 1px solid #1e293b;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 18px;
+
+    box-sizing: border-box;
+}
+
+.language-selector {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: #cbd5e1;
+
+    min-width: 0;
+}
+
+.language-selector select {
+    background: #1e293b;
+
+    border: 1px solid #334155;
+
+    color: #f8fafc;
+
+    padding: 8px 34px 8px 10px;
+
+    border-radius: 7px;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+.editor-label {
+    color: #64748b;
+
+    font-size: 13px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   CODE EDITOR
+========================================================= */
+
+.code-editor {
+    flex: 1 1 auto;
+
+    min-height: 0;
+    min-width: 0;
+
+    display: grid;
+
+    grid-template-columns: 50px minmax(0, 1fr);
+
+    overflow: hidden;
+}
+
+.line-numbers {
+    min-height: 0;
+
+    background: #0f172a;
+
+    color: #475569;
+
+    padding-top: 18px;
+
+    text-align: right;
+
+    padding-right: 12px;
+
+    font-family:
+        Consolas,
+        Monaco,
+        monospace;
+
+    font-size: 14px;
+
+    line-height: 1.65;
+
+    user-select: none;
+
+    overflow: hidden;
+}
+
+.line-numbers span {
+    display: block;
+}
+
+.code-textarea {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    min-width: 0;
+    min-height: 0;
+
+    resize: none;
+
+    border: none;
+    outline: none;
+
+    background: #0f172a;
+
+    color: #e2e8f0;
+
+    padding: 18px;
+
+    box-sizing: border-box;
+
+    font-family:
+        Consolas,
+        Monaco,
+        monospace;
+
+    font-size: 14px;
+
+    line-height: 1.65;
+
+    tab-size: 4;
+
+    overflow-x: auto;
+    overflow-y: auto;
+
+    white-space: pre;
+
+    overflow-wrap: normal;
+
+    word-break: normal;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.editor-actions {
+    flex-shrink: 0;
+
+    height: 62px;
+
+    box-sizing: border-box;
+
+    background: #111827;
+
+    border-top: 1px solid #1e293b;
+
+    padding: 12px 16px;
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 10px;
+
+    position: relative;
+
+    z-index: 10;
+}
+
+.editor-actions button {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 10px 18px;
+
+    min-height: 38px;
+
+    border-radius: 8px;
+
+    border: none;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+}
+
+.editor-actions button:disabled {
+    opacity: 0.55;
+
+    cursor: not-allowed;
+}
+
+.run-button {
+    background: #1e293b;
+
+    color: #e2e8f0;
+}
+
+.run-button:hover:not(:disabled) {
+    background: #334155;
+}
+
+.submit-button {
+    background: #2563eb;
+
+    color: white;
+}
+
+.submit-button:hover:not(:disabled) {
+    background: #1d4ed8;
+}
+
+
+/* =========================================================
+   RESULT PANEL
+========================================================= */
+
+.test-result-panel {
+    flex: 0 0 290px;
+
+    min-height: 0;
+
+    background: #111827;
+
+    border-top: 1px solid #1e293b;
+
+    overflow-y: auto;
+
+    color: #e2e8f0;
+}
+
+.test-result-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 15px 18px;
+
+    border-bottom: 1px solid #1e293b;
+
+    position: sticky;
+
+    top: 0;
+
+    background: #111827;
+
+    z-index: 2;
+}
+
+.test-result-header h3 {
+    margin: 0;
+
+    font-size: 15px;
+}
+
+.result-status {
+    padding: 5px 10px;
+
+    border-radius: 6px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+.result-status.accepted {
+    background: #14532d;
+
+    color: #86efac;
+}
+
+.result-status.failed {
+    background: #450a0a;
+
+    color: #fca5a5;
+}
+
+
+/* =========================================================
+   EMPTY RESULT
+========================================================= */
+
+.empty-result {
+    min-height: 210px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    color: #64748b;
+
+    gap: 10px;
+}
+
+.empty-result p {
+    margin: 0;
+}
+
+
+/* =========================================================
+   RESULT SUMMARY
+========================================================= */
+
+.result-summary {
+    display: flex;
+
+    gap: 28px;
+
+    padding: 15px 18px;
+
+    border-bottom: 1px solid #1e293b;
+}
+
+.result-summary > div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.result-summary strong {
+    font-size: 18px;
+}
+
+.result-summary span {
+    font-size: 11px;
+
+    color: #64748b;
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.execution-message {
+    padding: 12px 18px;
+
+    color: #94a3b8;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   TEST RESULTS
+========================================================= */
+
+.execution-tests {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    padding: 0 18px 18px;
+}
+
+.execution-test {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        auto
+        auto;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 10px 12px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+
+    min-width: 0;
+}
+
+.execution-test.passed {
+    background: #052e16;
+
+    color: #86efac;
+}
+
+.execution-test.failed {
+    background: #450a0a;
+
+    color: #fca5a5;
+}
+
+.execution-test > div {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .coding-problem-page {
+        height: auto;
+
+        min-height: 100vh;
+
+        overflow: visible;
+    }
+
+
+    .coding-workspace {
+        grid-template-columns: 1fr;
+
+        height: auto;
+
+        overflow: visible;
+    }
+
+
+    .problem-panel {
+        border-right: none;
+
+        min-height: 600px;
+
+        overflow: visible;
+    }
+
+
+    .editor-panel {
+        min-height: 700px;
+    }
+
+
+    .problem-topbar {
+        position: relative;
+    }
+
+
+    .problem-top-meta {
+        display: none;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .problem-topbar {
+        padding: 0 16px;
+    }
+
+
+    .problem-heading,
+    .problem-content,
+    .solution-content,
+    .submission-content {
+        padding: 20px;
+    }
+
+
+    .problem-tabs {
+        padding: 0 20px;
+    }
+
+
+    .problem-tabs button {
+        padding: 13px 10px;
+
+        font-size: 13px;
+    }
+
+
+    .problem-heading h1 {
+        font-size: 22px;
+    }
+
+
+    .solution-toolbar {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .solution-actions {
+        width: 100%;
+    }
+
+
+    .solution-copy-button,
+    .solution-editor-button {
+        flex: 1;
+
+        justify-content: center;
+    }
+
+
+    .editor-header {
+        padding: 0 12px;
+    }
+
+
+    .editor-label {
+        display: none;
+    }
+
+
+    .editor-actions {
+        padding: 10px;
+
+        justify-content: stretch;
+    }
+
+
+    .editor-actions button {
+        flex: 1;
+    }
+
+
+    .test-result-panel {
+        flex-basis: 260px;
+    }
+
+}
+
+
+@media (max-width: 450px) {
+
+    .problem-tabs {
+        padding: 0 10px;
+    }
+
+
+    .problem-tabs button {
+        flex: 1;
+
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+
+    .code-editor {
+        grid-template-columns: 42px minmax(0, 1fr);
+    }
+
+
+    .line-numbers {
+        padding-right: 8px;
+    }
+
+
+    .code-textarea {
+        padding: 14px;
+
+        font-size: 13px;
+    }
+
+}

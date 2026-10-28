@@ -1,0 +1,84 @@
+.mock-session-page {
+    min-height: 100vh;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    padding: 38px 7% 60px;
+}
+.mock-session-back {
+    display: flex; align-items: center; gap: 9px; padding: 11px 16px;
+    border: 0; border-radius: 12px; background: #2563eb; color: #fff;
+    cursor: pointer; font-weight: 600; margin-bottom: 28px;
+}
+.mock-session-header {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 20px; max-width: 900px; margin: 0 auto 26px;
+}
+.mock-session-header h1 { margin: 6px 0; font-size: clamp(1.8rem, 4vw, 2.6rem); }
+.mock-session-header p { color: var(--text-secondary); margin: 5px 0; }
+.mock-session-eyebrow, .mock-session-label {
+    font-size: .76rem; letter-spacing: .12em; font-weight: 800; color: #6366f1 !important;
+}
+.mock-session-question-count {
+    padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 999px;
+    white-space: nowrap; font-weight: 700;
+}
+.mock-session-card {
+    max-width: 900px; margin: 0 auto; padding: clamp(22px, 4vw, 42px);
+    border: 1px solid var(--border-color); border-radius: 24px;
+    background: var(--bg-card); box-shadow: 0 16px 45px rgba(0,0,0,.07);
+}
+.mock-session-ai-icon {
+    width: 48px; height: 48px; display: grid; place-items: center;
+    background: #eef2ff; color: #4f46e5; border-radius: 15px; margin-bottom: 18px;
+}
+.mock-session-card h2 { font-size: clamp(1.25rem, 2.6vw, 1.8rem); line-height: 1.5; margin: 8px 0 20px; }
+.mock-session-question-actions, .mock-session-controls {
+    display: flex; flex-wrap: wrap; gap: 12px; margin: 18px 0 25px;
+}
+.mock-session-question-actions button, .mock-mic-btn, .mock-submit-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+    border: 1px solid var(--border-color); border-radius: 12px; padding: 12px 16px;
+    cursor: pointer; font-weight: 700; background: var(--input-bg); color: var(--text-primary);
+}
+.mock-session-card label { display: block; margin-bottom: 9px; font-weight: 750; }
+.mock-session-card textarea {
+    width: 100%; box-sizing: border-box; resize: vertical; padding: 15px;
+    border: 1px solid var(--border-color); border-radius: 14px;
+    background: var(--input-bg); color: var(--text-primary); font: inherit; line-height: 1.6;
+}
+.mock-session-card textarea:focus { outline: 2px solid #6366f1; border-color: transparent; }
+.mock-session-controls { justify-content: space-between; }
+.mock-mic-btn.listening { background: #fee2e2; color: #991b1b; border-color: #fecaca; }
+.mock-submit-btn { background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; border: 0; }
+.mock-session-card button:disabled { opacity: .55; cursor: not-allowed; }
+.mock-session-feedback { margin-top: 24px; padding: 18px 20px; border-radius: 14px; background: var(--input-bg); border: 1px solid var(--border-color); line-height: 1.6; }
+.mock-session-feedback-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.mock-session-feedback-heading span { color: #4f46e5; font-weight: 800; }
+.mock-session-complete { text-align: left; }
+.interview-spinner { animation: interview-spin 1s linear infinite; }
+@keyframes interview-spin { to { transform: rotate(360deg); } }
+@media (max-width: 650px) {
+    .mock-session-page { padding: 25px 18px 45px; }
+    .mock-session-header { align-items: flex-start; flex-direction: column; }
+    .mock-session-controls > button { flex: 1; }
+}
+
+.mock-session-camera-dock {
+    width: min(320px, 100%); margin: 0 0 22px auto; padding: 12px;
+    border: 1px solid var(--border-color); border-radius: 16px;
+    background: var(--bg-card); box-shadow: 0 10px 25px rgba(0,0,0,.08);
+}
+.mock-session-camera-heading {
+    display: flex; align-items: center; gap: 7px; margin-bottom: 9px;
+    font-size: .9rem; font-weight: 750; color: var(--text-primary);
+}
+.mock-session-camera-video {
+    display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+    background: #111827; border-radius: 10px; transform: scaleX(-1);
+}
+.mock-session-camera-error { margin: 8px 0 0; color: #dc2626; font-size: .82rem; }
+
+.mock-session-pose-status { display: flex; align-items: center; gap: 7px; margin-top: 10px; color: var(--text-secondary); font-size: .78rem; }
+.mock-session-pose-dot { width: 8px; height: 8px; flex: 0 0 8px; border-radius: 50%; background: #16a34a; }
+.mock-session-pose-warning { margin: 9px 0 0; padding: 9px 10px; border-radius: 9px; background: #fff7ed; border: 1px solid #fed7aa; color: #9a3412; font-size: .82rem; line-height: 1.45; }
+.mock-session-pose-note { margin: 8px 0 0; color: var(--text-secondary); font-size: .72rem; line-height: 1.4; }

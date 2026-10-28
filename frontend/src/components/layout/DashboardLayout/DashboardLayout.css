@@ -1,0 +1,25 @@
+.dashboard-layout {
+
+    display: flex;
+
+    min-height: 100vh;
+
+    background: var(--bg-primary);
+
+    color: var(--text-primary);
+
+    transition:
+        background-color .25s ease,
+        color .25s ease;
+
+}
+
+.dashboard-content{
+
+    flex:1;
+
+    padding:40px;
+
+    overflow-y:auto;
+
+}

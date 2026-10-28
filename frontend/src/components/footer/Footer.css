@@ -1,0 +1,146 @@
+.footer {
+    background: #0f172a;
+    color: white;
+    padding: 80px 8% 30px;
+}
+
+.footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 50px;
+    margin-bottom: 60px;
+}
+
+/* Left Section */
+
+.footer-intro {
+    max-width: 400px;
+}
+
+.footer-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-bottom: 20px;
+
+    border-radius: 999px;
+
+    background: rgba(59, 130, 246, .12);
+
+    color: #3b82f6;
+
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.footer-intro h2 {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin-bottom: 18px;
+    color: white;
+}
+
+.footer-intro p {
+    color: #94a3b8;
+    line-height: 1.8;
+}
+
+/* Links */
+
+.footer-links h3 {
+    margin-bottom: 22px;
+    font-size: 1.1rem;
+    color: white;
+}
+
+.footer-links a,
+.footer-links p {
+    display: block;
+    margin-bottom: 14px;
+
+    color: #94a3b8;
+
+    text-decoration: none;
+
+    transition: .3s;
+}
+
+.footer-links a:hover {
+    color: white;
+    transform: translateX(6px);
+}
+
+/* Bottom */
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-top: 25px;
+
+    border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.footer-bottom span {
+    color: #94a3b8;
+}
+
+/* Scroll Button */
+
+.scroll-top {
+    width: 50px;
+    height: 50px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+    );
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    transition: .3s ease;
+}
+
+.scroll-top:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(59,130,246,.35);
+}
+
+.scroll-top svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+
+    .footer-top {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+
+@media (max-width: 650px) {
+
+    .footer-top {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+}
