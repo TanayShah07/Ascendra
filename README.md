@@ -193,8 +193,6 @@ To build an intelligent placement readiness platform capable of understanding te
 
 **Tanay Shah**
 
-**Priy Thakor**
-
 </div>
 
 ---
