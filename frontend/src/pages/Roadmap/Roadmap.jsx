@@ -83,7 +83,7 @@ const Roadmap = () => {
                 await Promise.all([
 
                     fetch(
-                        "http://localhost:8000/roadmap/",
+                        "/api/roadmap/",
                         {
                             headers: {
                                 Authorization:
@@ -93,7 +93,7 @@ const Roadmap = () => {
                     ),
 
                     fetch(
-                        "http://localhost:8000/roadmap/archived",
+                        "/api/roadmap/archived",
                         {
                             headers: {
                                 Authorization:
@@ -204,7 +204,7 @@ const Roadmap = () => {
 
             const response =
                 await fetch(
-                    "http://localhost:8000/roadmap/generate",
+                    "/api/roadmap/generate",
                     {
 
                         method: "POST",
@@ -332,7 +332,7 @@ const Roadmap = () => {
             const response =
                 await fetch(
 
-                    `http://localhost:8000/roadmap/${roadmapId}/rename`,
+                    `/api/roadmap/${roadmapId}/rename`,
 
                     {
 
@@ -443,7 +443,7 @@ const Roadmap = () => {
             const response =
                 await fetch(
 
-                    `http://localhost:8000/roadmap/${roadmapId}/archive`,
+                    `/api/roadmap/${roadmapId}/archive`,
 
                     {
 
@@ -548,7 +548,7 @@ const Roadmap = () => {
             const response =
                 await fetch(
 
-                    `http://localhost:8000/roadmap/${roadmapId}/restore`,
+                    `/api/roadmap/${roadmapId}/restore`,
 
                     {
 
@@ -663,7 +663,7 @@ const Roadmap = () => {
             const response =
                 await fetch(
 
-                    `http://localhost:8000/roadmap/${roadmapId}`,
+                    `/api/roadmap/${roadmapId}`,
 
                     {
 
@@ -796,7 +796,7 @@ const Roadmap = () => {
             const response =
                 await fetch(
 
-                    `http://localhost:8000/roadmap/${roadmap.id}/stage/${stageIndex}/topic/${topicIndex}`,
+                    `/api/roadmap/${roadmap.id}/stage/${stageIndex}/topic/${topicIndex}`,
 
                     {
 

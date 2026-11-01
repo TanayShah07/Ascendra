@@ -216,7 +216,7 @@ const ResumeAnalysis = () => {
             */
 
             const response = await fetch(
-                "http://localhost:8000/resume/parse",
+                "/api/resume/parse",
                 {
                     method: "POST",
                     body: formData

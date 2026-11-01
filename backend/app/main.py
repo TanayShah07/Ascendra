@@ -76,6 +76,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "https://ascendra-qplukqook-tanay-shahs-projects-e9be97cc.vercel.app",
+        "https://ascendra-weld.vercel.app",
     ],
 
     allow_credentials=True,
